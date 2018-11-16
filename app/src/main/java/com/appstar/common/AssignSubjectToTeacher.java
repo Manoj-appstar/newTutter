@@ -44,7 +44,7 @@ public class AssignSubjectToTeacher extends AppCompatActivity implements OnRespo
     EditText etSearch;
     TextView tvAdd;
     ProgressBar progressBar, progressSet;
-    int REQ_GET_SUBJECT = 999, REQ_SET_SUBJECT = 1000;
+    int REQ_GET_SUBJECT = 1002, REQ_SET_SUBJECT = 1001;
     SharePreferenceData preferenceData;
     DBHelper dbHelper;
 
