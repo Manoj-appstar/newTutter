@@ -85,6 +85,7 @@ public class GetSearchLocation extends AppCompatActivity implements OnMapReadyCa
     CardView cvAddLocation;
     String localAddress;
     private int KEY_BACK_DATA = 678;
+    int test=123;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
