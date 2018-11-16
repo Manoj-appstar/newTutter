@@ -81,21 +81,13 @@
                         android:textSize="@dimen/_13sdp" />
 
                     <ImageView
-                        android:id="@+id/ivShare"
-                        android:layout_width="@dimen/_15sdp"
-                        android:layout_height="@dimen/_15sdp"
-                        android:layout_alignParentRight="true"
-                        android:layout_marginRight="@dimen/_35sdp"
-                        android:visibility="gone"
-                        android:src="@drawable/ic_share_black_24dp" />
-
-                    <ImageView
-                        android:id="@+id/ivFavorite"
+                        android:id="@+id/ivEdit"
                         android:layout_width="@dimen/_15sdp"
                         android:layout_height="@dimen/_15sdp"
                         android:layout_alignParentRight="true"
                         android:layout_marginRight="@dimen/_10sdp"
-                        android:src="@drawable/ic_favorite" />
+                        android:src="@drawable/ic_mode_edit_white_24dp" />
+
                 </RelativeLayout>
             </android.support.v7.widget.Toolbar>
         </android.support.design.widget.CollapsingToolbarLayout>
@@ -148,31 +140,6 @@
                         android:textColor="@color/black"
                         android:textSize="@dimen/_12sdp"
                         android:textStyle="normal" />
-
-                    <TextView
-                        android:id="@+id/tvSeeOtherFacility"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentRight="true"
-                        android:layout_marginRight="@dimen/_30sdp"
-                        android:layout_marginTop="@dimen/_8sdp"
-                        android:autoLink="web"
-                        android:gravity="right|center"
-                        android:text="See other facility"
-                        android:textAppearance="?android:attr/textAppearanceSmall"
-                        android:textColor="@color/hint_color_best"
-                        android:textSize="@dimen/_10sdp"
-                        android:textStyle="normal" />
-
-                    <ImageView
-                        android:id="@+id/ivSeeOtherFacility"
-                        android:layout_width="@dimen/_12sdp"
-                        android:layout_height="@dimen/_12sdp"
-                        android:layout_alignParentRight="true"
-                        android:layout_centerVertical="true"
-                        android:layout_marginRight="@dimen/_15sdp"
-                        android:layout_marginTop="@dimen/_8sdp"
-                        android:src="@drawable/ic_error_outline_grey" />
 
                 </RelativeLayout>
 
@@ -270,7 +237,7 @@
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="@dimen/_15sdp"
                         android:layout_marginTop="@dimen/_8sdp"
-                        android:src="@drawable/temp_profile" />
+                        android:src="@drawable/ic_eye" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -279,7 +246,7 @@
                         android:layout_marginLeft="@dimen/_15sdp"
                         android:layout_marginTop="@dimen/_8sdp"
                         android:layout_toRightOf="@+id/ivProfile"
-                        android:text="Ayushman"
+                        android:text="View Student Added"
                         android:textColor="@color/black"
                         android:textSize="@dimen/_12sdp"
                         android:textStyle="normal" />
@@ -303,7 +270,8 @@
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_20sdp"
-                    android:layout_marginBottom="@dimen/_10sdp">
+                    android:layout_marginBottom="@dimen/_10sdp"
+                    android:visibility="gone">
 
                     <TextView
                         android:id="@+id/tvEmail"
@@ -418,9 +386,9 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="@dimen/_20sdp"
+                    android:layout_marginBottom="@dimen/_5sdp"
                     android:layout_marginLeft="@dimen/_15sdp"
                     android:layout_marginTop="@dimen/_5sdp"
-                    android:layout_marginBottom="@dimen/_5sdp"
                     android:text="Vaishali Ghaziabad, Sector-4"
                     android:textColor="@color/textColor"
                     android:textSize="@dimen/_10sdp" />
@@ -605,183 +573,6 @@
                     android:text="Show More"
                     android:textColor="@color/colorPrimary" />
             </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:background="@color/white"
-                android:orientation="vertical"
-                android:padding="@dimen/_10sdp">
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_centerHorizontal="true"
-                        android:layout_centerVertical="true"
-                        android:layout_marginLeft="@dimen/_15sdp"
-                        android:layout_marginTop="@dimen/_10sdp"
-                        android:text="Have a question?ask advertiser directly"
-                        android:textColor="@color/textColor"
-                        android:textSize="@dimen/_11sdp" />
-
-                    <android.support.v7.widget.CardView
-                        android:id="@+id/cvAskNow"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentRight="true"
-                        android:layout_centerHorizontal="true"
-                        android:layout_marginRight="@dimen/_15sdp"
-                        android:backgroundTint="@color/colorPrimary"
-                        android:elevation="@dimen/_5sdp"
-                        app:cardCornerRadius="@dimen/_5sdp">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:padding="@dimen/_5sdp"
-                            android:text="Ask Now"
-                            android:textColor="@color/white" />
-
-                    </android.support.v7.widget.CardView>
-                </RelativeLayout>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/_10sdp"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:background="@color/grey_50"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/_15sdp"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    android:text="Similar Classes"
-                    android:textColor="@color/black"
-                    android:textStyle="bold" />
-
-                <android.support.v7.widget.RecyclerView
-                    android:id="@+id/vpClasses"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/_5sdp"
-                    android:layout_marginLeft="@dimen/_3sdp"
-                    android:layout_marginRight="@dimen/_3sdp"
-                    android:layout_marginTop="@dimen/_5sdp"
-                    android:paddingBottom="2sp"
-                    android:paddingLeft="3sp"
-                    android:paddingRight="3sp"
-                    android:paddingTop="2sp">
-
-                </android.support.v7.widget.RecyclerView>
-            </LinearLayout>
-
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/_35sdp"
-        android:layout_gravity="bottom">
-
-        <android.support.v7.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_35sdp"
-            android:background="@color/white"
-            app:cardCornerRadius="@dimen/_5sdp"
-            app:cardElevation="@dimen/_30sdp">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_35sdp"
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:orientation="horizontal"
-                android:weightSum="2">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:orientation="horizontal">
-
-                    <android.support.v7.widget.CardView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginBottom="@dimen/_5sdp"
-                        android:layout_marginLeft="@dimen/_5sdp"
-                        android:layout_marginRight="@dimen/_5sdp"
-                        android:layout_marginTop="@dimen/_5sdp"
-                        android:background="@color/text_red"
-                        android:backgroundTint="@color/grey_200"
-                        android:gravity="center_horizontal"
-                        android:padding="@dimen/_1sdp"
-                        app:cardCornerRadius="@dimen/_3sdp">
-
-                        <ImageView
-                            android:layout_width="@dimen/_12sdp"
-                            android:layout_height="@dimen/_12sdp"
-                            android:layout_gravity="center_horizontal|center_vertical"
-                            android:layout_marginRight="@dimen/_15sdp"
-                            android:src="@drawable/ic_chat_class" />
-
-                        <com.appstar.tutionportal.views.MyTextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_horizontal|center_vertical"
-                            android:layout_marginLeft="@dimen/_10sdp"
-                            android:text="Chat"
-                            android:textColor="@color/hint_color_best"
-                            android:textSize="@dimen/_12sdp"
-                            android:textStyle="bold" />
-                    </android.support.v7.widget.CardView>
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1">
-
-                    <android.support.v7.widget.CardView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_gravity="center"
-                        android:layout_marginBottom="@dimen/_5sdp"
-                        android:layout_marginLeft="@dimen/_5sdp"
-                        android:layout_marginRight="@dimen/_5sdp"
-                        android:layout_marginTop="@dimen/_5sdp"
-                        android:backgroundTint="@color/colorPrimary"
-                        android:gravity="center"
-                        android:padding="@dimen/_1sdp"
-                        app:cardCornerRadius="@dimen/_3sdp">
-
-
-                        <com.appstar.tutionportal.views.MyTextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:gravity="center"
-                            android:text="Call Teacher"
-                            android:textColor="@color/white"
-                            android:textSize="@dimen/_12sdp"
-                            android:textStyle="normal" />
-
-                    </android.support.v7.widget.CardView>
-
-                </LinearLayout>
-            </LinearLayout>
-        </android.support.v7.widget.CardView>
-    </RelativeLayout>
 </android.support.design.widget.CoordinatorLayout>
