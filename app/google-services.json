@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "401524640341",
+    "firebase_url": "https://tuttor-213310.firebaseio.com",
+    "project_id": "tuttor-213310",
+    "storage_bucket": "tuttor-213310.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:401524640341:android:0ce01d9fb155657d",
+        "android_client_info": {
+          "package_name": "com.appstar.tutionportal"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "401524640341-ns1o12p0b60es3he6dq9ps7fbeg4a3vq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBNc6b5pMTTHWHl4GpdzzOuemfSYv_Xwtc"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

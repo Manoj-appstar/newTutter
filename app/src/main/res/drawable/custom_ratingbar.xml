@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@android:id/background"
+        android:width="20dp"
+        android:height="20dp"
+        android:drawable="@drawable/ic_star_unfill" />
+
+
+    <item
+        android:id="@android:id/secondaryProgress"
+        android:width="20dp"
+        android:height="20dp"
+        android:drawable="@drawable/ic_star_fill" />
+
+    <item
+        android:id="@android:id/progress"
+        android:width="20dp"
+        android:height="20dp"
+        android:drawable="@drawable/ic_star_half_filled" />
+
+</layer-list>

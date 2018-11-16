@@ -1,0 +1,106 @@
+<resources>
+    <string name="app_name">TutionPortal</string>
+    <string name="home">HOME</string>
+    <string name="about">About</string>
+    <!--<string name="google_api_key">AIzaSyAvMVZ3hxQbppZybnpK3QcZQpg8KE1z79E</string>-->
+
+    <string name="fname">First Name</string>
+    <string name="lname">Last Name</string>
+    <string name="contact_numaber">Mobile Number</string>
+    <string name="password">Password</string>
+    <string name="email">Email</string>
+    <string name="gender">Gender</string>
+    <string name="forgat_pass">Forgat Password?</string>
+    <string name="image"> Image </string>
+    <string name="no_media_file_available"> No media file available.</string>
+    <string name="default_notification_channel_id" translatable="false">fcm_default_channel</string>
+
+    <string name="create_account">Create Account</string>
+    <string name="title_activity_location">Location</string>
+    <string name="accept_conditions">I accept terms conditions</string>
+    <string name="no_internet">No Internet</string>
+    <string name="no_class">You Have Not Added Any Classes Yet..</string>
+    <string name="add_class">Please Add Your Class Here... </string>
+    <string name="checkedstate">START</string>
+    <string name="uncheckedstate">STOP</string>
+    <string name="please_wait_text"> Please wait</string>
+    <string name="refreshing"> Refreshing</string>
+
+    <string-array name="nav_arr_login">
+        <item>Home</item>
+        <item>Profile</item>
+        <!--<item>My Business</item>-->
+        <item>Privacy Policy</item>
+        <item>About</item>
+        <item>Logout</item>
+    </string-array>
+
+    <string-array name="graduation_type">
+        <item>Bachelor of Computer Applications (BCA)</item>
+        <item>Bachelor of Commerce (B.Com)</item>
+        <!--<item>My Business</item>-->
+        <item>Bachelor of Design(Fashion Design)</item>
+        <item>Bachelor of Technology (B.Tech)</item>
+        <item>Bachelor of Commerce (Hons) (B.Com.)</item>
+        <item>Bachelor of Business Administration</item>
+        <item>Bachelor of Laws</item>
+    </string-array>
+
+    <string-array name="graduation_detail">
+        <item>Computer Science and Engineering</item>
+        <item>Accounts</item>
+        <item>Fashion Designing</item>
+        <item>Mechanical Engineering</item>
+        <item>Honours</item>
+        <item>Industrial and Product Design</item>
+        <item>Digital and Interactive Design</item>
+        <item>Information Technology</item>
+        <item>Electronics and Communication Engineering</item>
+        <item>Electrical Engineering</item>
+        <item>Civil Engineering</item>
+        <item>Chemical Engineering</item>
+        <item>Petroleum Engineering</item>
+
+    </string-array>
+
+    <string-array name="post_graduation">
+        <item>Master of Arts (MA)</item>
+        <item>Master of Science (M.Sc)</item>
+        <!--<item>My Business</item>-->
+        <item>Master of Commerce (M.Com)</item>
+        <item>Master of Engineering/Technology (ME/M.Tech)</item>
+        <item>Master of Law (LLM)</item>
+        <item>Master of Computer Application (MCA)</item>
+        <item>Master of Business Administration (MBA)</item>
+        <item>Master of Law (LLM)</item>
+        <item>Master of Pharmacy (M.Pharma)</item>
+    </string-array>
+
+    <string-array name="post_graduation_detail">
+        <item>M.A. Development Studies</item>
+        <item>M.A. Counselling</item>
+        <item>Chartered Accountant</item>
+        <item>Chartered Accountant</item>
+        <item>Certified Management Accountant</item>
+        <item>Certified Public Accounting</item>
+        <!--<item>My Business</item>-->
+        <!--<item>Logout</item>-->
+    </string-array>
+
+    <string-array name="others">
+        <item>I want to register a teacher with Tutter</item>
+        <item>can i get my favorite teacher listed with Tutter</item>
+        <!--<item>My Business</item>-->
+        <!--<item>Logout</item>-->
+    </string-array>
+
+    <string-array name="PaymentsRefunds">
+        <item>What are the payment options available to me?</item>
+        <item>What is the average refund procesing time?</item>
+        <!--<item>My Business</item>-->
+        <!--<item>Logout</item>-->
+    </string-array>
+    <string name="title_activity_view_my_all_groups">ViewMyAllGroups</string>
+    <string name="title_activity_create_group">CreateGroup</string>
+
+</resources>

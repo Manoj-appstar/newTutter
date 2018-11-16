@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:orientation="vertical"
+    >
+
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/viewPager"
+            android:background="@android:color/white"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="@dimen/_40sdp"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="@dimen/_60sdp"
+            android:src="@drawable/ic_logo" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_60sdp"
+            android:layout_gravity="bottom"
+
+            android:layout_marginBottom="@dimen/_15sdp"
+            android:gravity="bottom">
+
+            <TextView
+                android:id="@+id/tvSkip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/_20sdp"
+
+                android:text="SKIP"
+                android:textColor="@color/slow_blue_light"
+                android:textSize="@dimen/_12sdp"
+                android:textStyle="normal" />
+
+            <com.rd.PageIndicatorView
+                android:layout_marginBottom="@dimen/_5sdp"
+                android:layout_alignParentBottom="true"
+                android:id="@+id/pageIndicatorView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+
+                app:piv_animationType="swap"
+                app:piv_dynamicCount="true"
+                app:piv_interactiveAnimation="true"
+                app:piv_selectedColor="@color/colorPrimary"
+                app:piv_unselectedColor="@color/slow_blue"
+                app:piv_viewPager="@id/viewPager" />
+
+            <ImageView
+                android:layout_marginRight="@dimen/_15sdp"
+                android:layout_centerVertical="true"
+                android:id="@+id/imgNext"
+                android:background="?selectableItemBackground"
+                android:padding="@dimen/_5sdp"
+                android:layout_width="@dimen/_23sdp"
+                android:layout_height="@dimen/_23sdp"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+
+                android:src="@drawable/ic_next" />
+        </RelativeLayout>
+    </FrameLayout>
+
+
+</android.support.constraint.ConstraintLayout>

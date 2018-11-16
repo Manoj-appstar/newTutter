@@ -1,0 +1,72 @@
+package com.appstar.common.adapter;
+
+import android.content.Context;
+import android.support.annotation.NonNull;
+import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import com.appstar.tutionportal.Model.ClassDetail;
+import com.appstar.tutionportal.Model.Subject;
+import com.appstar.tutionportal.R;
+
+import java.util.List;
+
+public class AddClassAdapter extends RecyclerView.Adapter<AddClassAdapter.MyHolder> {
+    Context mContext;
+    private List<ClassDetail> classList;
+
+    public AddClassAdapter(Context context, List<ClassDetail> arrayList, Object obj) {
+        this.mContext = context;
+        this.classList = arrayList;
+    }
+
+    @NonNull
+    @Override
+    public AddClassAdapter.MyHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        return new AddClassAdapter.MyHolder(LayoutInflater.from(mContext).inflate(R.layout.classes_item, parent, false));
+
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull AddClassAdapter.MyHolder holder, final int position) {
+        ClassDetail classDetail = classList.get(position);
+        holder.tvBatchName.setText(classDetail.getBatchName());
+        holder.tvInstitute.setText(classDetail.getInstituteName());
+        holder.tvTeacher.setText(classDetail.getTeacherName());
+        holder.tvLocation.setText(classDetail.getAddress());
+        String subjects = "";
+        for (Subject subject : classDetail.getSubjectname()) {
+            subjects += subject.getSubject() + " ,";
+        }
+        if(subjects.length()>1)
+        holder.tvSubject.setText(subjects.substring(0,subjects.length()-1));
+
+
+    }
+
+    @Override
+    public int getItemCount() {
+        //return 10;
+        return classList.size();
+    }
+
+    public class MyHolder extends RecyclerView.ViewHolder {
+        TextView tvBatchName, tvSubject, tvTeacher, tvInstitute, tvLocation;
+        ImageView imgClassImage;
+
+        public MyHolder(View itemView) {
+            super(itemView);
+            tvBatchName = itemView.findViewById(R.id.tvBatchName);
+            tvSubject = itemView.findViewById(R.id.tvSubject);
+            tvTeacher = itemView.findViewById(R.id.tvTeacher);
+            tvInstitute = itemView.findViewById(R.id.tvInstitute);
+            tvLocation = itemView.findViewById(R.id.tvLocation);
+            imgClassImage = itemView.findViewById(R.id.imgClassImage);
+        }
+
+    }
+}

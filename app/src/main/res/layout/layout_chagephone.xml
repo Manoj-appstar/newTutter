@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:background="@drawable/round_corner_dialog"
+    android:gravity="center"
+    android:minWidth="@dimen/_280sdp"
+    android:orientation="vertical">
+
+
+  <com.appstar.tutionportal.views.MyTextView
+      android:id="@+id/tvText"
+      android:layout_width="match_parent"
+      android:layout_height="@dimen/_30sdp"
+      android:layout_gravity="center"
+      android:layout_marginTop="@dimen/_30sdp"
+      android:gravity="center"
+      android:text="Change Your Phone No."
+      android:textColor="@color/colorPrimary"
+      android:textSize="@dimen/_13sdp" />
+
+  <LinearLayout
+      android:id="@+id/llChangePhone"
+      android:layout_width="match_parent"
+      android:layout_height="@dimen/_40sdp"
+      android:layout_gravity="center"
+      android:layout_marginEnd="@dimen/_20sdp"
+      android:layout_marginStart="@dimen/_20sdp"
+      android:layout_marginTop="@dimen/_5sdp"
+      android:background="@drawable/rounded_edittext"
+      android:orientation="horizontal">
+
+    <LinearLayout
+        android:layout_width="@dimen/_50sdp"
+        android:layout_height="@dimen/_38sdp"
+        android:layout_margin="@dimen/_1sdp"
+        android:layout_marginBottom="@dimen/_5sdp"
+        android:background="@color/grey_200">
+
+      <ImageView
+          android:layout_width="@dimen/_15sdp"
+          android:layout_height="@dimen/_15sdp"
+          android:layout_gravity="center"
+          android:layout_marginLeft="@dimen/_15sdp"
+          android:src="@drawable/ic_phone_call" />
+
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/etPhone"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="@dimen/_5sdp"
+        android:background="@android:color/transparent"
+        android:hint="Phone No."
+        android:inputType="number"
+        android:maxLength="10"
+        android:textColor="@color/textColor"
+        android:textColorHint="@color/colorpara" />
+
+  </LinearLayout>
+
+
+  <LinearLayout
+      android:id="@+id/llVerifyOtp"
+      android:layout_width="match_parent"
+      android:layout_height="@dimen/_40sdp"
+      android:layout_gravity="center"
+      android:layout_marginEnd="@dimen/_20sdp"
+      android:layout_marginStart="@dimen/_20sdp"
+      android:layout_marginTop="@dimen/_5sdp"
+      android:background="@drawable/rounded_edittext"
+      android:orientation="horizontal">
+
+    <EditText
+        android:id="@+id/etOtp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/_2sdp"
+        android:layout_marginLeft="@dimen/_5sdp"
+        android:background="#00000000"
+        android:inputType="number"
+        android:hint="Verify Your Otp..."
+        android:textColor="@color/colorPrimary"
+        android:textColorHint="@color/colorpara" />
+
+  </LinearLayout>
+
+  <TextView
+      android:id="@+id/tvResend"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="@dimen/_20sdp"
+      android:alpha=".4"
+      android:enabled="false"
+      android:paddingLeft="@dimen/_10sdp"
+      android:paddingRight="@dimen/_10sdp"
+      android:text="Resend OTP"
+      android:textColor="@color/black"
+      android:textSize="@dimen/_12sdp"
+      android:textStyle="normal" />
+
+  <TextView
+      android:id="@+id/tvTimer"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="@dimen/_10sdp"
+      android:text="03:00"
+      android:textColor="@color/black"
+      android:textSize="@dimen/_10sdp"
+      android:textStyle="normal" />
+
+
+  <Button
+      android:id="@+id/btnChangePhone"
+      android:layout_width="match_parent"
+      android:layout_height="@dimen/_40sdp"
+      android:layout_marginBottom="@dimen/_40sdp"
+      android:layout_marginEnd="@dimen/_20sdp"
+      android:layout_marginStart="@dimen/_20sdp"
+      android:layout_marginTop="@dimen/_30sdp"
+      android:background="@drawable/rounded_btn_green"
+      android:text="CHANGE PHONE No."
+      android:textColor="@color/white" />
+</LinearLayout>
