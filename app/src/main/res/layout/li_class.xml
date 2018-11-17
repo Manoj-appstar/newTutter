@@ -8,7 +8,7 @@
     android:layout_margin="@dimen/_3sdp">
 
     <android.support.v7.widget.CardView
-        android:id="@+id/cvClassName"
+        android:id="@+id/cvClass"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:cardCornerRadius="10dp"

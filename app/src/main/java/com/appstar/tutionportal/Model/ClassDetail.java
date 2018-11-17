@@ -1,11 +1,8 @@
 package com.appstar.tutionportal.Model;
 
-import android.os.Parcelable;
-
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-import java.io.Serializable;
 import java.util.List;
 
 public class ClassDetail {
@@ -50,6 +47,7 @@ public class ClassDetail {
     @Expose
     private String studentLimit;
     @SerializedName("price")
+
     @Expose
     private String price;
     @SerializedName("latitude")
@@ -61,6 +59,15 @@ public class ClassDetail {
     @SerializedName("address")
     @Expose
     private String address;
+    @SerializedName("city")
+    @Expose
+    private String city;
+    @SerializedName("house_no")
+    @Expose
+    private String house_no;
+    @SerializedName("landmark")
+    @Expose
+    private String landmark;
     @SerializedName("phone")
     @Expose
     private String phone;
@@ -85,6 +92,30 @@ public class ClassDetail {
     @SerializedName("image")
     @Expose
     private List<ClassImage> classImage = null;
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getHouse_no() {
+        return house_no;
+    }
+
+    public void setHouse_no(String house_no) {
+        this.house_no = house_no;
+    }
+
+    public String getLandmark() {
+        return landmark;
+    }
+
+    public void setLandmark(String landmark) {
+        this.landmark = landmark;
+    }
 
     public List<ClassImage> getClassImage() {
         return classImage;

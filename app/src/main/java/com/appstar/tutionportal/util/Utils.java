@@ -30,6 +30,7 @@ import com.appstar.tutionportal.teacher.fragments.FragmentEditClass;
 import com.appstar.tutionportal.teacher.fragments.FragmentEditProfileMore;
 import com.appstar.tutionportal.teacher.fragments.FragmentTeacherHome;
 import com.appstar.tutionportal.teacher.fragments.FragmentViewImage;
+import com.appstar.tutionportal.teacher.fragments.FragmentViewTeacherClass;
 import com.appstar.tutionportal.teacher.fragments.ProfileTeacherFragment;
 
 import java.util.List;
@@ -222,6 +223,13 @@ public class Utils {
                     FragmentEditClass fragmentEditClass = new FragmentEditClass();
                     fragmentEditClass.setArguments(bundle);
                     fragmentTransaction.replace(R.id.content, fragmentEditClass, fragmentName);
+                    break;
+
+                case FragmentNames._VIEW_TEACHER_CLASS_INFO:
+
+                    FragmentViewTeacherClass fragmentViewTeacherClass = new FragmentViewTeacherClass();
+                    fragmentViewTeacherClass.setArguments(bundle);
+                    fragmentTransaction.replace(R.id.content, fragmentViewTeacherClass, fragmentName);
                     break;
 
                 case FragmentNames._EDIT_TEACHER_PROFILE:
