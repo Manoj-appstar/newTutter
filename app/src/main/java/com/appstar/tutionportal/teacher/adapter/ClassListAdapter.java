@@ -85,12 +85,12 @@ public class ClassListAdapter extends RecyclerView.Adapter<ClassListAdapter.MyHo
             holder.imgTeacher.setImageResource(R.drawable.temp_profile);
         }
 
-        holder.cvClassName.setOnClickListener(new View.OnClickListener() {
+        holder.cvClass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Bundle bundle = new Bundle();
                 bundle.putString("class_id", String.valueOf(arrayList.get(position).getId()));
-                utils.openFragment((Activity) mContext, FragmentNames.EDIT_CLASS, FragmentNames._EDIT_CLASS, bundle, true);
+                utils.openFragment((Activity) mContext, FragmentNames.VIEW_TEACHER_CLASS_INFO, FragmentNames._VIEW_TEACHER_CLASS_INFO, bundle, true);
             }
         });
 
@@ -117,7 +117,7 @@ public class ClassListAdapter extends RecyclerView.Adapter<ClassListAdapter.MyHo
     }
 
     public class MyHolder extends RecyclerView.ViewHolder {
-        CardView cvClassName;
+        CardView cvClass;
         MyTextView tvClassName;
         MyTextView tvLocation;
         MyTextView tvTimeTo, tvTimeFrom;
@@ -130,7 +130,7 @@ public class ClassListAdapter extends RecyclerView.Adapter<ClassListAdapter.MyHo
         public MyHolder(View itemView) {
             super(itemView);
             tvClassName = itemView.findViewById(R.id.tvClassName);
-            cvClassName = itemView.findViewById(R.id.cvClassName);
+            cvClass = itemView.findViewById(R.id.cvClass);
             tvLocation = itemView.findViewById(R.id.tvLocation);
             tvSubject = itemView.findViewById(R.id.tvSubject);
             tvTimeTo = itemView.findViewById(R.id.tvTimeTo);

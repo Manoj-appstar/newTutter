@@ -10,6 +10,7 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -75,6 +76,7 @@ public class ProfileTeacherFragment extends Fragment implements View.OnClickList
         aSwitch.setOnClickListener(this);
         tvEnable = view.findViewById(R.id.tvEnable);
         tvDisable = view.findViewById(R.id.tvDisable);
+        Log.d("services",Data.getTeacherDetail().getServices().toLowerCase());
 
         if (Data.getTeacherDetail().getServices().equalsIgnoreCase("0")) {
             aSwitch.setChecked(false);
