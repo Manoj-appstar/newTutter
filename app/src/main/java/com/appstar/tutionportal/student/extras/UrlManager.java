@@ -35,5 +35,6 @@ public class UrlManager {
     public static final String GET_SUBECT_TO_TEACHER = BASE_URL + "get-teacher-to-subject";
     public static final String GET_TEACHER_DATA = BASE_URL + "get-teachers";
     public static final String GET_ALL_CLASSES_DIRECTOR = BASE_URL + "get-institute-classes";
-    public static final String GET_ALL_BRANCH_CLASSES= BASE_URL + "get-branch-classes";
+    public static final String GET_ALL_BRANCH_CLASSES = BASE_URL + "get-branch-classes";
+    public static final String GET_ALL_FILTER_CLASS = BASE_URL + "filter-institutes";
 }

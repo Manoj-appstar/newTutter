@@ -32,13 +32,10 @@ public class FragmentViewImage extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.view_full_image, container, false);
-
         mActivity = getActivity();
         sharePreferenceData = new SharePreferenceData();
         utils = new Utils();
-
         Bundle extras = getArguments();
-
         if (extras != null) {
             from = extras.getString("from");
         }

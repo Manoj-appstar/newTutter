@@ -58,7 +58,8 @@
                         android:padding="@dimen/_7sdp"
                         android:src="@drawable/ic_bottom_arrow" />
                 </LinearLayout>
-               <ImageView
+
+                <ImageView
                     android:id="@+id/imgFilter"
                     android:layout_width="@dimen/_25sdp"
                     android:layout_height="@dimen/_25sdp"
@@ -68,16 +69,17 @@
                     android:layout_marginTop="@dimen/_2sdp"
                     android:background="?selectableItemBackground"
                     android:padding="@dimen/_7sdp"
-                    android:src="@drawable/ic_filter"/>
+                    android:src="@drawable/ic_filter" />
             </RelativeLayout>
         </android.support.v7.widget.Toolbar>
 
     </android.support.design.widget.AppBarLayout>
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
+
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/teachersRecycler"
@@ -88,5 +90,15 @@
             android:paddingRight="3sp"
             android:paddingTop="2sp" />
 
-    </LinearLayout>
+        <ProgressBar
+            android:id="@+id/progressMoreLoad"
+            style="@style/AppTheme.BlueAccent"
+            android:layout_width="@dimen/_25sdp"
+            android:layout_height="@dimen/_25sdp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:backgroundTint="@color/colorPrimary"
+            android:theme="@style/AppTheme.BlueAccent" />
+
+    </RelativeLayout>
 </LinearLayout>
