@@ -7,6 +7,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import com.appstar.common.model.Address;
 import com.appstar.tutionportal.Model.DirectorDetail;
 import com.appstar.tutionportal.Model.StudentDetail;
 import com.appstar.tutionportal.Model.TeacherDetail;
@@ -17,6 +18,7 @@ public class DBHelper extends SQLiteOpenHelper {
     private final String TEACHER_TABLE = "Teacher_Detail";
     private final String STUDENT_TABLE = "Student_Detail";
     private final String DIRECTER_TABLE = "Director_Detail";
+    private final String LOCATION_TABLE = "LastLocation_Detail";
 
 
     public DBHelper(Context context) {
@@ -48,7 +50,61 @@ public class DBHelper extends SQLiteOpenHelper {
                 " image text,gender text,pursuing text, pursuing_detail text,bachelor text,bacheler_detail text, master text," +
                 "master_detail text, other_detail text, specialist text,dob date,state text, city text)";
         sqLiteDatabase.execSQL(QUERY_DIRECTOR);
+
+        String QUERY_LOCATION = "CREATE TABLE IF NOT EXISTS " + LOCATION_TABLE + " (id integer,city text,address text,latitude text,longitude text," +
+                " landmark text,fullAddress text,localAddress text)";
+        sqLiteDatabase.execSQL(QUERY_LOCATION);
+
+
     }
+
+
+    public void insertLastLocation(Address address) {
+
+        String query = "SELECT * from " + LOCATION_TABLE;
+        SQLiteDatabase database = getReadableDatabase();
+        Cursor cursor = database.rawQuery(query, null);
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("city", address.getCity());
+        contentValues.put("address", address.getAddress());
+        contentValues.put("latitude", address.getLatitude());
+        contentValues.put("longitude", address.getLongitude());
+        contentValues.put("landmark", address.getLandmark());
+        contentValues.put("fullAddress", address.getFullAddress());
+        contentValues.put("localAddress", address.getLocalAddress());
+
+        if (cursor != null&&cursor.moveToNext()) {
+            database.update(LOCATION_TABLE, contentValues, null, null);
+            cursor.close();
+        } else {
+            contentValues.put("id", 1);
+            database.insert(LOCATION_TABLE, null, contentValues);
+        }
+    }
+
+    public Address getLastLocation() {
+        Address address = null;
+        String query = "SELECT * from " + LOCATION_TABLE;
+        SQLiteDatabase database = getReadableDatabase();
+        Cursor cursor = database.rawQuery(query, null);
+        if (cursor != null) {
+            if(cursor.moveToNext()) {
+                address = new Address();
+                address.setCity(cursor.getString(cursor.getColumnIndex("city")));
+                address.setAddress(cursor.getString(cursor.getColumnIndex("address")));
+                address.setLatitude(cursor.getDouble(cursor.getColumnIndex("latitude")));
+                address.setLongitude(cursor.getDouble(cursor.getColumnIndex("longitude")));
+                address.setLandmark(cursor.getString(cursor.getColumnIndex("landmark")));
+                address.setFullAddress(cursor.getString(cursor.getColumnIndex("fullAddress")));
+                address.setLocalAddress(cursor.getString(cursor.getColumnIndex("localAddress")));
+            }
+            cursor.close();
+        }
+
+        return address;
+
+    }
+
 
     public boolean insertStudentDetail(StudentDetail studentDetail) {
         ContentValues contentValues = new ContentValues();
@@ -74,6 +130,7 @@ public class DBHelper extends SQLiteOpenHelper {
         return database.insert(TEACHER_TABLE, null, contentValues) > 0;
 
     }
+
     public StudentDetail getStudentDetail() {
         StudentDetail studentDetail = null;
         String query = "SELECT * from " + STUDENT_TABLE;
@@ -101,11 +158,13 @@ public class DBHelper extends SQLiteOpenHelper {
                 studentDetail.setState(cursor.getString(cursor.getColumnIndex("state")));
                 studentDetail.setCity(cursor.getString(cursor.getColumnIndex("city")));
             }
+            cursor.close();
         }
 
         return studentDetail;
 
     }
+
     public boolean updateStudentDetail(StudentDetail studentDetail) {
         ContentValues contentValues = new ContentValues();
         // contentValues.put("id", studentDetail.getId());
@@ -131,6 +190,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 new String[]{studentDetail.getId()}) > 0;
 
     }
+
     public boolean updateStudentDetailWithoutId(StudentDetail studentDetail) {
         ContentValues contentValues = new ContentValues();
         // contentValues.put("id", studentDetail.getId());
@@ -246,6 +306,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 teacherDetail.setImage(cursor.getString(cursor.getColumnIndex("image")));
                 teacherDetail.setPhone(cursor.getString(cursor.getColumnIndex("phone")));
             }
+            cursor.close();
         }
 
         return teacherDetail;
@@ -301,6 +362,7 @@ public class DBHelper extends SQLiteOpenHelper {
             teacherDetail.setImage(cursor.getString(cursor.getColumnIndex("image")));
             teacherDetail.setPhone(cursor.getString(cursor.getColumnIndex("phone")));*/
             }
+            cursor.close();
         }
         return directorDetail;
     }

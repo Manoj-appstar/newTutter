@@ -1,6 +1,5 @@
 package com.appstar.tutionportal.teacher.adapter;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
@@ -21,7 +20,6 @@ import android.widget.Toast;
 
 import com.appstar.tutionportal.Model.ClassDetail;
 import com.appstar.tutionportal.R;
-import com.appstar.tutionportal.student.extras.FragmentNames;
 import com.appstar.tutionportal.teacher.activities.ViewImageActivity;
 import com.appstar.tutionportal.util.SharePreferenceData;
 import com.appstar.tutionportal.util.Utils;
@@ -64,24 +62,11 @@ public class ClassListAdapter extends RecyclerView.Adapter<ClassListAdapter.MyHo
         holder.tvLocation.setText(model.getAddress());
         holder.tvTimeTo.setText(model.getTimingTo());
         holder.tvTimeFrom.setText(model.getTimingFrom());
-        // holder.tvCapacity.setText(model.getCapacity());
-        //   holder.ratingBar.setRating(Float.valueOf(model.getRating()));
-        // holder.ratingBar.setRating((float) 3.5);
         holder.ratingBar.setRating(3.0f);
         holder.ratingBar.setNumStars(5);
-
-        /*  holder.tvSubject.setText(model.());
-        if (model.getStatus().equalsIgnoreCase("0")) {
-            holder.tvStatus.setText("Open");
-        } else {
-            holder.tvStatus.setText("Closed");
-        }*/
-
         if (model.getClassImage() != null && model.getClassImage().size() > 0) {
             Glide.with(mContext).load(model.getClassImage().get(0).getImageUrl()).into(holder.imgTeacher);
-
         } else {
-            //   Glide.with(mContext).load(R.drawable.temp_profile).into(holder.imgTeacher);
             holder.imgTeacher.setImageResource(R.drawable.temp_profile);
         }
 
@@ -90,21 +75,21 @@ public class ClassListAdapter extends RecyclerView.Adapter<ClassListAdapter.MyHo
             public void onClick(View v) {
                 Bundle bundle = new Bundle();
                 bundle.putString("class_id", String.valueOf(arrayList.get(position).getId()));
-                utils.openFragment((Activity) mContext, FragmentNames.VIEW_TEACHER_CLASS_INFO, FragmentNames._VIEW_TEACHER_CLASS_INFO, bundle, true);
+                //utils.openFragment((Activity) mContext, FragmentNames.VIEW_TEACHER_CLASS_INFO, FragmentNames._VIEW_TEACHER_CLASS_INFO, bundle, true);
             }
         });
 
         holder.imgTeacher.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (model.getClassImage()!=null && model.getClassImage().size() > 0) {
+                if (model.getClassImage() != null && model.getClassImage().size() > 0) {
                     Intent intent = new Intent(mContext, ViewImageActivity.class);
-                    intent.putExtra("class_id",model.getId());
+                    intent.putExtra("class_id", model.getId());
                     mContext.startActivity(intent);
-                }else{
-                    Toast.makeText(mContext,"No Image Found",Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(mContext, "No Image Found", Toast.LENGTH_SHORT).show();
                 }
-                }
+            }
         });
 
 

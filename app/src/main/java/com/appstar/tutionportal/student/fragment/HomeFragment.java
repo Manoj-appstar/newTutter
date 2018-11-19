@@ -31,14 +31,16 @@ import com.appstar.common.model.FilterClass;
 import com.appstar.tutionportal.Model.ClassDataDetail;
 import com.appstar.tutionportal.Model.ClassDetail;
 import com.appstar.tutionportal.R;
+import com.appstar.tutionportal.database.DBHelper;
 import com.appstar.tutionportal.retrofit.ApiInterface;
-import com.appstar.tutionportal.student.adapter.TeacherListAdapter;
+import com.appstar.tutionportal.student.adapter.StudentClassAdapter;
 import com.appstar.tutionportal.student.extras.FragmentNames;
 import com.appstar.tutionportal.student.extras.UrlManager;
 import com.appstar.tutionportal.student.interfaces.ApiResponse;
 import com.appstar.tutionportal.student.interfaces.OnResponseListener;
 import com.appstar.tutionportal.student.model.TeachersModel;
 import com.appstar.tutionportal.util.ProgressUtil;
+import com.appstar.tutionportal.util.SharePreferenceData;
 import com.appstar.tutionportal.util.Utils;
 import com.appstar.tutionportal.util.UtilsStudent;
 import com.appstar.tutionportal.volley.RequestServer;
@@ -54,6 +56,7 @@ import java.util.List;
 public class HomeFragment extends Fragment implements OnResponseListener {
 
     private static final float APPBAR_ELEVATION = 10f;
+    public Address address;
     int MAX_SIZE = 30;
     ApiResponse apiResponse;
     Toolbar toolbar;
@@ -63,8 +66,7 @@ public class HomeFragment extends Fragment implements OnResponseListener {
     ImageView imgFilter;
     TextView tvLocation;
     int ACTIVITY_GET_LOCATION = 678;
-    Address address;
-    FilterClass filterClass;
+    FilterClass filterClass = new FilterClass();
     RequestServer requestServer;
     int REQ_GET_CLASS = 12345;
     ProgressBar progressMoreLoad;
@@ -72,13 +74,15 @@ public class HomeFragment extends Fragment implements OnResponseListener {
     private Activity mActivity;
     private RecyclerView recycleView;
     private LinearLayoutManager layoutManager;
-    private TeacherListAdapter teacherListAdapter;
+    private StudentClassAdapter adapter;
+
     private ArrayList<TeachersModel> teacherlist = new ArrayList<>();
     private ArrayList<ClassDetail> classList = new ArrayList<>();
     private ApiInterface apiInterface;
     private Utils utils;
     private LinearLayout homeLayout;
     private ProgressUtil progressUtil;
+    private DBHelper dbHelper;
 
     @Nullable
     @Override
@@ -86,15 +90,17 @@ public class HomeFragment extends Fragment implements OnResponseListener {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         utils = new Utils();
         mActivity = getActivity();
-        findViews(view);
+        initViews(view);
         setData();
-        getLocationCheck();
         onclickListener();
         onScrollListener();
+        getLocationCheck();
         return view;
     }
 
-    private void findViews(View view) {
+    private void initViews(View view) {
+        dbHelper = new DBHelper(getActivity());
+        requestServer = new RequestServer(getActivity(), this);
         progressMoreLoad = view.findViewById(R.id.progressMoreLoad);
         imgFilter = view.findViewById(R.id.imgFilter);
         tvLocation = view.findViewById(R.id.tvLocation);
@@ -107,8 +113,11 @@ public class HomeFragment extends Fragment implements OnResponseListener {
     }
 
     private void getLocationCheck() {
+        address = dbHelper.getLastLocation();
         if (address != null) {
+            tvLocation.setText(address.getLocalAddress());
             getClasses();
+
         } else
             llLocation.performClick();
     }
@@ -138,19 +147,16 @@ public class HomeFragment extends Fragment implements OnResponseListener {
                 dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
                 dialog.setCancelable(true);
                 dialog.setContentView(R.layout.filter_class_batch);
-
                 dialog.show();
-
-
             }
         });
     }
 
 
     private void setData() {
-        setList();
-        teacherListAdapter = new TeacherListAdapter(mActivity, teacherlist);
-        recycleView.setAdapter(teacherListAdapter);
+        //setList();
+        adapter = new StudentClassAdapter(mActivity, classList);
+        recycleView.setAdapter(adapter);
     }
 
     private void onScrollListener() {
@@ -159,6 +165,7 @@ public class HomeFragment extends Fragment implements OnResponseListener {
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
             }
+
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
@@ -195,7 +202,6 @@ public class HomeFragment extends Fragment implements OnResponseListener {
         }
     }
 
-
     private void getClasses() {
         try {
             progressMoreLoad.setVisibility(View.VISIBLE);
@@ -208,7 +214,8 @@ public class HomeFragment extends Fragment implements OnResponseListener {
                 jsonObject.put("subject_id", filterClass.getSubject());
             jsonObject.put("latitude", address.getLatitude());
             jsonObject.put("longitude", address.getLongitude());
-            jsonObject.put("offset", classList.size());
+            jsonObject.put("page", 1);
+            jsonObject.put("student_id", SharePreferenceData.getUserId(getActivity()));
             requestServer.sendStringPostWithHeader(UrlManager.GET_ALL_FILTER_CLASS, jsonObject, REQ_GET_CLASS, false);
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -229,6 +236,7 @@ public class HomeFragment extends Fragment implements OnResponseListener {
         if (requestCode == ACTIVITY_GET_LOCATION) {
             if (data != null) {
                 address = (Address) data.getSerializableExtra("obj");
+                dbHelper.insertLastLocation(address);
                 if (address != null) {
                     tvLocation.setText(address.getLocalAddress());
                     getClasses();
@@ -255,6 +263,7 @@ public class HomeFragment extends Fragment implements OnResponseListener {
                         isDataCompleted = true;
                     }
                     classList.addAll(userDetail.getData());
+                    setData();
                 }
             } catch (Exception ex) {
                 ex.printStackTrace();
