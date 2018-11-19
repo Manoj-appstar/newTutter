@@ -230,7 +230,7 @@ public class Utils {
                     FragmentViewTeacherClass fragmentViewTeacherClass = new FragmentViewTeacherClass();
                     fragmentViewTeacherClass.setArguments(bundle);
                     fragmentTransaction.replace(R.id.content, fragmentViewTeacherClass, fragmentName);
-                    break;
+                    break;*/
 
                 case FragmentNames._EDIT_TEACHER_PROFILE:
                     EditProfile editProfile1 = new EditProfile();
