@@ -225,12 +225,12 @@ public class Utils {
                     fragmentTransaction.replace(R.id.content, fragmentEditClass, fragmentName);
                     break;
 
-                case FragmentNames._VIEW_TEACHER_CLASS_INFO:
+                /*case FragmentNames._VIEW_TEACHER_CLASS_INFO:
 
                     FragmentViewTeacherClass fragmentViewTeacherClass = new FragmentViewTeacherClass();
                     fragmentViewTeacherClass.setArguments(bundle);
                     fragmentTransaction.replace(R.id.content, fragmentViewTeacherClass, fragmentName);
-                    break;
+                    break;*/
 
                 case FragmentNames._EDIT_TEACHER_PROFILE:
                     EditProfile editProfile1 = new EditProfile();

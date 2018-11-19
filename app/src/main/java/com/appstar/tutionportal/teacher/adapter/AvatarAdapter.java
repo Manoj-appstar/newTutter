@@ -95,7 +95,7 @@ public class AvatarAdapter extends TinderRVAdapter<String, AvatarAdapter.AvatarV
             holder.imageView.setImageResource(R.drawable.ic_add);
             holder.btnDelete.setVisibility(View.VISIBLE);
             holder.btnDelete.setImageResource(R.drawable.ic_delete_blue);
-            Glide.with(context).load(new File(listData.get(position))).into(holder.imageView);
+            Glide.with(context).load((listData.get(position))).into(holder.imageView);
         }
         holder.imgNoData.setOnClickListener(new View.OnClickListener() {
             @Override

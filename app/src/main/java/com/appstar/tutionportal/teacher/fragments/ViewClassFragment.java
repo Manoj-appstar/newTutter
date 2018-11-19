@@ -78,6 +78,7 @@ public class ViewClassFragment extends Fragment implements OnResponseListener, N
             public void onClick(View view) {
                 Intent intent = new Intent(mActivity, AddClasses.class);
                 intent.putExtra("from", "individual");
+                intent.putExtra("class", "addClass");
                 startActivity(intent);
                 //dialogClass.showDialog(mActivity);
                 //utils.openFragment(mActivity, FragmentNames.ADD_Class, FragmentNames._ADD_CLASS, null, false);
@@ -88,6 +89,7 @@ public class ViewClassFragment extends Fragment implements OnResponseListener, N
             public void onClick(View view) {
                 Intent intent = new Intent(mActivity, AddClasses.class);
                 intent.putExtra("from", "individual");
+                intent.putExtra("class", "addClass");
                 startActivity(intent);
                 //  utils.openFragment(mActivity, FragmentNames.ADD_Class, FragmentNames._ADD_CLASS, null, false);
                 //  dialogClass.showDialog(mActivity);
@@ -112,6 +114,7 @@ public class ViewClassFragment extends Fragment implements OnResponseListener, N
     }
 
     private void getData() {
+        bindData();
         if (Data.getClassList().size() > 0) {
             bindData();
         } else {
@@ -157,31 +160,7 @@ public class ViewClassFragment extends Fragment implements OnResponseListener, N
                         Data.setClassList(data.getData());
                         bindData();
                     }
-      /*      JSONObject jsonObject = new JSONObject(response);
-            JSONArray jo1 = jsonObject.getJSONArray("data");
-            if (jo1.length() > 0) {
-                // progressUtil.dismiss();
-                progress_bar.setVisibility(View.GONE);
-                for (int i = 0; i < jo1.length(); i++) {
-                    rl_data.setVisibility(View.VISIBLE);
-                    btnAddClass.setVisibility(View.VISIBLE);
-                    rl_noData.setVisibility(View.GONE);
-                    JSONObject c = jo1.getJSONObject(i);
-                    ClassModel classModel = new ClassModel();
-                    classModel.setClassId(c.getInt("cid"));
-                    classModel.setClassName(c.getString("class_name"));
-                    classModel.setSubject(c.getString("subject"));
-                    classModel.setLocation(c.getString("location"));
-                    classModel.setTime_to(c.getString("time_to"));
-                    classModel.setTime_from(c.getString("time_from"));
-                    classModel.setCapacity(c.getString("capacity"));
-                    classModel.setStatus(c.getString("status"));
-                    classModel.setRating(c.getString("rating"));
-                    classList.add(classModel);
-                    classListAdapter = new ClassListAdapter(mActivity, classList);
-                    classRecycler.setAdapter(classListAdapter);
-                }
-            }*/
+
                 } else {
                     rl_noData.setVisibility(View.VISIBLE);
                     rl_data.setVisibility(View.GONE);
@@ -207,6 +186,12 @@ public class ViewClassFragment extends Fragment implements OnResponseListener, N
     @Override
     public void onResume() {
         super.onResume();
-        getData();
+        notifySetChange();
+    }
+
+    private void notifySetChange() {
+        if (classListAdapter != null)
+            classListAdapter.notifyDataSetChanged();
+
     }
 }

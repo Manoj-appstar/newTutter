@@ -82,8 +82,8 @@ public class FragmentViewTeacherInfo extends Fragment {
         View view = inflater.inflate(R.layout.view_class_info, container, false);
         progressUtil = ProgressUtil.getInstance();
 
-/*    @Override
-    protected void onCreate(Bundle savedInstanceState) {
+     /*  @Override
+        protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.view_class_info);*/
 

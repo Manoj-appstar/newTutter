@@ -15,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -43,8 +44,10 @@ public class FragmentTeacherHome extends Fragment implements View.OnClickListene
     int REQ_CLASS = 198;
     EditText etGraduationType, etGraduationDetail, etPostGraduationType, etPostGraduationDetail, etOthers, etSpecialist;
     TeacherDetail teacherDetail;
+    FrameLayout flNotification;
+    TextView tvNotification;
     private ViewPager homePager;
-    private LinearLayout layoutChat, layoutProfile, layoutHome;
+    private LinearLayout layoutChat, layoutProfile, layoutHome, layoutNotification;
     private FragmentActivity mActivity;
     private CardView cvCancel;
     private DBHelper dbHelper;
@@ -63,10 +66,11 @@ public class FragmentTeacherHome extends Fragment implements View.OnClickListene
         layoutChat.setOnClickListener(this);
         layoutProfile.setOnClickListener(this);
         layoutHome.setOnClickListener(this);
+        layoutNotification.setOnClickListener(this);
         setupViewPager(homePager);
         setupPagerListener();
         requestServer = new RequestServer(mActivity, this);
-        //     Log.d("id",Data.getTeacherDetail().getBachelorDegree());
+        //Log.d("id",Data.getTeacherDetail().getBachelorDegree());
         if (TextUtils.isEmpty(Data.getTeacherDetail().getBachelorDegree())) {
             new Handler().postDelayed(new Runnable() {
                 @Override
@@ -75,7 +79,6 @@ public class FragmentTeacherHome extends Fragment implements View.OnClickListene
                 }
             }, 2000);
         }
-
         return view;
     }
 
@@ -85,6 +88,9 @@ public class FragmentTeacherHome extends Fragment implements View.OnClickListene
         layoutChat = view.findViewById(R.id.layoutChat);
         layoutProfile = view.findViewById(R.id.layoutProfile);
         layoutHome = view.findViewById(R.id.layoutHome);
+        layoutNotification = view.findViewById(R.id.layoutNotification);
+        flNotification = view.findViewById(R.id.flNotification);
+        tvNotification = view.findViewById(R.id.tvNotification);
 
     }
 
@@ -94,6 +100,7 @@ public class FragmentTeacherHome extends Fragment implements View.OnClickListene
         dashboardPagerAdapter.addFragment(Fragment.instantiate(mActivity, FragmentTeacherChatHistory.class.getName()), "CHAT");
         dashboardPagerAdapter.addFragment(Fragment.instantiate(mActivity, ViewClassFragment.class.getName()), "HOME");
         dashboardPagerAdapter.addFragment(Fragment.instantiate(mActivity, ProfileTeacherFragment.class.getName()), "PROFILE");
+        dashboardPagerAdapter.addFragment(Fragment.instantiate(mActivity, FragmentTeacherNotification.class.getName()), "PROFILE");
 
         viewPager.setAdapter(dashboardPagerAdapter);
         viewPager.setCurrentItem(Utils.getCurrentTab());
@@ -125,6 +132,7 @@ public class FragmentTeacherHome extends Fragment implements View.OnClickListene
         layoutHome.setSelected(false);
         layoutChat.setSelected(false);
         layoutProfile.setSelected(false);
+        layoutNotification.setSelected(false);
 
         switch (position) {
             case 0:
@@ -137,6 +145,10 @@ public class FragmentTeacherHome extends Fragment implements View.OnClickListene
 
             case 2:
                 layoutProfile.setSelected(true);
+                break;
+
+            case 3:
+                layoutNotification.setSelected(true);
                 break;
 
             default:
@@ -159,6 +171,10 @@ public class FragmentTeacherHome extends Fragment implements View.OnClickListene
 
             case R.id.layoutProfile:
                 homePager.setCurrentItem(2);
+                break;
+
+            case R.id.layoutNotification:
+                homePager.setCurrentItem(3);
                 break;
 
             default:

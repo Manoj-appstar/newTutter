@@ -107,6 +107,10 @@ public class TeacherDashboard extends AppCompatActivity implements NetworkRespon
             case FragmentNames._EDIT_CLASS:
                 utils.openFragment(mActivity, FragmentNames.TEACHER_HOME, FragmentNames._TEACHER_HOME, null, true);
                 break;
+
+         /*   case FragmentNames._VIEW_TEACHER_CLASS_INFO:
+                utils.openFragment(mActivity, FragmentNames.TEACHER_HOME, FragmentNames._TEACHER_HOME, null, true);
+                break;*/
         }
     }
 

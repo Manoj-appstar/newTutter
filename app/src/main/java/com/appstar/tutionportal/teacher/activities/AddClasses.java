@@ -48,6 +48,7 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.appstar.avatar.TinderRecyclerView;
+import com.appstar.common.BindData;
 import com.appstar.common.GetSearchLocation;
 import com.appstar.customgallery.GalleryFolder;
 import com.appstar.customgallery.ImageGallery;
@@ -105,16 +106,20 @@ public class AddClasses extends AppCompatActivity implements View.OnClickListene
     private final static int PLACE_PICKER_REQUEST = 999;
     private static final int MY_CAMERA_REQUEST_CODE = 100;
     public String choosedTimeFrom, choosedTimeTo;
-
+    public TextView aLocation, aTimeTo, aTimeFrom, aDate, tvEndDate, tvLocation, tvAddClass, tvAddYourClass, tvClassName,
+            tvInstituteNmae, tvBranchName, tvTeacherAssigned, tvAddMoreSub, tvSubject;
+    public EditText etPrice, etClassPhone, tvDays, batchName, aLimit;
+    public String lat, longt, strCity, strLandmark, strHouse_no, class_selected_id, subject_selected_id, endDate, startingDate, check_day;
+    public AutoCompleteTextView aClass, aSubject;
+    public TinderRecyclerView recyclerView;
+    public List<String> listData = new ArrayList<>();
+    public RecyclerView rvAddSubject;
+    BindData bindData;
     boolean progress_bar_visibility;
-    TextView tvAddYourClass;
     LinearLayout llAddInstitute;
-    TinderRecyclerView recyclerView;
     String path1;
-    String lat, longt;
     int i;
     int PLACE_AUTOCOMPLETE_REQUEST_CODE = 1;
-    String check_day;
     AvatarAdapter adapter;
     List<String> image = new ArrayList<String>();
     LinearLayoutManager linearLayoutManager;
@@ -123,9 +128,7 @@ public class AddClasses extends AppCompatActivity implements View.OnClickListene
     int class_image_count = 0;
     Double latitude, longitude;
     String scheduledTime = "";
-    TextView aLocation, aTimeTo, aTimeFrom, aDate, tvEndDate;
-    String Subject_id_list, subject_name_list, endDate, startingDate;
-    EditText tvDays;
+    String Subject_id_list, subject_name_list;
     int year, day, month;
     String[] str = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
     int REQ_ADD_CLASS = 188;
@@ -134,38 +137,26 @@ public class AddClasses extends AppCompatActivity implements View.OnClickListene
     int UPLOAD_CLASS_IMAGE = 158;
     String batch_id;
     int SELECT_PICTURE = 899;
-    List<String> listData = new ArrayList<>();
     List<String> listData_data = new ArrayList<>();
     ArrayList<String> listImage = new ArrayList<>();
     int selectedPosition = 0;
-    TextView tvClassName, tvInstituteNmae, tvBranchName;
     CardView cvAddClass;
-    TextView tvAddClass;
-
     ImageView ivBack;
     Dialog dialog;
-    String from;
+    String from, clas, class_id;
     int select_Location = 159;
     AutoCompleteTextView addSubject;
     List<Subject> subjectList = new ArrayList<>();
     List<Subject> selectedSubjectListName = new ArrayList<>();
-    EditText batchName;
     LinearLayoutManager llGetClass;
-    AutoCompleteTextView aClass, aSubject;
     String branch_id, branch_name, institute_id, institute_name, teacher_id_list, branch_address, branch_latitude, branch_longitude;
-    EditText etPrice;
-
-    EditText etClassPhone;
-    TextView tvLocation;
-    String class_selected_id, subject_selected_id;
-
     int REQ_TEACHER_LIST = 108;
     String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
     ProgressBar progressBar;
-    TextView tvTeacherAssigned;
     FrameLayout frameLayout;
     Branch branchInfo;
     com.appstar.common.model.Address address;
+    List<List<ClassImage>> imageList;
     private GetClassAdapter getClassAdapter;
     private ArrayList<SubjectTeacherList> subjectTeacherLists = new ArrayList<>();
     private SharePreferenceData sharePreferenceData;
@@ -183,14 +174,11 @@ public class AddClasses extends AppCompatActivity implements View.OnClickListene
     private List<TeacherDetail> teacherDetails = new ArrayList<>();
     private List<ClassDetail> classImage = new ArrayList<>();
     private FusedLocationProviderClient mFusedLocationClient;
-    private EditText aLimit;
     private MyTextView tvLayoutName;
     private MyTextView btnAddClass;
     private ProgressUtil progressUtil;
     private HorizontalScrollView horizontalScrollview;
-    private RecyclerView rvAddSubject;
     private LinearLayoutManager llmTeacherclass;
-    private TextView tvAddMoreSub, tvSubject;
     private AutoCompleteTextView addTeacherAssigned;
     private DialogAddSubject dialogAddSubject;
     private ClassDetail classDetail;
@@ -236,6 +224,7 @@ public class AddClasses extends AppCompatActivity implements View.OnClickListene
         setContentView(R.layout.add_classes);
 
         mActivity = AddClasses.this;
+        bindData = new BindData();
         utils = new Utils();
         requestServer = new RequestServer(mActivity, this);
         progressUtil = new ProgressUtil();
@@ -243,33 +232,80 @@ public class AddClasses extends AppCompatActivity implements View.OnClickListene
         getClassData();
         getSubjectData();
         findViews();
-        getData();
+
         sharePreferenceData = new SharePreferenceData();
         setUpGoogleApiClient();
         createLocationRequest();
         buildLocationSettingsRequest();
         checkLocationSettings();
         Utils.checkInternetConnection(mActivity);
-
-
+        getData();
     }
 
     private void getData() {
-        from = getIntent().getStringExtra("from");
-        if (from.equalsIgnoreCase("institute")) {
-            branchInfo = (Branch) getIntent().getSerializableExtra("obj");
-            showHideMoreSubject();
+        clas = getIntent().getStringExtra("class");
+        if (clas.equalsIgnoreCase("addClass")) {
+            tvAddClass.setText("Add class");
+            from = getIntent().getStringExtra("from");
+            if (from.equalsIgnoreCase("institute")) {
+                branchInfo = (Branch) getIntent().getSerializableExtra("obj");
+                showHideMoreSubject();
+            } else {
+            }
         } else {
+            from = getIntent().getStringExtra("editFrom");
+            tvAddClass.setText("Edit class");
+            class_id = getIntent().getStringExtra("class_id");
+            if (Data.getClassList().size() > 0) {
+                ClassDetail classDetail = getFilterClassByBranchId();
+                bindData(classDetail);
+            }
 
-         /*   branch_id = getIntent().getStringExtra("branch_id");
-            branch_name = getIntent().getStringExtra("branch_name");
-            institute_id = getIntent().getStringExtra("institute_id");
-            institute_name = getIntent().getStringExtra("institute_name");
-            branch_address = getIntent().getStringExtra("branch_address");
-            branch_latitude = getIntent().getStringExtra("branch_latitude");
-            branch_longitude = getIntent().getStringExtra("branch_longitude");*/
         }
+
         showHideViews();
+    }
+
+    private ClassDetail getFilterClassByBranchId() {
+        ClassDetail classDetail = null;
+        for (ClassDetail obj : Data.getClassList()) {
+            if (obj.getId().equals(class_id)) {
+                classDetail = obj;
+            }
+        }
+        return classDetail;
+    }
+
+    private void bindData(final ClassDetail classDetail) {
+        bindData.bindAllData(mActivity, this, classDetail);
+        //  imageList = Arrays.asList(classDetail.getClassImage());
+        listData.clear();
+        try {
+            for (int i = 0; i < classDetail.getClassImage().size(); i++) {
+                listData.add(classDetail.getClassImage().get(i).getImageUrl());
+            }
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        try {
+            for (int i = 0; i < classDetail.getSubjectname().size(); i++) {
+                if (subject_name_list == null) {
+                    subject_name_list = classDetail.getSubjectname().get(i).getSubject() + ",";
+                } else {
+                    subject_name_list += classDetail.getSubjectname().get(i).getSubject() + ",";
+
+                }
+            }
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        if (subject_name_list.endsWith(",")) {
+            subject_name_list = subject_name_list.substring(0, subject_name_list.length() - 1);
+            aSubject.setText(subject_name_list);
+        }
+        setRecycleView();
     }
 
     private void showHideViews() {
@@ -285,7 +321,7 @@ public class AddClasses extends AppCompatActivity implements View.OnClickListene
             tvAddYourClass.setVisibility(View.VISIBLE);
             llAddInstitute.setVisibility(View.GONE);
         } else {
-            //  tvSubject.setVisibility(View.GONE);
+            //tvSubject.setVisibility(View.GONE);
             aSubject.setVisibility(View.GONE);
             tvLocation.setVisibility(View.GONE);
             aLocation.setVisibility(View.GONE);
@@ -307,6 +343,7 @@ public class AddClasses extends AppCompatActivity implements View.OnClickListene
     }
 
     private void findViews() {
+
         batchName = findViewById(R.id.BatchName);
         addTeacherAssigned = findViewById(R.id.addTeacherAssigned);
         tvTeacherAssigned = findViewById(R.id.tvTeacherAssigned);
@@ -394,7 +431,6 @@ public class AddClasses extends AppCompatActivity implements View.OnClickListene
 
         tvDays.setOnClickListener(this);
         tvEndDate.setOnClickListener(this);
-
 
         setRecycleView();
     }
@@ -581,7 +617,10 @@ public class AddClasses extends AppCompatActivity implements View.OnClickListene
                 callAPI();
                 break;
             case R.id.tvAddClass:
-                callAPI();
+                if (clas.equalsIgnoreCase("addClass"))
+                    callAPI();
+                else
+                    editApi();
                 break;
             case R.id.tvDays:
                 showNameDialog();
@@ -625,9 +664,9 @@ public class AddClasses extends AppCompatActivity implements View.OnClickListene
                 if (from.equalsIgnoreCase("individual")) {
                     jsonObject.put("teacher_id", Data.getTeacherDetail().getId());
                     jsonObject.put("address", aLocation.getText().toString().trim());
-                    jsonObject.put("house_no", address.getAddress());
-                    jsonObject.put("city", address.getCity());
-                    jsonObject.put("landmark", address.getLandmark());
+                    jsonObject.put("house_no", strHouse_no);
+                    jsonObject.put("city", strCity);
+                    jsonObject.put("landmark", strLandmark);
                     jsonObject.put("latitude", lat);
                     jsonObject.put("longitude", longt);
                     jsonObject.put("subject_id", subject_selected_id);
@@ -645,6 +684,69 @@ public class AddClasses extends AppCompatActivity implements View.OnClickListene
                         Subject_id_list = Subject_id_list.substring(0, Subject_id_list.length() - 1);
                     }
                     jsonObject.put("teacher_id", "1");
+                    jsonObject.put("address", branchInfo.getAddress());
+                    jsonObject.put("latitude", branchInfo.getLatitude());
+                    jsonObject.put("subject_id", Subject_id_list);
+                    jsonObject.put("longitude", branchInfo.getLongitude());
+                    jsonObject.put("institute_id", branchInfo.getInstituteId());
+                    jsonObject.put("branch_id", branchInfo.getBranchId());
+                    jsonObject.put("category_type", "1");
+                }
+
+                jsonObject.put("class_id", class_selected_id);
+                jsonObject.put("timing_to", aTimeFrom.getText().toString().trim());
+                jsonObject.put("timing_from", aTimeTo.getText().toString().trim());
+                jsonObject.put("starting_date", startingDate);
+                jsonObject.put("end_date", endDate);
+                jsonObject.put("phone", etClassPhone.getText().toString().trim());
+                jsonObject.put("week_days", check_day);
+                jsonObject.put("price", etPrice.getText().toString().trim());
+                jsonObject.put("student_limit", aLimit.getText().toString());
+                jsonObject.put("batch_name", batchName.getText().toString());
+                tvAddClass.setText("Adding class...");
+                progressBar_result.setVisibility(View.VISIBLE);
+                progress_bar_visibility = true;
+                requestServer.sendStringPostWithHeader(UrlManager.ADD_CLASS, jsonObject, REQ_ADD_CLASS, false);
+
+                //  }
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        }
+    }
+
+    private void editApi() {
+        if (validation()) {
+            try {
+                JSONObject jsonObject = new JSONObject();
+                if (check_day.endsWith(",")) {
+                    check_day = check_day.substring(0, check_day.length() - 1);
+                }
+                if (from.equalsIgnoreCase("individual")) {
+                    jsonObject.put("teacher_id", Data.getTeacherDetail().getId());
+                    jsonObject.put("batch_id", class_id);
+                    jsonObject.put("address", aLocation.getText().toString().trim());
+                    jsonObject.put("house_no", strHouse_no);
+                    jsonObject.put("city", strCity);
+                    jsonObject.put("landmark", strLandmark);
+                    jsonObject.put("latitude", lat);
+                    jsonObject.put("longitude", longt);
+                    jsonObject.put("subject_id", subject_selected_id);
+                    jsonObject.put("student_limit", aLimit.getText().toString().trim());
+                    jsonObject.put("category_type", "0");
+                    jsonObject.put("institute_id", "0");
+                    jsonObject.put("branch_id", "0");
+                } else {
+
+              /*  if (teacher_id_list.endsWith(",")) {
+                    teacher_id_list = teacher_id_list.substring(0, teacher_id_list.length() - 1);
+                }*/
+
+                    if (Subject_id_list.endsWith(",")) {
+                        Subject_id_list = Subject_id_list.substring(0, Subject_id_list.length() - 1);
+                    }
+                    jsonObject.put("teacher_id", "1");
+                    jsonObject.put("batch_id", class_id);
                     jsonObject.put("address", branchInfo.getAddress());
                     jsonObject.put("latitude", branchInfo.getLatitude());
                     jsonObject.put("subject_id", Subject_id_list);
@@ -1108,6 +1210,9 @@ public class AddClasses extends AppCompatActivity implements View.OnClickListene
                 aLocation.setText(address.getFullAddress());
                 lat = String.valueOf(address.getLatitude());
                 longt = String.valueOf(address.getLongitude());
+                strCity = address.getCity();
+                strHouse_no = address.getAddress();
+                strLandmark = address.getLandmark();
 
             }
 
@@ -1138,12 +1243,13 @@ public class AddClasses extends AppCompatActivity implements View.OnClickListene
     }
 
     private void setRecycleView() {
-        listData.add("");
-        listData.add("");
-        listData.add("");
-        listData.add("");
-        listData.add("");
-        listData.add("");
+        int size = listData.size();
+        //  int count = 6 - size;
+
+        for (int i = 0; i < 6 - size; i++) {
+            listData.add("");
+        }
+
 
         recyclerView.setMoveNext(true);
         adapter = new AvatarAdapter(this, mActivity, listData);

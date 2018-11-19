@@ -1,10 +1,8 @@
 package com.appstar.tutionportal.teacher.adapter;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
-import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
 import android.support.v7.widget.CardView;
@@ -21,8 +19,8 @@ import android.widget.Toast;
 
 import com.appstar.tutionportal.Model.ClassDetail;
 import com.appstar.tutionportal.R;
-import com.appstar.tutionportal.student.extras.FragmentNames;
 import com.appstar.tutionportal.teacher.activities.ViewImageActivity;
+import com.appstar.tutionportal.teacher.fragments.FragmentViewTeacherClass;
 import com.appstar.tutionportal.util.SharePreferenceData;
 import com.appstar.tutionportal.util.Utils;
 import com.appstar.tutionportal.views.MyTextView;
@@ -59,18 +57,20 @@ public class ClassListAdapter extends RecyclerView.Adapter<ClassListAdapter.MyHo
     public void onBindViewHolder(@NonNull ClassListAdapter.MyHolder holder, final int position) {
         //holder.ratingbar.setRating(position);
         final ClassDetail model = arrayList.get(position);
-        //   callAPI(model.getClassId());
+        //callAPI(model.getClassId());
         holder.tvClassName.setText(model.getBatchName());
-        holder.tvLocation.setText(model.getAddress());
+        holder.tvLocation.setText(model.getLandmark());
         holder.tvTimeTo.setText(model.getTimingTo());
         holder.tvTimeFrom.setText(model.getTimingFrom());
+
         // holder.tvCapacity.setText(model.getCapacity());
         //   holder.ratingBar.setRating(Float.valueOf(model.getRating()));
         // holder.ratingBar.setRating((float) 3.5);
+
         holder.ratingBar.setRating(3.0f);
         holder.ratingBar.setNumStars(5);
 
-        /*  holder.tvSubject.setText(model.());
+        /* holder.tvSubject.setText(model.());
         if (model.getStatus().equalsIgnoreCase("0")) {
             holder.tvStatus.setText("Open");
         } else {
@@ -78,36 +78,45 @@ public class ClassListAdapter extends RecyclerView.Adapter<ClassListAdapter.MyHo
         }*/
 
         if (model.getClassImage() != null && model.getClassImage().size() > 0) {
+            holder.vieImages.setVisibility(View.VISIBLE);
             Glide.with(mContext).load(model.getClassImage().get(0).getImageUrl()).into(holder.imgTeacher);
 
         } else {
-            //   Glide.with(mContext).load(R.drawable.temp_profile).into(holder.imgTeacher);
+            holder.vieImages.setVisibility(View.GONE);
+            Glide.with(mContext).load(R.drawable.temp_profile).into(holder.imgTeacher);
             holder.imgTeacher.setImageResource(R.drawable.temp_profile);
         }
 
-        holder.cvClass.setOnClickListener(new View.OnClickListener() {
+      /*  holder.cvClass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Bundle bundle = new Bundle();
                 bundle.putString("class_id", String.valueOf(arrayList.get(position).getId()));
                 utils.openFragment((Activity) mContext, FragmentNames.VIEW_TEACHER_CLASS_INFO, FragmentNames._VIEW_TEACHER_CLASS_INFO, bundle, true);
             }
+        });*/
+
+        holder.cvClass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(mContext, FragmentViewTeacherClass.class);
+                intent.putExtra("class_id", model.getId());
+                mContext.startActivity(intent);
+            }
         });
 
         holder.imgTeacher.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (model.getClassImage()!=null && model.getClassImage().size() > 0) {
+                if (model.getClassImage() != null && model.getClassImage().size() > 0) {
                     Intent intent = new Intent(mContext, ViewImageActivity.class);
-                    intent.putExtra("class_id",model.getId());
+                    intent.putExtra("class_id", model.getId());
                     mContext.startActivity(intent);
-                }else{
-                    Toast.makeText(mContext,"No Image Found",Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(mContext, "No Image Found", Toast.LENGTH_SHORT).show();
                 }
-                }
+            }
         });
-
-
     }
 
     @Override
@@ -148,7 +157,6 @@ public class ClassListAdapter extends RecyclerView.Adapter<ClassListAdapter.MyHo
                             AnimationUtils.loadAnimation(mContext,
                                     R.anim.img_anim);
                     imgTeacher.startAnimation(animation1);
-
                 }
             });
         }

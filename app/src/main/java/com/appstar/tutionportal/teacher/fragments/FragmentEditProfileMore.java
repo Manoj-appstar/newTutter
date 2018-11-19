@@ -124,7 +124,7 @@ public class FragmentEditProfileMore extends Fragment implements OnResponseListe
 
 
     private void callAPI() {
-        //  RetrofitCall.CallHome(HomeFragment.this, apiInterface);
+        //  RetrofitCall.CallHome(HomeFragment.this, api Interface);
         try {
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("teacher_id", Data.getTeacherDetail().getId());

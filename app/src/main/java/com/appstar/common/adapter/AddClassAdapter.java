@@ -1,7 +1,9 @@
 package com.appstar.common.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +14,9 @@ import android.widget.TextView;
 import com.appstar.tutionportal.Model.ClassDetail;
 import com.appstar.tutionportal.Model.Subject;
 import com.appstar.tutionportal.R;
+import com.appstar.tutionportal.student.fragment.AddClass;
+import com.appstar.tutionportal.teacher.activities.AddClasses;
+import com.appstar.tutionportal.teacher.fragments.FragmentViewTeacherClass;
 
 import java.util.List;
 
@@ -33,7 +38,7 @@ public class AddClassAdapter extends RecyclerView.Adapter<AddClassAdapter.MyHold
 
     @Override
     public void onBindViewHolder(@NonNull AddClassAdapter.MyHolder holder, final int position) {
-        ClassDetail classDetail = classList.get(position);
+        final ClassDetail classDetail = classList.get(position);
         holder.tvBatchName.setText(classDetail.getBatchName());
         holder.tvInstitute.setText(classDetail.getInstituteName());
         holder.tvTeacher.setText(classDetail.getTeacherName());
@@ -42,6 +47,16 @@ public class AddClassAdapter extends RecyclerView.Adapter<AddClassAdapter.MyHold
         for (Subject subject : classDetail.getSubjectname()) {
             subjects += subject.getSubject() + " ,";
         }
+        holder.cvInstituteClass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(mContext, AddClasses.class);
+                intent.putExtra("class", "editClass");
+                intent.putExtra("class_id", classDetail.getId());
+                intent.putExtra("editFrom", "institute");
+                mContext.startActivity(intent);
+            }
+        });
         if(subjects.length()>1)
         holder.tvSubject.setText(subjects.substring(0,subjects.length()-1));
 
@@ -57,9 +72,11 @@ public class AddClassAdapter extends RecyclerView.Adapter<AddClassAdapter.MyHold
     public class MyHolder extends RecyclerView.ViewHolder {
         TextView tvBatchName, tvSubject, tvTeacher, tvInstitute, tvLocation;
         ImageView imgClassImage;
+        CardView cvInstituteClass;
 
         public MyHolder(View itemView) {
             super(itemView);
+            cvInstituteClass = itemView.findViewById(R.id.cvInstituteClass);
             tvBatchName = itemView.findViewById(R.id.tvBatchName);
             tvSubject = itemView.findViewById(R.id.tvSubject);
             tvTeacher = itemView.findViewById(R.id.tvTeacher);

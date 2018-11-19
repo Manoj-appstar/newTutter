@@ -37,6 +37,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyAlLkXcIWrsPHAfbpnS2_9ViMlLlF5UFSE"/>
@@ -72,6 +73,10 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".login.ChooseScreen"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".teacher.fragments.FragmentViewTeacherClass"
             android:screenOrientation="portrait" />
         <activity
             android:name=".institute.activities.InstituteDashboard"

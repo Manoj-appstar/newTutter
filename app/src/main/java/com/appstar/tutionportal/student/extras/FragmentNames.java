@@ -15,6 +15,7 @@ public class FragmentNames {
     public static final String EDIT_TEACHER_PROFILE = "editTeacherProfile";
     public static final String VIEW_FULL_IMAGE = "editTeacherProfile";
     public static final String VIEW_STUDENT_PROFILE = "viewStudentProfile";
+    public static final String VIEW_TEACHER_CLASS_INFO = "viewStudentProfile";
 
     public static final int _TEACHER_HOME = 1;
     public static final int _ADD_CLASS = 2;
@@ -27,6 +28,7 @@ public class FragmentNames {
     public static final int _EDIT_TEACHER_PROFILE = 9;
     public static final int _VIEW_FULL_IMAGE = 10;
     public static final int _VIEW_STUDENT_PROFILE = 11;
+    public static final int _VIEW_TEACHER_CLASS_INFO = 12;
 
 
     // Fragment names for student
