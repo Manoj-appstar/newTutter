@@ -164,7 +164,7 @@ public class SharePreferenceData {
         editor.apply();
     }
 
-    public String getUserId(Context context) {
+    public static String getUserId(Context context) {
         SharedPreferences sharedPreferences = context.getSharedPreferences(context.getResources().getString(R.string.app_name), Context.MODE_PRIVATE);
         return sharedPreferences.getString("user_id", "");
     }

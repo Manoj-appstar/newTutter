@@ -47,7 +47,6 @@ public class ClassDetail {
     @Expose
     private String studentLimit;
     @SerializedName("price")
-
     @Expose
     private String price;
     @SerializedName("latitude")
@@ -86,12 +85,37 @@ public class ClassDetail {
     @SerializedName("Teacher Name")
     @Expose
     private String teacherName;
+
+    public String isJoined() {
+        return isJoined;
+    }
+
+    public void setJoined(String joined) {
+        isJoined = joined;
+    }
+
     @SerializedName("subjectname")
     @Expose
+
     private List<Subject> subjectname = null;
+    @SerializedName("Join")
+    @Expose
+    private String isJoined;
     @SerializedName("image")
     @Expose
     private List<ClassImage> classImage = null;
+
+    @SerializedName("distance")
+    @Expose
+    private String distance;
+
+    public String getDistance() {
+        return distance;
+    }
+
+    public void setDistance(String distance) {
+        this.distance = distance;
+    }
 
     public String getCity() {
         return city;

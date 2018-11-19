@@ -87,7 +87,7 @@ public class ClassListAdapter extends RecyclerView.Adapter<ClassListAdapter.MyHo
             holder.imgTeacher.setImageResource(R.drawable.temp_profile);
         }
 
-      /*  holder.cvClass.setOnClickListener(new View.OnClickListener() {
+     /*   holder.cvClass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Bundle bundle = new Bundle();
