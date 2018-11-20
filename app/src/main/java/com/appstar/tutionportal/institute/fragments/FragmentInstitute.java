@@ -58,9 +58,7 @@ public class FragmentInstitute extends Fragment implements OnResponseListener {
     @Override
     public void onResume() {
         super.onResume();
-        if (adapter == null) {
-            bindData();
-        } else
+        if (adapter != null)
             adapter.notifyDataSetChanged();
     }
 
@@ -82,19 +80,25 @@ public class FragmentInstitute extends Fragment implements OnResponseListener {
 
     private void getData() {
         progress.setVisibility(View.VISIBLE);
-        try {
-            if (Data.getInstituteList().size() <= 0) {
-                String url = UrlManager.INSTITUTE_DATA;
-                JSONObject jsonObject = new JSONObject();
-                //jsonObject.put("director_id=", preferenceData.getUserId(getActivity()));
-                jsonObject.put("director_id", preferenceData.getUserId(getContext()));
-                requestServer.sendStringPostWithHeader(url, jsonObject, REQ_GET_INSTITUTE, false);
-            } else {
-                bindData();
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    if (Data.getInstituteList().size() <= 0) {
+                        String url = UrlManager.INSTITUTE_DATA;
+                        JSONObject jsonObject = new JSONObject();
+                        //jsonObject.put("director_id=", preferenceData.getUserId(getActivity()));
+                        jsonObject.put("director_id", preferenceData.getUserId(getContext()));
+                        requestServer.sendStringPostWithHeader(url, jsonObject, REQ_GET_INSTITUTE, false);
+                    } else {
+                        bindData();
+                    }
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
             }
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
+        },2000);
+
    /*     new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
