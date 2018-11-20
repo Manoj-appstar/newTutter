@@ -55,9 +55,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 " landmark text,fullAddress text,localAddress text)";
         sqLiteDatabase.execSQL(QUERY_LOCATION);
 
-
     }
-
 
     public void insertLastLocation(Address address) {
 
@@ -73,7 +71,7 @@ public class DBHelper extends SQLiteOpenHelper {
         contentValues.put("fullAddress", address.getFullAddress());
         contentValues.put("localAddress", address.getLocalAddress());
 
-        if (cursor != null&&cursor.moveToNext()) {
+        if (cursor != null && cursor.moveToNext()) {
             database.update(LOCATION_TABLE, contentValues, null, null);
             cursor.close();
         } else {
@@ -88,7 +86,7 @@ public class DBHelper extends SQLiteOpenHelper {
         SQLiteDatabase database = getReadableDatabase();
         Cursor cursor = database.rawQuery(query, null);
         if (cursor != null) {
-            if(cursor.moveToNext()) {
+            if (cursor.moveToNext()) {
                 address = new Address();
                 address.setCity(cursor.getString(cursor.getColumnIndex("city")));
                 address.setAddress(cursor.getString(cursor.getColumnIndex("address")));
@@ -102,7 +100,6 @@ public class DBHelper extends SQLiteOpenHelper {
         }
         return address;
     }
-
 
     public boolean insertStudentDetail(StudentDetail studentDetail) {
         ContentValues contentValues = new ContentValues();

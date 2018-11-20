@@ -181,8 +181,6 @@ public class UtilsInstitute {
             }
 
             fragmentTransaction.commit();
-
-
         } catch (Exception e) {
             Log.e("FRAG EXC", "::::    " + e.getMessage());
         }

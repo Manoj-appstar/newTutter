@@ -47,7 +47,7 @@ public class AddClassAdapter extends RecyclerView.Adapter<AddClassAdapter.MyHold
             subjects += subject.getSubject() + " ,";
         }
 
-       /* holder.cvInstituteClass.setOnClickListener(new View.OnClickListener() {
+      /* holder.cvInstituteClass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(mContext, AddClasses.class);
