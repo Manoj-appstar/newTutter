@@ -100,7 +100,7 @@ public class FragmentTeacherHome extends Fragment implements View.OnClickListene
         dashboardPagerAdapter.addFragment(Fragment.instantiate(mActivity, FragmentTeacherChatHistory.class.getName()), "CHAT");
         dashboardPagerAdapter.addFragment(Fragment.instantiate(mActivity, ViewClassFragment.class.getName()), "HOME");
         dashboardPagerAdapter.addFragment(Fragment.instantiate(mActivity, ProfileTeacherFragment.class.getName()), "PROFILE");
-        dashboardPagerAdapter.addFragment(Fragment.instantiate(mActivity, FragmentTeacherNotification.class.getName()), "PROFILE");
+        dashboardPagerAdapter.addFragment(Fragment.instantiate(mActivity, FragmentTeacherNotification.class.getName()), "NOTIFICATION");
 
         viewPager.setAdapter(dashboardPagerAdapter);
         viewPager.setCurrentItem(Utils.getCurrentTab());

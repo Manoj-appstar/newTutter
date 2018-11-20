@@ -51,19 +51,28 @@ public class ClassDetail {
     private String price;
     @SerializedName("latitude")
     @Expose
-    private double latitude;
+    private Double latitude;
     @SerializedName("longitude")
     @Expose
-    private double longitude;
+    private Double longitude;
     @SerializedName("address")
     @Expose
     private String address;
     @SerializedName("city")
     @Expose
     private String city;
+
+    public String getHouseNo() {
+        return houseNo;
+    }
+
+    public void setHouseNo(String houseNo) {
+        this.houseNo = houseNo;
+    }
+
     @SerializedName("house_no")
     @Expose
-    private String house_no;
+    private String houseNo;
     @SerializedName("landmark")
     @Expose
     private String landmark;
@@ -134,14 +143,6 @@ public class ClassDetail {
 
     public void setCity(String city) {
         this.city = city;
-    }
-
-    public String getHouse_no() {
-        return house_no;
-    }
-
-    public void setHouse_no(String house_no) {
-        this.house_no = house_no;
     }
 
     public String getLandmark() {

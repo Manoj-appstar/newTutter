@@ -518,6 +518,7 @@ public class AddClasses extends AppCompatActivity implements View.OnClickListene
                 TimePickerDialog mTimePickerFrom;
                 mTimePickerFrom = new TimePickerDialog(mActivity, new TimePickerDialog.OnTimeSetListener() {
                     int callCount = 0;   //To track number of calls to onTimeSet()
+
                     @Override
                     public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
 
@@ -694,7 +695,7 @@ public class AddClasses extends AppCompatActivity implements View.OnClickListene
                     jsonObject.put("address", branchInfo.getAddress());
                     jsonObject.put("latitude", branchInfo.getLatitude());
                     jsonObject.put("longitude", branchInfo.getLongitude());
-                    jsonObject.put("house_no", branchInfo.getHouse_no());
+                    jsonObject.put("house_no", branchInfo.getHouseNo());
                     jsonObject.put("city", branchInfo.getCity());
                     jsonObject.put("landmark", branchInfo.getLandmark());
                     jsonObject.put("subject_id", Subject_id_list);
@@ -962,6 +963,9 @@ public class AddClasses extends AppCompatActivity implements View.OnClickListene
                             }
 
                         addClassDetail(batch_id, classImages);
+                    /*    progressBar_result.setVisibility(View.GONE);
+                        progress_bar_visibility = false;
+                        finish();*/
                         //   tvAddClass.setText("Adding Image");
                         runOnUiThread(new Runnable() {
                             @Override
@@ -977,7 +981,13 @@ public class AddClasses extends AppCompatActivity implements View.OnClickListene
             }
         } catch (Exception ex) {
             ex.printStackTrace();
-            Toast.makeText(mActivity, "Error in response", Toast.LENGTH_SHORT).show();
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    Toast.makeText(mActivity, "Error in response", Toast.LENGTH_SHORT).show();
+                }
+            });
+
         }
     }
 
@@ -1003,9 +1013,12 @@ public class AddClasses extends AppCompatActivity implements View.OnClickListene
         classDetail.setClassImage(classImages);
 
         if (from.equalsIgnoreCase("individual")) {
-            classDetail.setAddress(aLocation.getText().toString().trim());
-            classDetail.setLatitude(28.6454);
-            classDetail.setLongitude(77.3331);
+            classDetail.setAddress(address.getFullAddress());
+            classDetail.setLatitude(address.getLatitude());
+            classDetail.setLongitude(address.getLongitude());
+            classDetail.setCity(address.getCity());
+            classDetail.setHouseNo(address.getAddress());
+            classDetail.setLandmark(address.getLandmark());
             classDetail.setBranchId("0");
             classDetail.setBranchName("0");
             classDetail.setInstituteId("0");
@@ -1017,6 +1030,9 @@ public class AddClasses extends AppCompatActivity implements View.OnClickListene
             classDetail.setAddress(branchInfo.getAddress());
             classDetail.setLatitude(Double.parseDouble(branchInfo.getLatitude()));
             classDetail.setLongitude(Double.parseDouble(branchInfo.getLongitude()));
+            classDetail.setCity(branchInfo.getCity());
+            classDetail.setHouseNo(branchInfo.getHouseNo());
+            classDetail.setLandmark(branchInfo.getLandmark());
             classDetail.setBranchId(branchInfo.getBranchId());
             classDetail.setInstituteId(branchInfo.getInstituteId());
             classDetail.setSubjectId(Subject_id_list);

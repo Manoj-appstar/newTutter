@@ -18,6 +18,7 @@ import android.support.v7.widget.CardView;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.appstar.common.GetSearchLocation;
 import com.appstar.tutionportal.Dialog.DialogError;
@@ -55,19 +56,15 @@ import java.util.List;
 import java.util.Locale;
 
 public class AddInstituteBranch extends AppCompatActivity implements OnResponseListener {
-    public String choosedTimeFrom, choosedTimeTo;
-    EditText etBranchName, etAddress, etPhone, etEmail, etTimeTo, etTimeFrom, etInstituteName;
+    EditText etBranchName, etPhone, etEmail, etTimeTo, etTimeFrom, etInstituteName;
+    TextView etAddress;
     CardView cvCancel, cvAdd;
     int REQ_ADD_BRANCH = 198;
     Double latitude, longitude;
-    String scheduledTime = "";
     String institute_id, institute_name;
     int select_Location = 159;
     com.appstar.common.model.Address address;
-    String lat, longt, strCity, strHouse_no, strLandmark;
     private Activity mActivity;
-    private SharePreferenceData sharePreferenceData;
-    private UtilsInstitute utilsInstitute;
     private RequestServer requestServer;
     private GoogleApiClient mGoogleApiClient;
     private LocationRequest mLocationRequest;
@@ -80,8 +77,6 @@ public class AddInstituteBranch extends AppCompatActivity implements OnResponseL
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_add_branch);
         mActivity = AddInstituteBranch.this;
-        sharePreferenceData = new SharePreferenceData();
-        utilsInstitute = new UtilsInstitute();
         getData();
         requestServer = new RequestServer(this, this);
         findView();
@@ -161,13 +156,7 @@ public class AddInstituteBranch extends AppCompatActivity implements OnResponseL
         else if (requestCode == select_Location) {
             if (data != null) {
                 address = (com.appstar.common.model.Address) data.getSerializableExtra("obj");
-                Log.d("addresslatitude", address.getAddress());
                 etAddress.setText(address.getFullAddress());
-                lat = String.valueOf(address.getLatitude());
-                longt = String.valueOf(address.getLongitude());
-                strCity = address.getCity();
-                strHouse_no = address.getAddress();
-                strLandmark = address.getLandmark();
             }
         }
     }
@@ -181,11 +170,11 @@ public class AddInstituteBranch extends AppCompatActivity implements OnResponseL
                 jsonObject.put("phone_no", etPhone.getText().toString().trim());
                 jsonObject.put("institute_id", institute_id);
                 jsonObject.put("email_id", etEmail.getText().toString().trim());
-                jsonObject.put("latitude", latitude);
-                jsonObject.put("longitude", longitude);
-                jsonObject.put("city", strCity);
-                jsonObject.put("house_no", strHouse_no);
-                jsonObject.put("landmark", strLandmark);
+                jsonObject.put("latitude", address.getLatitude());
+                jsonObject.put("longitude", address.getLongitude());
+                jsonObject.put("city", address.getCity());
+                jsonObject.put("house_no", address.getAddress());
+                jsonObject.put("landmark", address.getLandmark());
                 jsonObject.put("timing_to", "6:00 PM");
                 jsonObject.put("timing_from", "10:00 AM");
                 jsonObject.put("status", "1");
