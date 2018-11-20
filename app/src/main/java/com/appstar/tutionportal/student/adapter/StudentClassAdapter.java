@@ -14,6 +14,7 @@ import android.widget.RatingBar;
 import android.widget.Toast;
 
 import com.appstar.tutionportal.Model.ClassDetail;
+import com.appstar.tutionportal.Model.Subject;
 import com.appstar.tutionportal.R;
 import com.appstar.tutionportal.student.extras.FragmentNames;
 import com.appstar.tutionportal.util.UtilsStudent;
@@ -58,15 +59,25 @@ public class StudentClassAdapter extends RecyclerView.Adapter<StudentClassAdapte
         holder.tvRupees.setText("₹ " + classDetail.getPrice());
         holder.tvAvailableSeats.setText("99");
         holder.tvLocation.setText(classDetail.getAddress());
-        //setDistance(classDetail.getD)
-
+        setDistance(holder.tvDistance, Double.valueOf(classDetail.getDistance()));
+        String subject = "";
+        for (Subject obj : classDetail.getSubjectname()) {
+            if (subject.trim().equalsIgnoreCase("")) {
+                subject += obj.getSubject();
+            } else {
+                subject += ", " + obj.getSubject();
+            }
+        }
+        holder.tvSubject.setText(subject);
         // Glide.with(mContext).load(arrayList.get(position).getImage()).override(width, width + 20).into(holder.imgTeacher);
         // Glide.with(mContext).load(arrayList.get(position).getImage()).apply(RequestOptions.centerCropTransform()).into(holder.imgTeacher);
     }
 
     private void setDistance(MyTextView tvDistance, double distance) {
-        distance = distance * 1000;
-        tvDistance.setText(new DecimalFormat("##.##").format(distance));
+        //distance = distance * 1000;
+        if (distance < 0.5)
+            distance = 0.5;
+        tvDistance.setText(new DecimalFormat("##.##").format(distance) + " KM");
 
     }
 

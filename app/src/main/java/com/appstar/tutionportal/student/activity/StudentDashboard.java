@@ -37,9 +37,7 @@ public class StudentDashboard extends AppCompatActivity implements NetworkRespon
         fragmentManager = getSupportFragmentManager();
         utilsStudent = new UtilsStudent();
         mActivity = this;
-
         networkChangeReceiver = new NetworkChangeReceiver(mActivity, this);
-
         IntentFilter filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
         filter.addAction(Intent.ACTION_AIRPLANE_MODE_CHANGED);
         this.registerReceiver(networkChangeReceiver, filter);
