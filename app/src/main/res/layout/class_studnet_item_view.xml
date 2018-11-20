@@ -165,8 +165,6 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_marginLeft="@dimen/_3sdp"
-
-
                         android:numStars="4"
                         android:rating="3.5"
                         android:theme="@style/RatingBar" />

@@ -24,7 +24,6 @@ import com.appstar.tutionportal.student.extras.UrlManager;
 import com.appstar.tutionportal.student.interfaces.OnResponseListener;
 import com.appstar.tutionportal.teacher.adapter.CustomAdapter;
 import com.appstar.tutionportal.util.Data;
-import com.appstar.tutionportal.util.SharePreferenceData;
 import com.appstar.tutionportal.util.Utils;
 import com.appstar.tutionportal.volley.RequestServer;
 
@@ -51,7 +50,7 @@ public class FragmentEditProfileMore extends Fragment implements OnResponseListe
         utils = new Utils();
         mActivity = getActivity();
         requestServer = new RequestServer(getActivity(), this);
-     //   sharePreferenceData = new SharePreferenceData();
+        //sharePreferenceData = new SharePreferenceData();
         dbHelper = new DBHelper(mActivity);
         findView(view);
         setData();
@@ -90,6 +89,7 @@ public class FragmentEditProfileMore extends Fragment implements OnResponseListe
                 callAPI();
             }
         });
+
         tvCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -199,7 +199,6 @@ public class FragmentEditProfileMore extends Fragment implements OnResponseListe
     public void onFailed(int reqCode, String response) {
 
     }
-
 
     private void showDialog(String type, final String[] array) {
         selectType = type;

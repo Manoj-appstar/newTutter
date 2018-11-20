@@ -2,7 +2,6 @@ package com.appstar.tutionportal.institute.activities;
 
 import android.Manifest;
 import android.app.Activity;
-import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.content.pm.PackageManager;
@@ -16,17 +15,15 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.Spinner;
-import android.widget.Switch;
-import android.widget.TimePicker;
 
+import com.appstar.common.GetSearchLocation;
 import com.appstar.tutionportal.Dialog.DialogError;
 import com.appstar.tutionportal.Model.Branch;
 import com.appstar.tutionportal.Model.Institute;
 import com.appstar.tutionportal.R;
-import com.appstar.tutionportal.student.extras.FragmentNames;
 import com.appstar.tutionportal.student.extras.UrlManager;
 import com.appstar.tutionportal.student.interfaces.OnResponseListener;
 import com.appstar.tutionportal.teacher.activities.AddClasses;
@@ -54,7 +51,6 @@ import org.json.JSONObject;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 
@@ -66,6 +62,9 @@ public class AddInstituteBranch extends AppCompatActivity implements OnResponseL
     Double latitude, longitude;
     String scheduledTime = "";
     String institute_id, institute_name;
+    int select_Location = 159;
+    com.appstar.common.model.Address address;
+    String lat, longt, strCity, strHouse_no, strLandmark;
     private Activity mActivity;
     private SharePreferenceData sharePreferenceData;
     private UtilsInstitute utilsInstitute;
@@ -77,6 +76,7 @@ public class AddInstituteBranch extends AppCompatActivity implements OnResponseL
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_add_branch);
         mActivity = AddInstituteBranch.this;
@@ -117,7 +117,7 @@ public class AddInstituteBranch extends AppCompatActivity implements OnResponseL
             public void onClick(View view) {
          /*       Intent intent = new Intent(AddInstituteBranch.this, InstituteDashboard.class);
                 startActivity(intent);*/
-         finish();
+                finish();
             }
         });
         cvAdd.setOnClickListener(new View.OnClickListener() {
@@ -126,115 +126,50 @@ public class AddInstituteBranch extends AppCompatActivity implements OnResponseL
                 callAPI();
             }
         });
-        etTimeTo.setOnClickListener(new View.OnClickListener() {
+        etAddress.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Calendar mCurrentTimeTO = Calendar.getInstance();
-                int hour = mCurrentTimeTO.get(Calendar.HOUR_OF_DAY);
-                int minute = mCurrentTimeTO.get(Calendar.MINUTE);
-                TimePickerDialog mTimePicker;
-                mTimePicker = new TimePickerDialog(mActivity, new TimePickerDialog.OnTimeSetListener() {
-                    int callCount = 0;   //To track number of calls to onTimeSet()
-
-                    @Override
-                    public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
-                        if (callCount == 0) {
-                            String choosedHour = "";
-                            String choosedMinute = "";
-                            String choosedTimeZone = "";
-                            scheduledTime = selectedHour + ":" + selectedMinute;
-
-                            if (selectedHour > 12) {
-                                choosedTimeZone = "PM";
-                                selectedHour = selectedHour - 12;
-                                if (selectedHour < 10) {
-                                    choosedHour = "0" + selectedHour;
-                                } else {
-                                    choosedHour = "" + selectedHour;
-                                }
-                            } else {
-                                choosedTimeZone = "AM";
-                                if (selectedHour < 10) {
-                                    choosedHour = "0" + selectedHour;
-                                } else {
-                                    choosedHour = "" + selectedHour;
-                                }
-                            }
-
-                            if (selectedMinute < 10) {
-                                choosedMinute = "0" + selectedMinute;
-                            } else {
-                                choosedMinute = "" + selectedMinute;
-                            }
-                            choosedTimeTo = choosedHour + ":" + choosedMinute + " " + choosedTimeZone;
-                            etTimeTo.setText(choosedTimeTo);
-
-                        }
-                        callCount++;
-                    }
-                }, hour, minute, true);//Yes 24 hour time
-                mTimePicker.setTitle("Select Starting Time");
-                mTimePicker.show();
+                Intent intent = new Intent(getApplicationContext(), GetSearchLocation.class);
+                intent.putExtra("key", select_Location);
+                startActivityForResult(intent, select_Location);
             }
         });
 
-        etTimeFrom.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Calendar mCurrentTimeFrom = Calendar.getInstance();
-                int hourFrom = mCurrentTimeFrom.get(Calendar.HOUR_OF_DAY);
-                int minuteFrom = mCurrentTimeFrom.get(Calendar.MINUTE);
-                TimePickerDialog mTimePickerFrom;
-                mTimePickerFrom = new TimePickerDialog(mActivity, new TimePickerDialog.OnTimeSetListener() {
-                    int callCount = 0;   //To track number of calls to onTimeSet()
+    }
 
-                    @Override
-                    public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == requestCode && resultCode == RESULT_OK && data != null && data.getData() != null) {
 
-                        if (callCount == 0) {
-                            String choosedHourFrom = "";
-                            String choosedMinuteFrom = "";
-                            String choosedTimeZoneFrom = "";
-                            scheduledTime = selectedHour + ":" + selectedMinute;
+        }
 
-                            if (selectedHour > 12) {
-                                choosedTimeZoneFrom = "PM";
-                                selectedHour = selectedHour - 12;
-                                if (selectedHour < 10) {
-                                    choosedHourFrom = "0" + selectedHour;
-                                } else {
-                                    choosedHourFrom = "" + selectedHour;
-                                }
-                            } else {
-                                choosedTimeZoneFrom = "AM";
-                                if (selectedHour < 10) {
-                                    choosedHourFrom = "0" + selectedHour;
-                                } else {
-                                    choosedHourFrom = "" + selectedHour;
-                                }
-                            }
-
-                            if (selectedMinute < 10) {
-                                choosedMinuteFrom = "0" + selectedMinute;
-                            } else {
-                                choosedMinuteFrom = "" + selectedMinute;
-                            }
-                            choosedTimeFrom = choosedHourFrom + ":" + choosedMinuteFrom + " " + choosedTimeZoneFrom;
-                            if (!choosedTimeFrom.equals(etTimeFrom.getText().toString())) {
-                                etTimeFrom.setText(choosedTimeFrom);
-
-                            } else {
-                                Snackbar.make(etTimeFrom, "Please Select Different Time", Snackbar.LENGTH_SHORT).show();
-                                //   Toast.makeText(getApplicationContext(), "please select different time", Toast.LENGTH_LONG);
-                            }
-                        }
-                        callCount++;
-                    }
-                }, hourFrom, minuteFrom, false);//Yes 24 hour time
-                mTimePickerFrom.setTitle("Select Closing Time");
-                mTimePickerFrom.show();
+      /*  if (requestCode == PLACE_AUTOCOMPLETE_REQUEST_CODE) {
+            if (resultCode == RESULT_OK) {
+                Place place = PlaceAutocomplete.getPlace(mActivity, data);
+                //   aLocation.setText(place.getName());
+                //  Log.i(TAG, "Place: " + place.getName());
+            } else if (resultCode == PlaceAutocomplete.RESULT_ERROR) {
+                Status status = PlaceAutocomplete.getStatus(mActivity, data);
+                // TODO: Handle the error.
+                //  Log.i(TAG, status.getStatusMessage());
+            } else if (resultCode == RESULT_CANCELED) {
+                // The user canceled the operation.
             }
-        });
+        }*/
+
+        else if (requestCode == select_Location) {
+            if (data != null) {
+                address = (com.appstar.common.model.Address) data.getSerializableExtra("obj");
+                Log.d("addresslatitude", address.getAddress());
+                etAddress.setText(address.getFullAddress());
+                lat = String.valueOf(address.getLatitude());
+                longt = String.valueOf(address.getLongitude());
+                strCity = address.getCity();
+                strHouse_no = address.getAddress();
+                strLandmark = address.getLandmark();
+            }
+        }
     }
 
     private void callAPI() {
@@ -248,6 +183,9 @@ public class AddInstituteBranch extends AppCompatActivity implements OnResponseL
                 jsonObject.put("email_id", etEmail.getText().toString().trim());
                 jsonObject.put("latitude", latitude);
                 jsonObject.put("longitude", longitude);
+                jsonObject.put("city", strCity);
+                jsonObject.put("house_no", strHouse_no);
+                jsonObject.put("landmark", strLandmark);
                 jsonObject.put("timing_to", "6:00 PM");
                 jsonObject.put("timing_from", "10:00 AM");
                 jsonObject.put("status", "1");
@@ -405,6 +343,7 @@ public class AddInstituteBranch extends AppCompatActivity implements OnResponseL
                 });
 
     }
+
     private String getAddressFromLatLng(Location location) {
 
         try {
@@ -448,8 +387,8 @@ public class AddInstituteBranch extends AppCompatActivity implements OnResponseL
                         Intent intent = new Intent(mActivity, AddClasses.class);
                         branch.setInstituteName(institute_name);
                         intent.putExtra("from", "institute");
-                        intent.putExtra("obj",branch);
-
+                        intent.putExtra("class", "addClass");
+                        intent.putExtra("obj", branch);
                         startActivity(intent);
 
                     } else {

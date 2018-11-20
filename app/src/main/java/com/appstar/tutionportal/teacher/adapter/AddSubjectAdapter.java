@@ -46,7 +46,6 @@ public class AddSubjectAdapter extends RecyclerView.Adapter<AddSubjectAdapter.My
 
         final Subject model = arrayList.get(position);
         if (arrayList.size() > 1) {
-
             // holder.tvSubject.setVisibility(View.GONE);
             holder.etSubject.setText(model.getSubject());
             holder.ivRemove.setOnClickListener(new View.OnClickListener() {
