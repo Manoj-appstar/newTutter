@@ -1,6 +1,7 @@
 package com.appstar.tutionportal.student.fragment;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -16,9 +17,8 @@ import android.widget.ListView;
 
 import com.appstar.tutionportal.Dialog.DialogError;
 import com.appstar.tutionportal.R;
-import com.appstar.tutionportal.institute.activities.InstituteDashboard;
+import com.appstar.tutionportal.database.DBHelper;
 import com.appstar.tutionportal.login.ChooseScreen;
-import com.appstar.tutionportal.login.VerifyOtp;
 import com.appstar.tutionportal.student.extras.FragmentNames;
 import com.appstar.tutionportal.util.SharePreferenceData;
 import com.appstar.tutionportal.util.UtilsStudent;
@@ -33,8 +33,8 @@ public class MenuFragment extends Fragment {
     private static UtilsStudent utilsStudent;
     private static String[] navArray;
     private static SharePreferenceData sharePreferenceData;
+    DBHelper dbHelper;
     private LinearLayout llSetting, llSupport, llAbout, llLogout;
-
 
     @Nullable
     @Override
@@ -51,6 +51,7 @@ public class MenuFragment extends Fragment {
     }
 
     private void findViews(View view) {
+        dbHelper = new DBHelper(getContext());
         llSetting = view.findViewById(R.id.llSetting);
         llSupport = view.findViewById(R.id.llSupport);
         llAbout = view.findViewById(R.id.llAbout);
@@ -85,10 +86,6 @@ public class MenuFragment extends Fragment {
                     @Override
                     public void run() {
                         setLogout();
-                        sharePreferenceData.setUserLogInFirst(getContext(),true);
-                        Intent i = new Intent(getActivity(), ChooseScreen.class);
-                        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                        startActivity(i);
                     }
                 });
 
@@ -99,6 +96,11 @@ public class MenuFragment extends Fragment {
     private void setLogout() {
         sharePreferenceData.setUserId(getActivity(), "");
         sharePreferenceData.clearAllData(getActivity());
+        sharePreferenceData.setUserLogInFirst(getContext(), true);
+        dbHelper.onLogOutUser();
+        Intent i = new Intent(getActivity(), ChooseScreen.class);
+        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(i);
     }
 
     @Override
@@ -106,4 +108,5 @@ public class MenuFragment extends Fragment {
         super.onResume();
         UtilsStudent.setCurrentScreen(FragmentNames._STUDENT_HOME);
     }
+
 }
