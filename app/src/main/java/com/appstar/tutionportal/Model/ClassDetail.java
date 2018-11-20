@@ -82,16 +82,16 @@ public class ClassDetail {
     @SerializedName("category_type")
     @Expose
     private String categoryType;
-    @SerializedName("Institute name")
+    @SerializedName("institute_name")
     @Expose
     private String instituteName;
-    @SerializedName("Branch name")
+    @SerializedName("branch_name")
     @Expose
     private String branchName;
-    @SerializedName("Class Name")
+    @SerializedName("class_name")
     @Expose
     private String className;
-    @SerializedName("Teacher Name")
+    @SerializedName("teacher_name")
     @Expose
     private String teacherName;
 

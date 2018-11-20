@@ -38,7 +38,7 @@ public class AddClassAdapter extends RecyclerView.Adapter<AddClassAdapter.MyHold
         final ClassDetail classDetail = classList.get(position);
         holder.tvBatchName.setText(classDetail.getBatchName());
         holder.tvInstitute.setText(classDetail.getInstituteName());
-        holder.tvTeacher.setText(classDetail.getTeacherName());
+        holder.tvTeacher.setText("Teacher:" + classDetail.getTeacherName());
         holder.tvLocation.setText(classDetail.getAddress());
         String subjects = "";
         for (Subject subject : classDetail.getSubjectname()) {

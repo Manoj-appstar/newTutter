@@ -53,7 +53,7 @@
 
                             <com.appstar.tutionportal.views.MyTextView
                                 android:id="@+id/tvUserName"
-                                android:layout_width="wrap_content"
+                                android:layout_width="279dp"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="@dimen/_5sdp"
                                 android:layout_weight="1"
@@ -64,7 +64,7 @@
 
                             <ImageView
                                 android:id="@+id/ivSetting"
-                                android:layout_width="@dimen/_11sdp"
+                                android:layout_width="11dp"
                                 android:layout_height="@dimen/_11sdp"
                                 android:layout_marginRight="@dimen/_5sdp"
                                 android:layout_marginTop="@dimen/_8sdp"
