@@ -2,7 +2,6 @@ package com.appstar.tutionportal.institute.fragments;
 
 import android.app.AlertDialog;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -10,28 +9,22 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.CardView;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.appstar.tutionportal.Model.TeacherDetail;
 import com.appstar.tutionportal.R;
-import com.appstar.tutionportal.database.DBHelper;
 import com.appstar.tutionportal.student.adapter.DashboardPagerAdapter;
-import com.appstar.tutionportal.student.interfaces.OnResponseListener;
-import com.appstar.tutionportal.teacher.fragments.FragmentTeacherChatHistory;
-import com.appstar.tutionportal.teacher.fragments.ProfileTeacherFragment;
-import com.appstar.tutionportal.teacher.fragments.ViewClassFragment;
-import com.appstar.tutionportal.util.Data;
 import com.appstar.tutionportal.util.SharePreferenceData;
 import com.appstar.tutionportal.util.Utils;
 import com.appstar.tutionportal.volley.RequestServer;
 
-public class FragmentInstituteHome extends Fragment  implements View.OnClickListener{
+public class FragmentInstituteHome extends Fragment implements View.OnClickListener {
     public static FragmentManager fragmentManager;
     private static Utils utils;
     private static SharePreferenceData sharePreferenceData;
@@ -41,8 +34,10 @@ public class FragmentInstituteHome extends Fragment  implements View.OnClickList
     int REQ_CLASS = 198;
     EditText etGraduationType, etGraduationDetail, etPostGraduationType, etPostGraduationDetail, etOthers, etSpecialist;
     TeacherDetail teacherDetail;
+    FrameLayout flNotification;
+    TextView tvNotification;
     private ViewPager homePager;
-    private LinearLayout layoutChat, layoutProfile, layoutHome;
+    private LinearLayout layoutChat, layoutProfile, layoutHome, layoutNotification;
     private FragmentActivity mActivity;
     private CardView cvCancel;
 
@@ -60,18 +55,23 @@ public class FragmentInstituteHome extends Fragment  implements View.OnClickList
         layoutChat.setOnClickListener(this);
         layoutProfile.setOnClickListener(this);
         layoutHome.setOnClickListener(this);
+        layoutNotification.setOnClickListener(this);
 
         setupViewPager(homePager);
         setupPagerListener();
         return view;
 
     }
+
     private void findViews(View view) {
 
         homePager = view.findViewById(R.id.homePager);
         layoutChat = view.findViewById(R.id.layoutChat);
         layoutProfile = view.findViewById(R.id.layoutProfile);
         layoutHome = view.findViewById(R.id.layoutHome);
+        layoutNotification = view.findViewById(R.id.layoutNotification);
+        flNotification = view.findViewById(R.id.flNotification);
+        tvNotification = view.findViewById(R.id.tvNotification);
 
     }
 
@@ -82,6 +82,7 @@ public class FragmentInstituteHome extends Fragment  implements View.OnClickList
         dashboardPagerAdapter.addFragment(Fragment.instantiate(mActivity, FragmentInstituteChatHistory.class.getName()), "CHAT");
         dashboardPagerAdapter.addFragment(Fragment.instantiate(mActivity, FragmentInstituteViewClass.class.getName()), "HOME");
         dashboardPagerAdapter.addFragment(Fragment.instantiate(mActivity, FragmentInstituteProfile.class.getName()), "PROFILE");
+        dashboardPagerAdapter.addFragment(Fragment.instantiate(mActivity, FragmentInstituteNotification.class.getName()), "NOTIFICATION");
 
         viewPager.setAdapter(dashboardPagerAdapter);
         viewPager.setCurrentItem(Utils.getCurrentTab());
@@ -113,6 +114,7 @@ public class FragmentInstituteHome extends Fragment  implements View.OnClickList
         layoutHome.setSelected(false);
         layoutChat.setSelected(false);
         layoutProfile.setSelected(false);
+        layoutNotification.setSelected(false);
 
         switch (position) {
             case 0:
@@ -125,6 +127,10 @@ public class FragmentInstituteHome extends Fragment  implements View.OnClickList
 
             case 2:
                 layoutProfile.setSelected(true);
+                break;
+
+            case 3:
+                layoutNotification.setSelected(true);
                 break;
 
             default:
@@ -147,6 +153,10 @@ public class FragmentInstituteHome extends Fragment  implements View.OnClickList
 
             case R.id.layoutProfile:
                 homePager.setCurrentItem(2);
+                break;
+
+            case R.id.layoutNotification:
+                homePager.setCurrentItem(3);
                 break;
 
             default:

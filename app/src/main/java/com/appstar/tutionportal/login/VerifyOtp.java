@@ -9,7 +9,6 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
-import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
@@ -297,6 +296,7 @@ public class VerifyOtp extends AppCompatActivity implements OnResponseListener {
 
 
     private void verifyOtp() {
+
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -308,52 +308,50 @@ public class VerifyOtp extends AppCompatActivity implements OnResponseListener {
                     otp_fourth_digit = no4.getText().toString();
                     //  concat_otp = otp_first_digit + otp_second_digit + otp_third_digit + otp_fourth_digit;
                     concat_otp = etOtp.getText().toString().trim();
-                    JSONObject jsonObject = new JSONObject();
-                    jsonObject.put("phone", mobile);
-                    jsonObject.put("otp", concat_otp);
-                    requestServer.sendStringPost(url, jsonObject, REQ_VERIFY_OTP, true);
+                    if (validation()) {
+                        JSONObject jsonObject = new JSONObject();
+                        jsonObject.put("phone", mobile);
+                        jsonObject.put("otp", concat_otp);
+                        requestServer.sendStringPost(url, jsonObject, REQ_VERIFY_OTP, true);
+                    }
 
                 } catch (Exception ex) {
                 }
             }
         }, 400);
 
+
     }
 
     private void registerUser() {
-        if (validation()) {
-            try {
-                JSONObject jsonObject = new JSONObject();
-                jsonObject.put("first_name", fname);
-                jsonObject.put("last_name", lname);
-                jsonObject.put("email", email);
-                jsonObject.put("phone", mobile);
-                if (user_type.equalsIgnoreCase("teacher")) {
-                    jsonObject.put("user_type", "2");
-                } else if (user_type.equalsIgnoreCase("student")) {
-                    jsonObject.put("user_type", "1");
-                } else {
-                    jsonObject.put("user_type", "3");
-                }
-                requestServer.sendStringPost(UrlManager.REGISTRATION, jsonObject, REQ_REGISTER, true);
-            } catch (Exception ex) {
+        try {
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("first_name", fname);
+            jsonObject.put("last_name", lname);
+            jsonObject.put("email", email);
+            jsonObject.put("phone", mobile);
+            if (user_type.equalsIgnoreCase("teacher")) {
+                jsonObject.put("user_type", "2");
+            } else if (user_type.equalsIgnoreCase("student")) {
+                jsonObject.put("user_type", "1");
+            } else {
+                jsonObject.put("user_type", "3");
             }
+            requestServer.sendStringPost(UrlManager.REGISTRATION, jsonObject, REQ_REGISTER, true);
+        } catch (Exception ex) {
         }
-
     }
-
 
     private boolean validation() {
         boolean bool = false;
         try {
-
             if (etOtp.getText().toString().trim().equals("")) {
-                Snackbar.make(etOtp, "Enter Your Batch Name", Snackbar.LENGTH_SHORT).show();
+                Snackbar.make(etOtp, "Please Enter Otp First", Snackbar.LENGTH_SHORT).show();
                 bool = false;
-            } else if (etOtp.getText().toString().trim().length() < 3) {
-                Snackbar.make(etOtp, "Your Class Name Is Too Short", Snackbar.LENGTH_SHORT).show();
+            } else if (etOtp.getText().toString().trim().length() < 4) {
+                Snackbar.make(etOtp, "Please Enter 4 Digit Otp", Snackbar.LENGTH_SHORT).show();
                 bool = false;
-            }  else
+            } else
                 bool = true;
         } catch (Exception ex) {
             ex.printStackTrace();

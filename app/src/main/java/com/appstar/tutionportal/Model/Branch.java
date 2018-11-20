@@ -21,7 +21,6 @@ public class Branch implements Serializable {
     @Expose
     private String phoneNo;
     @SerializedName("email_id")
-
     @Expose
     private String emailId;
     @SerializedName("latitude")
@@ -33,9 +32,17 @@ public class Branch implements Serializable {
     @SerializedName("city")
     @Expose
     private String city;
+
+    public String getHouseNo() {
+        return houseNo;
+    }
+
+    public void setHouseNo(String houseNo) {
+        this.houseNo = houseNo;
+    }
     @SerializedName("house_no")
     @Expose
-    private String house_no;
+    private String houseNo;
     @SerializedName("landmark")
     @Expose
     private String landmark;
@@ -59,14 +66,6 @@ public class Branch implements Serializable {
 
     public void setCity(String city) {
         this.city = city;
-    }
-
-    public String getHouse_no() {
-        return house_no;
-    }
-
-    public void setHouse_no(String house_no) {
-        this.house_no = house_no;
     }
 
     public String getLandmark() {

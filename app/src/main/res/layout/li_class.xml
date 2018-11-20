@@ -41,7 +41,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/_3sdp"
-                        android:layout_marginTop="5dp"
+                        android:layout_marginTop="5sp"
                         android:layout_weight="1"
                         android:text="Class Name"
                         android:textColor="@color/colorAccent"
@@ -60,22 +60,73 @@
                 <TextView
                     android:id="@+id/tvSubject"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/_20sdp"
+                    android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/_3sdp"
-                    android:layout_marginTop="3sp"
+                    android:layout_marginTop="4sp"
                     android:text="physics,chemistry"
-                    android:textColor="@color/textColor" />
+                    android:textColor="@color/textColor"
+                    android:textSize="@dimen/_12sdp" />
 
-                <RatingBar
-                    android:id="@+id/ratingClass"
-                    android:layout_width="@dimen/_70sdp"
-                    android:layout_height="@dimen/_10sdp"
-                    android:layout_marginLeft="@dimen/_3sdp"
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4sp"
+                    android:orientation="horizontal">
+
+                    <com.appstar.tutionportal.views.MyTextView
+                        android:id="@+id/Status"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/_3sdp"
+                        android:text="Status -"
+                        android:textColor="@color/text_color"
+                        android:textSize="@dimen/_12sdp" />
+
+                    <com.appstar.tutionportal.views.MyTextView
+                        android:id="@+id/tvStatus"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/_3sdp"
+                        android:text="Open"
+                        android:textColor="@color/text_color"
+                        android:textSize="@dimen/_12sdp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="3sp"
-                    android:numStars="5"
-                    android:rating="3.5"
-                    android:isIndicator="true"
-                    style="?android:attr/ratingBarStyleSmall" />
+                    android:orientation="horizontal">
+
+                    <com.appstar.tutionportal.views.MyTextView
+                        android:id="@+id/tvTimeTo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/_15sdp"
+                        android:layout_marginLeft="@dimen/_3sdp"
+                        android:text="6.30 AM"
+                        android:textColor="@color/text_color"
+                        android:textSize="@dimen/_12sdp" />
+
+                    <TextView
+                        android:layout_width="@dimen/_8sdp"
+                        android:layout_height="1sp"
+                        android:layout_gravity="center"
+                        android:layout_margin="@dimen/_4sdp"
+                        android:background="@drawable/ic_underline" />
+
+                    <com.appstar.tutionportal.views.MyTextView
+                        android:id="@+id/tvTimeFrom"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/_3sdp"
+                        android:layout_weight="1"
+                        android:text="7.30 AM"
+                        android:textColor="@color/text_color"
+                        android:textSize="@dimen/_12sdp" />
+
+                </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -93,71 +144,27 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/_3sdp"
-                        android:layout_marginTop="3sp"
+                        android:layout_marginTop="4sp"
                         android:text="Vaishali, Ghaziabad"
                         android:textColor="@color/colorPrimary"
                         android:textSize="@dimen/_12sdp" />
                 </LinearLayout>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
+                <RatingBar
+                    android:id="@+id/ratingClass"
+                    style="?android:attr/ratingBarStyleSmall"
+                    android:layout_width="@dimen/_70sdp"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:layout_marginBottom="5sp"
+                    android:layout_marginLeft="@dimen/_3sdp"
                     android:layout_marginTop="3sp"
-                    android:orientation="horizontal">
+                    android:layout_marginRight="@dimen/_15sdp"
+                    android:isIndicator="true"
+                    android:numStars="5"
+                    android:rating="3.5"
+                    android:theme="@style/RatingBar" />
 
-                    <com.appstar.tutionportal.views.MyTextView
-                        android:id="@+id/Status"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/_3sdp"
-                        android:text="Status -"
-                        android:textColor="@color/text_color"
-                        android:textSize="@dimen/_10sdp" />
-
-                    <com.appstar.tutionportal.views.MyTextView
-                        android:id="@+id/tvStatus"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/_3sdp"
-                        android:text="Open"
-                        android:textColor="@color/text_color"
-                        android:textSize="@dimen/_10sdp" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="3sp"
-                    android:orientation="horizontal">
-
-                    <com.appstar.tutionportal.views.MyTextView
-                        android:id="@+id/tvTimeTo"
-                        android:layout_width="wrap_content"
-                        android:layout_height="@dimen/_15sdp"
-                        android:layout_marginLeft="@dimen/_3sdp"
-                        android:text="6.30 AM"
-                        android:textColor="@color/text_color"
-                        android:textSize="@dimen/_10sdp" />
-
-                    <TextView
-                        android:layout_width="@dimen/_8sdp"
-                        android:layout_height="1sp"
-                        android:layout_gravity="center"
-                        android:layout_margin="@dimen/_4sdp"
-                        android:background="@drawable/ic_underline" />
-
-                    <com.appstar.tutionportal.views.MyTextView
-                        android:id="@+id/tvTimeFrom"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/_3sdp"
-                        android:layout_weight="1"
-                        android:text="7.30 AM"
-                        android:textColor="@color/text_color"
-                        android:textSize="@dimen/_10sdp" />
-
-                </LinearLayout>
             </LinearLayout>
 
             <RelativeLayout
@@ -170,8 +177,10 @@
                     android:id="@+id/imgTeacher"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_120sdp"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
                     android:layout_gravity="center"
-                    android:scaleType="fitXY"
+                    android:scaleType="centerCrop"
                     android:src="@mipmap/teacher" />
 
                 <View
@@ -180,6 +189,7 @@
                     android:layout_height="@dimen/_120sdp"
                     android:alpha="0.7"
                     android:background="@android:color/black"
+                    android:visibility="gone"
                     tools:ignore="MissingConstraints"
                     tools:layout_editor_absoluteX="0dp"
                     tools:layout_editor_absoluteY="0dp" />
@@ -191,7 +201,8 @@
                     android:gravity="center"
                     android:text="VIEW IMAGES"
                     android:textColor="@color/white"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:visibility="gone" />
             </RelativeLayout>
         </LinearLayout>
     </android.support.v7.widget.CardView>

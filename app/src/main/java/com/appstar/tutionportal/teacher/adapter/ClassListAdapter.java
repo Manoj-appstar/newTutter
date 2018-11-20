@@ -78,11 +78,11 @@ public class ClassListAdapter extends RecyclerView.Adapter<ClassListAdapter.MyHo
         }*/
 
         if (model.getClassImage() != null && model.getClassImage().size() > 0) {
-            holder.vieImages.setVisibility(View.VISIBLE);
+            //   holder.vieImages.setVisibility(View.VISIBLE);
             Glide.with(mContext).load(model.getClassImage().get(0).getImageUrl()).into(holder.imgTeacher);
 
         } else {
-            holder.vieImages.setVisibility(View.GONE);
+            //   holder.vieImages.setVisibility(View.GONE);
             Glide.with(mContext).load(R.drawable.temp_profile).into(holder.imgTeacher);
             holder.imgTeacher.setImageResource(R.drawable.temp_profile);
         }
