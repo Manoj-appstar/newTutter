@@ -5,19 +5,19 @@
     android:layout_height="wrap_content">
 
     <android.support.v7.widget.CardView
-        android:layout_margin="@dimen/_2sdp"
         android:id="@+id/cvInstituteClass"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_2sdp"
         app:cardBackgroundColor="@color/white"
         app:cardCornerRadius="@dimen/_2sdp"
 
         app:cardElevation="@dimen/_2sdp">
 
         <LinearLayout
-            android:layout_marginBottom="@dimen/_5sdp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/_5sdp"
             android:orientation="vertical">
 
             <LinearLayout
@@ -31,12 +31,14 @@
                     android:layout_width="@dimen/_60sdp"
                     android:layout_height="@dimen/_60sdp"
                     android:layout_margin="@dimen/_4sdp"
-                    app:cardBackgroundColor="@color/grey_300">
+                    app:cardBackgroundColor="@color/grey_300"
+                    app:cardCornerRadius="@dimen/_2sdp">
 
                     <ImageView
                         android:id="@+id/imgClassImage"
-                        android:layout_width="@dimen/_58sdp"
-                        android:layout_height="@dimen/_58sdp"
+                        android:layout_width="@dimen/_60sdp"
+                        android:layout_height="@dimen/_60sdp"
+                        android:scaleType="centerCrop"
                         android:src="@mipmap/ic_launcher" />
                 </android.support.v7.widget.CardView>
 
@@ -60,37 +62,57 @@
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_3sdp"
                         android:orientation="horizontal">
 
                         <TextView
-                            android:layout_width="wrap_content"
+                            android:layout_width="@dimen/_40sdp"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/_5sdp"
+
+                            android:layout_gravity="left"
+                            android:gravity="left"
                             android:text="Subject:"
                             android:textColor="@color/grey_600"
-                            android:textSize="@dimen/_11sdp"
+                            android:textSize="@dimen/_10sdp"
                             android:textStyle="normal" />
 
                         <TextView
-                            android:layout_marginLeft="@dimen/_5sdp"
                             android:id="@+id/tvSubject"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/_5sdp"
+                            android:layout_gravity="center"
+
+                            android:layout_marginLeft="@dimen/_5sdp"
+                            android:gravity="right"
                             android:text="Hindi,English"
                             android:textColor="@color/green_700"
                             android:textSize="@dimen/_11sdp"
                             android:textStyle="bold|italic" />
                     </LinearLayout>
 
-                    <TextView
-                        android:id="@+id/tvTeacher"
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Teacher: Manoj Sir"
-                        android:textColor="@color/colorPrimary"
-                        android:textSize="@dimen/_11sdp"
-                        android:textStyle="normal" />
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="@dimen/_40sdp"
+                            android:layout_height="wrap_content"
+                            android:text="Teacher:"
+                            android:textColor="@color/grey_600"
+                            android:textSize="@dimen/_10sdp"
+                            android:textStyle="normal" />
+
+                        <TextView
+                            android:id="@+id/tvTeacher"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/_5sdp"
+                            android:text="Manoj Sir"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="@dimen/_11sdp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
                 </LinearLayout>
 
             </LinearLayout>
@@ -98,7 +120,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/_15sdp"
+                android:layout_marginLeft="@dimen/_4sdp"
                 android:layout_marginTop="@dimen/_5sdp"
                 android:orientation="horizontal">
 
@@ -127,20 +149,29 @@
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1">
+                    android:layout_gravity="right"
+                    android:layout_weight="1"
+                    android:gravity="right">
 
                     <ImageView
                         android:layout_width="@dimen/_15sdp"
                         android:layout_height="@dimen/_15sdp"
-                        android:src="@drawable/ic_pin2" />
+                        android:layout_gravity="right"
+                        android:gravity="right"
+                        android:src="@drawable/ic_pin2"
+                        android:visibility="gone" />
 
                     <TextView
                         android:id="@+id/tvLocation"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="right"
                         android:layout_marginLeft="@dimen/_5sdp"
+                        android:layout_marginRight="@dimen/_5sdp"
+                        android:drawableLeft="@drawable/ic_pin2"
+                        android:gravity="right"
                         android:text="Dwarka Delhi"
-                        android:textColor="@color/colorPrimary"
+                        android:textColor="@color/grey_600"
                         android:textSize="@dimen/_10sdp"
                         android:textStyle="bold" />
                 </LinearLayout>
