@@ -6,8 +6,10 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.provider.Settings;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
@@ -319,22 +321,44 @@ public class VerifyOtp extends AppCompatActivity implements OnResponseListener {
     }
 
     private void registerUser() {
-        try {
-            JSONObject jsonObject = new JSONObject();
-            jsonObject.put("first_name", fname);
-            jsonObject.put("last_name", lname);
-            jsonObject.put("email", email);
-            jsonObject.put("phone", mobile);
-            if (user_type.equalsIgnoreCase("teacher")) {
-                jsonObject.put("user_type", "2");
-            } else if (user_type.equalsIgnoreCase("student")) {
-                jsonObject.put("user_type", "1");
-            } else {
-                jsonObject.put("user_type", "3");
+        if (validation()) {
+            try {
+                JSONObject jsonObject = new JSONObject();
+                jsonObject.put("first_name", fname);
+                jsonObject.put("last_name", lname);
+                jsonObject.put("email", email);
+                jsonObject.put("phone", mobile);
+                if (user_type.equalsIgnoreCase("teacher")) {
+                    jsonObject.put("user_type", "2");
+                } else if (user_type.equalsIgnoreCase("student")) {
+                    jsonObject.put("user_type", "1");
+                } else {
+                    jsonObject.put("user_type", "3");
+                }
+                requestServer.sendStringPost(UrlManager.REGISTRATION, jsonObject, REQ_REGISTER, true);
+            } catch (Exception ex) {
             }
-            requestServer.sendStringPost(UrlManager.REGISTRATION, jsonObject, REQ_REGISTER, true);
-        } catch (Exception ex) {
         }
+
+    }
+
+
+    private boolean validation() {
+        boolean bool = false;
+        try {
+
+            if (etOtp.getText().toString().trim().equals("")) {
+                Snackbar.make(etOtp, "Enter Your Batch Name", Snackbar.LENGTH_SHORT).show();
+                bool = false;
+            } else if (etOtp.getText().toString().trim().length() < 3) {
+                Snackbar.make(etOtp, "Your Class Name Is Too Short", Snackbar.LENGTH_SHORT).show();
+                bool = false;
+            }  else
+                bool = true;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return bool;
     }
 
     private void resendOtp() {
