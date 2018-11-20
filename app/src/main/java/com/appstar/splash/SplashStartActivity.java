@@ -35,7 +35,7 @@ public class SplashStartActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         sharePreferenceData = new SharePreferenceData();
-        if (sharePreferenceData.isUserLogInFirst(getApplicationContext())) {
+        if (!sharePreferenceData.isUserLogInFirst(getApplicationContext())) {
             Intent intent = new Intent(SplashStartActivity.this, SplashScreen.class);
             startActivity(intent);
             finish();

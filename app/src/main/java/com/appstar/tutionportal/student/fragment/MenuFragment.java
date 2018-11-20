@@ -96,7 +96,7 @@ public class MenuFragment extends Fragment {
     private void setLogout() {
         sharePreferenceData.setUserId(getActivity(), "");
         sharePreferenceData.clearAllData(getActivity());
-        sharePreferenceData.setUserLogInFirst(getContext(), true);
+        sharePreferenceData.setUserLogInFirst(getContext(), false);
         dbHelper.onLogOutUser();
         Intent i = new Intent(getActivity(), ChooseScreen.class);
         i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
