@@ -256,9 +256,17 @@ public class AddClasses extends AppCompatActivity implements View.OnClickListene
             from = getIntent().getStringExtra("editFrom");
             tvAddClass.setText("Edit class");
             class_id = getIntent().getStringExtra("class_id");
-            if (Data.getClassList().size() > 0) {
-                ClassDetail classDetail = getFilterClassByBranchId();
-                bindData(classDetail);
+            if (from.equalsIgnoreCase("institute")) {
+                if (Data.getClassList().size() > 0) {
+                    showHideMoreSubject();
+                    ClassDetail classDetail = getFilterClassByBranchId();
+                    bindData(classDetail);
+                }
+            } else {
+                if (Data.getClassList().size() > 0) {
+                    ClassDetail classDetail = getFilterClassByBranchId();
+                    bindData(classDetail);
+                }
             }
 
         }
@@ -510,7 +518,6 @@ public class AddClasses extends AppCompatActivity implements View.OnClickListene
                 TimePickerDialog mTimePickerFrom;
                 mTimePickerFrom = new TimePickerDialog(mActivity, new TimePickerDialog.OnTimeSetListener() {
                     int callCount = 0;   //To track number of calls to onTimeSet()
-
                     @Override
                     public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
 
@@ -686,8 +693,11 @@ public class AddClasses extends AppCompatActivity implements View.OnClickListene
                     jsonObject.put("teacher_id", "1");
                     jsonObject.put("address", branchInfo.getAddress());
                     jsonObject.put("latitude", branchInfo.getLatitude());
-                    jsonObject.put("subject_id", Subject_id_list);
                     jsonObject.put("longitude", branchInfo.getLongitude());
+                    jsonObject.put("house_no", branchInfo.getHouse_no());
+                    jsonObject.put("city", branchInfo.getCity());
+                    jsonObject.put("landmark", branchInfo.getLandmark());
+                    jsonObject.put("subject_id", Subject_id_list);
                     jsonObject.put("institute_id", branchInfo.getInstituteId());
                     jsonObject.put("branch_id", branchInfo.getBranchId());
                     jsonObject.put("category_type", "1");
@@ -785,6 +795,9 @@ public class AddClasses extends AppCompatActivity implements View.OnClickListene
                 if (subject_selected_id.trim().equals("")) {
                     Snackbar.make(aSubject, "Enter Valid Subject Name Otherwise Register Your Class", Snackbar.LENGTH_SHORT).show();
                     bool = false;
+                } else if (aLocation.getText().toString().trim().equals("")) {
+                    Snackbar.make(aClass, "Please select location", Snackbar.LENGTH_SHORT).show();
+                    bool = false;
                 }
             } else {
                 if (Subject_id_list.trim().equals("")) {
@@ -833,9 +846,6 @@ public class AddClasses extends AppCompatActivity implements View.OnClickListene
             } else if (TextUtils.isEmpty(listData.get(0))) {
                 Snackbar.make(aClass, "Please select an image", Snackbar.LENGTH_SHORT).show();
                 bool = false;
-            } else if (aLocation.getText().toString().trim().equals("")) {
-                Snackbar.make(aClass, "Please select location", Snackbar.LENGTH_SHORT).show();
-                bool = false;
             } else
                 bool = true;
         } catch (Exception ex) {
@@ -859,6 +869,7 @@ public class AddClasses extends AppCompatActivity implements View.OnClickListene
 
 
                         requestServer.uploadClassImage(UPLOAD_CLASS_IMAGE, UrlManager.ADD_CLASS_IMAGE, listData, hashMap, false);
+
                       /* runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
@@ -888,6 +899,7 @@ public class AddClasses extends AppCompatActivity implements View.OnClickListene
                             getClassAdapter = new GetClassAdapter(mActivity, R.layout.listview_item, getClassLists, true);
                             aClass.setThreshold(1);
                             aClass.setAdapter(getClassAdapter);
+                            aClass.setSelection(aClass.getText().toString().trim().length());
                             aClass.setOnItemClickListener(onItemClickListener);
                         }
                     }

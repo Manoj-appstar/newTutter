@@ -196,6 +196,7 @@ public class ExpandableAdapter extends BaseExpandableListAdapter {
             public void onClick(View view) {
                 Intent intent = new Intent(context, AddClasses.class);
                 intent.putExtra("obj", branch);
+                intent.putExtra("class", "addClass");
                 intent.putExtra("from", "institute");
                 context.startActivity(intent);
             }

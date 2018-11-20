@@ -82,7 +82,20 @@ public class FragmentInstitute extends Fragment implements OnResponseListener {
 
     private void getData() {
         progress.setVisibility(View.VISIBLE);
-        new Handler().postDelayed(new Runnable() {
+        try {
+            if (Data.getInstituteList().size() <= 0) {
+                String url = UrlManager.INSTITUTE_DATA;
+                JSONObject jsonObject = new JSONObject();
+                //jsonObject.put("director_id=", preferenceData.getUserId(getActivity()));
+                jsonObject.put("director_id", preferenceData.getUserId(getContext()));
+                requestServer.sendStringPostWithHeader(url, jsonObject, REQ_GET_INSTITUTE, false);
+            } else {
+                bindData();
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+   /*     new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
                 try {
@@ -99,7 +112,7 @@ public class FragmentInstitute extends Fragment implements OnResponseListener {
                     ex.printStackTrace();
                 }
             }
-        }, 2000);
+        }, 2000);*/
 
     }
 
