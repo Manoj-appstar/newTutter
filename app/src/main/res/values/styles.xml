@@ -46,6 +46,7 @@
         <item name="android:windowIsFloating">false</item>
     </style>
 
+
     <style name="AppTheme.BlueAccent">
         <item name="colorAccent">@color/colorAccent</item> <!-- Whatever color you want-->
     </style>

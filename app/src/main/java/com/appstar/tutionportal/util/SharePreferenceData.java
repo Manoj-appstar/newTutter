@@ -22,18 +22,12 @@ public class SharePreferenceData {
     }
 
     public SharePreferenceData() {
-
     }
 
     public static SharePreferenceData getInstance() {
         if (sharePreferenceData == null)
             sharePreferenceData = new SharePreferenceData();
         return sharePreferenceData;
-    }
-
-    public void clearAllData(Context context){
-        SharedPreferences sharedPreferences = context.getSharedPreferences(context.getResources().getString(R.string.app_name), Context.MODE_PRIVATE);
-        sharedPreferences.edit().clear().commit();
     }
 
     public static boolean isSubjectAdded(Context context) {
@@ -155,6 +149,16 @@ public class SharePreferenceData {
         editor.apply();
     }
 
+    public static String getUserId(Context context) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences(context.getResources().getString(R.string.app_name), Context.MODE_PRIVATE);
+        return sharedPreferences.getString("user_id", "");
+    }
+
+    public void clearAllData(Context context) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences(context.getResources().getString(R.string.app_name), Context.MODE_PRIVATE);
+        sharedPreferences.edit().clear().commit();
+    }
+
     public void setToken(Context context, String str) {
         SharedPreferences sharedPreferences = context.getSharedPreferences(context.getResources().getString(R.string.app_name), Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -162,16 +166,11 @@ public class SharePreferenceData {
         editor.apply();
     }
 
-    public void setUserLogInFirst(Context context,boolean value) {
+    public void setUserLogInFirst(Context context, boolean value) {
         SharedPreferences sharedPreferences = context.getSharedPreferences(context.getResources().getString(R.string.app_name), Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putBoolean("first", value);
         editor.apply();
-    }
-
-    public static String getUserId(Context context) {
-        SharedPreferences sharedPreferences = context.getSharedPreferences(context.getResources().getString(R.string.app_name), Context.MODE_PRIVATE);
-        return sharedPreferences.getString("user_id", "");
     }
 
     public void setUserId(Context context, String str) {

@@ -1,7 +1,6 @@
 package com.appstar.common.adapter;
 
 import android.content.Context;
-import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -14,7 +13,6 @@ import android.widget.TextView;
 import com.appstar.tutionportal.Model.ClassDetail;
 import com.appstar.tutionportal.Model.Subject;
 import com.appstar.tutionportal.R;
-import com.appstar.tutionportal.teacher.activities.AddClasses;
 import com.bumptech.glide.Glide;
 
 import java.util.List;
@@ -40,7 +38,7 @@ public class AddClassAdapter extends RecyclerView.Adapter<AddClassAdapter.MyHold
         final ClassDetail classDetail = classList.get(position);
         holder.tvBatchName.setText(classDetail.getBatchName());
         holder.tvInstitute.setText(classDetail.getInstituteName());
-        holder.tvTeacher.setText(classDetail.getTeacherName());
+        holder.tvTeacher.setText("Teacher:" + classDetail.getTeacherName());
         holder.tvLocation.setText(classDetail.getAddress());
         String subjects = "";
         for (Subject subject : classDetail.getSubjectname()) {
@@ -70,9 +68,6 @@ public class AddClassAdapter extends RecyclerView.Adapter<AddClassAdapter.MyHold
             Glide.with(mContext).load(R.drawable.temp_profile).into(holder.imgClassImage);
             holder.imgClassImage.setImageResource(R.drawable.temp_profile);
         }
-
-
-
     }
 
     @Override
