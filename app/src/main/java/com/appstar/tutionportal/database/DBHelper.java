@@ -363,10 +363,31 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
     public void onLogOutUser() {
-        SQLiteDatabase db = getWritableDatabase();
-        db.delete(TEACHER_TABLE, null, null);
-        db.delete(STUDENT_TABLE, null, null);
+        clearAllTable();
+        SQLiteDatabase database = getReadableDatabase();
+        createTables(database);
 
+      /*  SQLiteDatabase db = getWritableDatabase();
+        db.delete(TEACHER_TABLE, null, null);
+        db.delete(STUDENT_TABLE, null, null);*/
+
+    }
+
+
+    private void clearAllTable() {
+      /*  private final String TEACHER_TABLE = "Teacher_Detail";
+        private final String STUDENT_TABLE = "Student_Detail";
+        private final String DIRECTER_TABLE = "Director_Detail";
+        private final String LOCATION_TABLE = "LastLocation_Detail";*/
+        SQLiteDatabase database = getReadableDatabase();
+        String query = " DROP table " + TEACHER_TABLE;
+        database.execSQL(query);
+        query = " DROP table " + STUDENT_TABLE;
+        database.execSQL(query);
+        query = " DROP table " + DIRECTER_TABLE;
+        database.execSQL(query);
+        query = " DROP table " + LOCATION_TABLE;
+        database.execSQL(query);
     }
 
 }

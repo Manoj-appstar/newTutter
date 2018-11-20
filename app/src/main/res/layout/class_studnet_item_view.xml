@@ -43,14 +43,7 @@
                         android:textSize="@dimen/_13sdp"
                         android:textStyle="bold" />
 
-                    <ImageView
-                        android:layout_width="@dimen/_25sdp"
-                        android:layout_height="@dimen/_25sdp"
-                        android:layout_alignParentRight="true"
-                        android:background="?selectableItemBackground"
-                        android:padding="@dimen/_5sdp"
-                        android:src="@drawable/ic_favorite_border_grey"
-                        android:visibility="gone" />
+
                 </RelativeLayout>
 
                 <LinearLayout
@@ -253,7 +246,6 @@
                         android:layout_marginTop="@dimen/_10sdp"
                         android:background="?selectableItemBackground"
                         android:padding="@dimen/_5sdp"
-                        android:src="@drawable/ic_favorite_border_grey"
                         android:visibility="visible" />
                     />
                 </LinearLayout>

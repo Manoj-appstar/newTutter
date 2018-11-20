@@ -22,15 +22,16 @@ import com.appstar.tutionportal.views.MyTextView;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.List;
 
 public class StudentClassAdapter extends RecyclerView.Adapter<StudentClassAdapter.MyHolder> {
     int width;
     private Context mContext;
-    private ArrayList<ClassDetail> arrayList;
+    private List<ClassDetail> arrayList;
     private LayoutInflater inflater;
     private UtilsStudent utilsStudent;
 
-    public StudentClassAdapter(Context context, ArrayList<ClassDetail> arrayList) {
+    public StudentClassAdapter(Context context, List<ClassDetail> arrayList) {
         this.mContext = context;
         utilsStudent = new UtilsStudent();
         this.arrayList = arrayList;
