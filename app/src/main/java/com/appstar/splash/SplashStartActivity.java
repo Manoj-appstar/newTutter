@@ -124,7 +124,7 @@ public class SplashStartActivity extends AppCompatActivity {
         tvText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                sharePreferenceData.setUserLogInFirst(getApplicationContext());
+                sharePreferenceData.setUserLogInFirst(getApplicationContext(),false);
                 Intent intent = new Intent(SplashStartActivity.this, ChooseScreen.class);
                 startActivity(intent);
                 finish();

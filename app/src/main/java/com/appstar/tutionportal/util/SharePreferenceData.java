@@ -31,6 +31,11 @@ public class SharePreferenceData {
         return sharePreferenceData;
     }
 
+    public void clearAllData(Context context){
+        SharedPreferences sharedPreferences = context.getSharedPreferences(context.getResources().getString(R.string.app_name), Context.MODE_PRIVATE);
+        sharedPreferences.edit().clear().commit();
+    }
+
     public static boolean isSubjectAdded(Context context) {
         SharedPreferences sharedPreferences = context.getSharedPreferences(context.getResources().getString(R.string.app_name), Context.MODE_PRIVATE);
         return sharedPreferences.getBoolean("addedSubject", false);
@@ -157,10 +162,10 @@ public class SharePreferenceData {
         editor.apply();
     }
 
-    public void setUserLogInFirst(Context context) {
+    public void setUserLogInFirst(Context context,boolean value) {
         SharedPreferences sharedPreferences = context.getSharedPreferences(context.getResources().getString(R.string.app_name), Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putBoolean("first", true);
+        editor.putBoolean("first", value);
         editor.apply();
     }
 

@@ -24,7 +24,6 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class StudentClassAdapter extends RecyclerView.Adapter<StudentClassAdapter.MyHolder> {
-
     int width;
     private Context mContext;
     private ArrayList<ClassDetail> arrayList;
@@ -46,8 +45,8 @@ public class StudentClassAdapter extends RecyclerView.Adapter<StudentClassAdapte
     }
 
     @Override
-    public void onBindViewHolder(@NonNull StudentClassAdapter.MyHolder holder, int position) {
-        ClassDetail classDetail = arrayList.get(position);
+    public void onBindViewHolder(@NonNull final StudentClassAdapter.MyHolder holder, int position) {
+        final ClassDetail classDetail = arrayList.get(position);
 //        holder.ratingbar.setRating(position);
         holder.ratingbar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
             @Override
@@ -69,8 +68,20 @@ public class StudentClassAdapter extends RecyclerView.Adapter<StudentClassAdapte
             }
         }
         holder.tvSubject.setText(subject);
-        // Glide.with(mContext).load(arrayList.get(position).getImage()).override(width, width + 20).into(holder.imgTeacher);
-        // Glide.with(mContext).load(arrayList.get(position).getImage()).apply(RequestOptions.centerCropTransform()).into(holder.imgTeacher);
+        if(classDetail.isFavorite()){
+            holder.imgFavorite.setImageResource(R.drawable.ic_fav_red);
+        }
+        else
+            holder.imgFavorite.setImageResource(R.drawable.ic_favorite_border_black);
+
+        holder.imgFavorite.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                classDetail.setFavorite(!classDetail.isFavorite());
+                notifyDataSetChanged();
+
+            }
+        });
     }
 
     private void setDistance(MyTextView tvDistance, double distance) {
@@ -92,11 +103,12 @@ public class StudentClassAdapter extends RecyclerView.Adapter<StudentClassAdapte
         LinearLayout llViewClass;
         MyTextView tvBatchName, tvLocation, tvSubject, tvRupees, tvAvailableSeats, tvDistance;
         RatingBar ratingbar;
-        ImageView imgTeacher;
+        ImageView imgTeacher, imgFavorite;
 
         public MyHolder(View itemView) {
             super(itemView);
             ratingbar = itemView.findViewById(R.id.ratingTeacher);
+            imgFavorite = itemView.findViewById(R.id.imgFavorite);
             imgTeacher = itemView.findViewById(R.id.imgTeacher);
             cvClassName = itemView.findViewById(R.id.cvClassName);
             llViewClass = itemView.findViewById(R.id.llViewClass);

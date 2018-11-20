@@ -348,7 +348,6 @@ public class NewLogInActivity extends AppCompatActivity implements OnResponseLis
     }
 
     private void login() {
-
         try {
             String url = UrlManager.GET_NEW_USER_OTP + "?phone=" + etMobile.getText().toString().trim();
             requestServer.getRequest(url, REQ_TYPE_LOGIN, true);

@@ -47,10 +47,10 @@
                         android:layout_width="@dimen/_25sdp"
                         android:layout_height="@dimen/_25sdp"
                         android:layout_alignParentRight="true"
-                        android:padding="@dimen/_5sdp"
-                        android:visibility="gone"
                         android:background="?selectableItemBackground"
-                        android:src="@drawable/ic_favorite_border_grey" />
+                        android:padding="@dimen/_5sdp"
+                        android:src="@drawable/ic_favorite_border_grey"
+                        android:visibility="gone" />
                 </RelativeLayout>
 
                 <LinearLayout
@@ -214,22 +214,18 @@
                         android:textSize="@dimen/_9sdp"
                         android:textStyle="bold" />
 
-                    <ImageView
-                        android:layout_width="@dimen/_25sdp"
-                        android:layout_height="@dimen/_25sdp"
-                        android:layout_alignParentRight="true"
-                        android:padding="@dimen/_5sdp"
-                        android:background="?selectableItemBackground"
-                        android:src="@drawable/ic_favorite_border_grey" />
+
                 </RelativeLayout>
             </LinearLayout>
 
-            <LinearLayout
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="@dimen/_5sdp">
 
+
                 <android.support.v7.widget.CardView
+                    android:id="@+id/cvView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -239,14 +235,35 @@
                     <ImageView
                         android:id="@+id/imgTeacher"
                         android:layout_width="@dimen/_90sdp"
-                        android:layout_height="@dimen/_95sdp"
+                        android:layout_height="@dimen/_105sdp"
                         android:layout_gravity="center"
                         android:layout_margin="@dimen/_2sdp"
                         android:background="@drawable/ic_hover"
                         android:scaleType="centerCrop"
                         android:src="@mipmap/teacher" />
                 </android.support.v7.widget.CardView>
-            </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/cvView"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/imgFavorite"
+                        android:layout_width="@dimen/_25sdp"
+                        android:layout_height="@dimen/_25sdp"
+                        android:layout_marginLeft="@dimen/_65sdp"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:background="?selectableItemBackground"
+                        android:padding="@dimen/_5sdp"
+                        android:src="@drawable/ic_favorite_border_grey"
+                        android:visibility="visible" />
+                    />
+                </LinearLayout>
+
+
+            </RelativeLayout>
         </LinearLayout>
     </android.support.v7.widget.CardView>
 </LinearLayout>

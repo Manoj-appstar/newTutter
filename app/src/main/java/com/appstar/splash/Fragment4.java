@@ -36,7 +36,7 @@ public class Fragment4 extends Fragment {
         cvStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                sharePreferenceData.setUserLogInFirst(getActivity());
+                sharePreferenceData.setUserLogInFirst(getActivity(),false);
                 Intent intent = new Intent(getActivity(), ChooseScreen.class);
                 startActivity(intent);
             }

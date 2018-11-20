@@ -109,6 +109,17 @@ public class ClassDetail {
     @Expose
     private String distance;
 
+
+    private boolean isFavorite;
+
+    public boolean isFavorite() {
+        return isFavorite;
+    }
+
+    public void setFavorite(boolean favorite) {
+        isFavorite = favorite;
+    }
+
     public String getDistance() {
         return distance;
     }
