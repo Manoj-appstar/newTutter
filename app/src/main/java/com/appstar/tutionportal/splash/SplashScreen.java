@@ -67,12 +67,12 @@ public class SplashScreen extends AppCompatActivity implements OnResponseListene
             @Override
             public void run() {
 //                if (preferenceData.getUserId1()!=0) {
-                String user=preferenceData.getUserType(getApplicationContext());
+                String user = preferenceData.getUserType(getApplicationContext());
 
                 if (!TextUtils.isEmpty(preferenceData.getUserId(getApplicationContext()))) {
                     if (preferenceData.getUserType(getApplicationContext()).equals("student")) {
-                            Data.setStudentDetail(dbHelper.getStudentDetail());
-                            startActivity(new Intent(getApplicationContext(), StudentDashboard.class));
+                        Data.setStudentDetail(dbHelper.getStudentDetail());
+                        startActivity(new Intent(getApplicationContext(), StudentDashboard.class));
 
 
                     } else if (preferenceData.getUserType(getApplicationContext()).equals("teacher")) {
@@ -97,7 +97,7 @@ public class SplashScreen extends AppCompatActivity implements OnResponseListene
                 }
                 finish();
             }
-        }, 100);
+        }, 2000);
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
                 .detectAll()
                 .penaltyLog()
