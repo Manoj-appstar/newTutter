@@ -47,7 +47,7 @@ public class AddClassAdapter extends RecyclerView.Adapter<AddClassAdapter.MyHold
             subjects += subject.getSubject() + " ,";
         }
 
-       /* holder.cvInstituteClass.setOnClickListener(new View.OnClickListener() {
+       holder.cvInstituteClass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(mContext, AddClasses.class);
@@ -57,7 +57,7 @@ public class AddClassAdapter extends RecyclerView.Adapter<AddClassAdapter.MyHold
                 mContext.startActivity(intent);
             }
         });
-*/
+
         if (subjects.length() > 1)
             holder.tvSubject.setText(subjects.substring(0, subjects.length() - 1));
 

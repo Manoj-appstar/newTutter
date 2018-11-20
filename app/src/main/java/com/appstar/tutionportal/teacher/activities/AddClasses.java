@@ -256,22 +256,20 @@ public class AddClasses extends AppCompatActivity implements View.OnClickListene
             from = getIntent().getStringExtra("editFrom");
             tvAddClass.setText("Edit class");
             class_id = getIntent().getStringExtra("class_id");
+            classDetail = getFilterClassByBranchId();
+
             if (from.equalsIgnoreCase("institute")) {
                 if (Data.getClassList().size() > 0) {
                     showHideMoreSubject();
-                    ClassDetail classDetail = getFilterClassByBranchId();
                     bindData(classDetail);
                 }
             } else {
                 if (Data.getClassList().size() > 0) {
-                    ClassDetail classDetail = getFilterClassByBranchId();
                     bindData(classDetail);
                 }
             }
-
         }
-
-        showHideViews();
+        showHideViews(classDetail);
     }
 
     private ClassDetail getFilterClassByBranchId() {
@@ -296,27 +294,34 @@ public class AddClasses extends AppCompatActivity implements View.OnClickListene
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-        try {
-            for (int i = 0; i < classDetail.getSubjectname().size(); i++) {
-                if (subject_name_list == null) {
-                    subject_name_list = classDetail.getSubjectname().get(i).getSubject() + ",";
-                } else {
-                    subject_name_list += classDetail.getSubjectname().get(i).getSubject() + ",";
+        if (from.equalsIgnoreCase("individual")) {
+            try {
+                for (int i = 0; i < classDetail.getSubjectname().size(); i++) {
+                    if (subject_name_list == null) {
+                        subject_name_list = classDetail.getSubjectname().get(i).getSubject() + ",";
+                    } else {
+                        subject_name_list += classDetail.getSubjectname().get(i).getSubject() + ",";
 
+                    }
                 }
-            }
 
-        } catch (Exception ex) {
-            ex.printStackTrace();
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+            if (subject_name_list.endsWith(",")) {
+                subject_name_list = subject_name_list.substring(0, subject_name_list.length() - 1);
+                aSubject.setText(subject_name_list);
+            }
         }
-        if (subject_name_list.endsWith(",")) {
-            subject_name_list = subject_name_list.substring(0, subject_name_list.length() - 1);
-            aSubject.setText(subject_name_list);
+        if (from.equalsIgnoreCase("institute")) {
+            AddSubjectAdapter adapter = new AddSubjectAdapter(mActivity, classDetail.getSubjectname(), this);
+            rvAddSubject.setAdapter(adapter);
+            showHideMoreSubject();
         }
         setRecycleView();
     }
 
-    private void showHideViews() {
+    private void showHideViews(final ClassDetail classDetail) {
         if (from.equalsIgnoreCase("Individual")) {
             rvAddSubject.setVisibility(View.GONE);
             tvAddMoreSub.setVisibility(View.GONE);
@@ -341,12 +346,21 @@ public class AddClasses extends AppCompatActivity implements View.OnClickListene
                 tvAddMoreSub.setVisibility(View.GONE);
             }
         }
-
-        if (from.equalsIgnoreCase("individual")) {
-            tvInstituteNmae.setText("Add Class");
+        if (clas.equalsIgnoreCase("addClass")) {
+            if (from.equalsIgnoreCase("individual")) {
+                tvInstituteNmae.setText("Add Class");
+            } else {
+                tvInstituteNmae.setText(branchInfo.getInstituteName());
+                tvBranchName.setText(branchInfo.getName());
+            }
         } else {
-            tvInstituteNmae.setText(branchInfo.getInstituteName());
-            tvBranchName.setText(branchInfo.getName());
+            if (from.equalsIgnoreCase("individual")) {
+                tvInstituteNmae.setText("Edit Class");
+            } else {
+                addTeacherAssigned.setText(classDetail.getTeacherName());
+                tvInstituteNmae.setText(classDetail.getInstituteName());
+                tvBranchName.setText(classDetail.getBranchName());
+            }
         }
     }
 
@@ -735,7 +749,6 @@ public class AddClasses extends AppCompatActivity implements View.OnClickListene
                 }
                 if (from.equalsIgnoreCase("individual")) {
                     jsonObject.put("teacher_id", Data.getTeacherDetail().getId());
-                    jsonObject.put("batch_id", class_id);
                     jsonObject.put("address", aLocation.getText().toString().trim());
                     jsonObject.put("house_no", strHouse_no);
                     jsonObject.put("city", strCity);
@@ -757,17 +770,19 @@ public class AddClasses extends AppCompatActivity implements View.OnClickListene
                         Subject_id_list = Subject_id_list.substring(0, Subject_id_list.length() - 1);
                     }
                     jsonObject.put("teacher_id", "1");
-                    jsonObject.put("batch_id", class_id);
                     jsonObject.put("address", branchInfo.getAddress());
                     jsonObject.put("latitude", branchInfo.getLatitude());
-                    jsonObject.put("subject_id", Subject_id_list);
                     jsonObject.put("longitude", branchInfo.getLongitude());
+                    jsonObject.put("house_no", branchInfo.getHouseNo());
+                    jsonObject.put("city", branchInfo.getCity());
+                    jsonObject.put("landmark", branchInfo.getLandmark());
+                    jsonObject.put("subject_id", Subject_id_list);
                     jsonObject.put("institute_id", branchInfo.getInstituteId());
                     jsonObject.put("branch_id", branchInfo.getBranchId());
                     jsonObject.put("category_type", "1");
                 }
-
                 jsonObject.put("class_id", class_selected_id);
+                jsonObject.put("batch_id", class_id);
                 jsonObject.put("timing_to", aTimeFrom.getText().toString().trim());
                 jsonObject.put("timing_from", aTimeTo.getText().toString().trim());
                 jsonObject.put("starting_date", startingDate);
@@ -780,6 +795,7 @@ public class AddClasses extends AppCompatActivity implements View.OnClickListene
                 tvAddClass.setText("Adding class...");
                 progressBar_result.setVisibility(View.VISIBLE);
                 progress_bar_visibility = true;
+
                 requestServer.sendStringPostWithHeader(UrlManager.ADD_CLASS, jsonObject, REQ_ADD_CLASS, false);
 
                 //  }

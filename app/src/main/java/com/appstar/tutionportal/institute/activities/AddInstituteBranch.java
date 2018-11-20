@@ -375,6 +375,7 @@ public class AddInstituteBranch extends AppCompatActivity implements OnResponseL
 
                         Intent intent = new Intent(mActivity, AddClasses.class);
                         branch.setInstituteName(institute_name);
+                        branch.setInstituteId(institute_id);
                         intent.putExtra("from", "institute");
                         intent.putExtra("class", "addClass");
                         intent.putExtra("obj", branch);

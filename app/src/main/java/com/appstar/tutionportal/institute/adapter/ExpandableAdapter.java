@@ -160,6 +160,7 @@ public class ExpandableAdapter extends BaseExpandableListAdapter {
         final ViewBranchHolder holder;
         Branch branch = instituteList.get(groupPosition).getBranches().get(childPosition);
         branch.setInstituteName(instituteList.get(groupPosition).getName());
+        branch.setInstituteId(instituteList.get(groupPosition).getInstituteId());
         if (view == null) {
             holder = new ViewBranchHolder();
             view = LayoutInflater.from(context).inflate(R.layout.institute_branch_item, null);
