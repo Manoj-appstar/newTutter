@@ -1038,6 +1038,7 @@ public class AddClasses extends AppCompatActivity implements View.OnClickListene
             classDetail.setSubjectId(Subject_id_list);
             classDetail.setSubjectname(subjectList);
             classDetail.setTeacherName(addTeacherAssigned.getText().toString().trim());
+            classDetail.setInstituteName(branchInfo.getInstituteName());
             classDetail.setCategoryType("1");
             classDetail.setTeacherId("1");
         }
