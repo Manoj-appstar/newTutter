@@ -1346,7 +1346,6 @@ public class AddClasses extends AppCompatActivity implements View.OnClickListene
         chkAll.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-
                 chkMonday.setChecked(b);
                 chkTuesday.setChecked(b);
                 chkWednesday.setChecked(b);

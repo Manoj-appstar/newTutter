@@ -1,6 +1,7 @@
 package com.appstar.common.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -13,6 +14,7 @@ import android.widget.TextView;
 import com.appstar.tutionportal.Model.ClassDetail;
 import com.appstar.tutionportal.Model.Subject;
 import com.appstar.tutionportal.R;
+import com.appstar.tutionportal.teacher.activities.AddClasses;
 import com.bumptech.glide.Glide;
 
 import java.util.List;
@@ -45,7 +47,7 @@ public class AddClassAdapter extends RecyclerView.Adapter<AddClassAdapter.MyHold
             subjects += subject.getSubject() + " ,";
         }
 
-      /* holder.cvInstituteClass.setOnClickListener(new View.OnClickListener() {
+       /* holder.cvInstituteClass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(mContext, AddClasses.class);
@@ -54,8 +56,8 @@ public class AddClassAdapter extends RecyclerView.Adapter<AddClassAdapter.MyHold
                 intent.putExtra("editFrom", "institute");
                 mContext.startActivity(intent);
             }
-        });*/
-
+        });
+*/
         if (subjects.length() > 1)
             holder.tvSubject.setText(subjects.substring(0, subjects.length() - 1));
 
@@ -65,7 +67,7 @@ public class AddClassAdapter extends RecyclerView.Adapter<AddClassAdapter.MyHold
 
         } else {
             //   holder.vieImages.setVisibility(View.GONE);
-            Glide.with(mContext).load(R.drawable.temp_profile).into(holder.imgClassImage);
+            Glide.with(mContext).load(R.drawable.ic_logo).into(holder.imgClassImage);
             holder.imgClassImage.setImageResource(R.drawable.temp_profile);
         }
     }
