@@ -14,8 +14,13 @@
                         <option name="values">
                           <map>
                             <entry key="assetSourceType" value="FILE" />
+<<<<<<< Updated upstream
                             <entry key="outputName" value="ic_fav_blue" />
                             <entry key="sourceFile" value="E:\Teacher Icons\ic_fav_red.svg" />
+=======
+                            <entry key="outputName" value="ic_notification" />
+                            <entry key="sourceFile" value="C:\Users\MY\Desktop\Tuttor\notification.svg" />
+>>>>>>> Stashed changes
                           </map>
                         </option>
                       </PersistentState>
