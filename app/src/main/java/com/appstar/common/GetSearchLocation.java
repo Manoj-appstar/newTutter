@@ -32,6 +32,7 @@ import android.widget.Toast;
 
 import com.appstar.tutionportal.Dialog.DialogError;
 import com.appstar.tutionportal.R;
+import com.appstar.tutionportal.util.Utils;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
 import com.google.android.gms.common.GooglePlayServicesRepairableException;
@@ -84,8 +85,9 @@ public class GetSearchLocation extends AppCompatActivity implements OnMapReadyCa
     boolean isCurrentLocationSelected;
     CardView cvAddLocation;
     String localAddress;
+    int test = 123;
+    String from = "home";
     private int KEY_BACK_DATA = 678;
-    int test=123;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,7 +101,7 @@ public class GetSearchLocation extends AppCompatActivity implements OnMapReadyCa
                 onClick();
             }
         }, 1500);
-        getLocation();
+        //getLocation();
     }
 
     private void initView() {
@@ -120,6 +122,18 @@ public class GetSearchLocation extends AppCompatActivity implements OnMapReadyCa
 
     private void getData() {
         KEY_BACK_DATA = getIntent().getIntExtra("key", KEY_BACK_DATA);
+        try {
+            from = getIntent().getStringExtra("from");
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            from = "home";
+        }
+        if (from.equalsIgnoreCase("search")) {
+            etLandMark.setVisibility(View.GONE);
+            etAddress.setVisibility(View.GONE);
+            etLocation.setVisibility(View.GONE);
+
+        }
     }
 
     private void onClick() {
@@ -156,10 +170,17 @@ public class GetSearchLocation extends AppCompatActivity implements OnMapReadyCa
                 }
             }
         });
-
+        tvSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Utils.setEnableDisbaleView(view,2000);
+                getLocation();
+            }
+        });
         imgEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Utils.setEnableDisbaleView(view,2000);
                 getLocation();
             }
         });

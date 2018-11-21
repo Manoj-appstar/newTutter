@@ -35,6 +35,7 @@ public class FragmentInstituteHome extends Fragment implements View.OnClickListe
     private ViewPager homePager;
     private LinearLayout layoutChat, layoutProfile, layoutHome, layoutNotification;
     private FragmentActivity mActivity;
+    private CardView cvCancel;
 
     @Nullable
     @Override

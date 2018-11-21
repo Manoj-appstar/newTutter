@@ -49,7 +49,7 @@
                 android:layout_weight=".84"
                 android:background="@android:color/transparent"
                 android:gravity="start|center"
-                android:hint="Indirapuram"
+                android:hint="Type your Location"
                 android:maxLength="50"
                 android:textColor="@color/black"
                 android:textColorHint="#b9b9b9"

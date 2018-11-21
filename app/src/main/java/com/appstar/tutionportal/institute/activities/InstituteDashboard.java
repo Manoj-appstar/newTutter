@@ -62,12 +62,10 @@ public class InstituteDashboard extends AppCompatActivity {
         fragmentManager = getSupportFragmentManager();
         utilsInstitute = new UtilsInstitute();
         sharePreferenceData = new SharePreferenceData();
-
-        setUpGoogleApiClient();
+       /* setUpGoogleApiClient();
         createLocationRequest();
         buildLocationSettingsRequest();
-        checkLocationSettings();
-
+        checkLocationSettings();*/
         utilsInstitute.openFragment(mActivity, FragmentNames.INSTITUTE_HOME, FragmentNames._INSTITUTE_HOME, null, false);
     }
 

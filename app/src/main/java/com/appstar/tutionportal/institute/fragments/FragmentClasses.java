@@ -79,6 +79,8 @@ public class FragmentClasses extends Fragment implements OnResponseListener {
     }
 
     private void bindData() {
+        if (Data.getClassList().size() > 0)
+            tvNoData.setVisibility(View.GONE);
         progressBar.setVisibility(View.GONE);
         adapter = new AddClassAdapter(getActivity(), Data.getClassList(), this);
         recyclerView.setAdapter(adapter);
@@ -125,5 +127,5 @@ public class FragmentClasses extends Fragment implements OnResponseListener {
     private void notifySetChange() {
         if (adapter != null)
             adapter.notifyDataSetChanged();
-        }
+    }
 }

@@ -2,184 +2,292 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
 
     <android.support.v7.widget.CardView
         android:id="@+id/cvInstituteClass"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/_2sdp"
-        app:cardBackgroundColor="@color/white"
-        app:cardCornerRadius="@dimen/_2sdp"
-
-        app:cardElevation="@dimen/_2sdp">
+        app:cardCornerRadius="5dp"
+        app:cardPreventCornerOverlap="true"
+        app:cardUseCompatPadding="true">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/_5sdp"
-            android:orientation="vertical">
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/_5sdp"
+            android:orientation="horizontal"
+            android:weightSum="3">
 
             <LinearLayout
+                android:id="@+id/llViewClass"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:gravity="left"
-                android:orientation="horizontal">
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
 
-                <android.support.v7.widget.CardView
-                    android:layout_width="@dimen/_60sdp"
-                    android:layout_height="@dimen/_60sdp"
-                    android:layout_margin="@dimen/_4sdp"
-                    app:cardBackgroundColor="@color/grey_300"
-                    app:cardCornerRadius="@dimen/_2sdp">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/_3sdp"
+                    android:layout_marginTop="5dp">
 
-                    <ImageView
-                        android:id="@+id/imgClassImage"
-                        android:layout_width="@dimen/_60sdp"
-                        android:layout_height="@dimen/_60sdp"
-                        android:scaleType="centerCrop"
-                        android:src="@mipmap/ic_launcher" />
-                </android.support.v7.widget.CardView>
+                    <com.appstar.tutionportal.views.MyTextView
+                        android:id="@+id/tvBatchName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="@dimen/_20sdp"
+                        android:text="Manoj Classes"
+                        android:textColor="@color/colorAccent"
+                        android:textSize="@dimen/_13sdp"
+                        android:textStyle="bold" />
+
+
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_2sdp"
+                    android:orientation="horizontal">
+
+                    <com.appstar.tutionportal.views.MyTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/_3sdp"
+                        android:text="Subjects:"
+                        android:textColor="@color/text_color"
+                        android:textSize="@dimen/_9sdp"
+                        android:textStyle="italic" />
+
+
+                    <com.appstar.tutionportal.views.MyTextView
+                        android:id="@+id/tvSubject"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/_2sdp"
+                        android:text="Hindi"
+                        android:textColor="@color/green_800"
+                        android:textSize="@dimen/_9sdp"
+                        android:textStyle="bold"
+                        android:visibility="visible" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_2sdp"
+                    android:orientation="horizontal">
+
+                    <com.appstar.tutionportal.views.MyTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/_3sdp"
+                        android:text="Teacher:"
+                        android:textColor="@color/text_color"
+                        android:textSize="@dimen/_9sdp"
+                         />
+
+
+                    <com.appstar.tutionportal.views.MyTextView
+                        android:id="@+id/tvTeacher"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/_2sdp"
+                        android:text="Manoj"
+                        android:textColor="@color/text_color"
+                        android:textSize="@dimen/_9sdp"
+                        android:textStyle="bold|italic"
+                        android:visibility="visible" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_2sdp"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
+
+                    <com.appstar.tutionportal.views.MyTextView
+                        android:id="@+id/tvRupees"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/_3sdp"
+                        android:layout_weight="1.2"
+                        android:text="₹ 5000"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_10sdp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_2sdp"
+                    android:orientation="horizontal">
+
+                    <com.appstar.tutionportal.views.MyTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/_3sdp"
+                        android:text="Available seats  -"
+                        android:textColor="@color/text_color"
+                        android:textSize="@dimen/_10sdp" />
+
+                    <com.appstar.tutionportal.views.MyTextView
+                        android:id="@+id/tvAvailableSeats"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/_3sdp"
+                        android:text="21"
+                        android:textColor="@color/text_color"
+                        android:textSize="@dimen/_10sdp" />
+
+                </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_marginLeft="@dimen/_5sdp"
-                    android:gravity="left"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/tvBatchName"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Batches: SSC Capsule course"
-                        android:textColor="@color/colorPrimary"
-                        android:textSize="@dimen/_13sdp"
-                        android:textStyle="bold" />
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_3sdp"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:layout_width="@dimen/_40sdp"
-                            android:layout_height="wrap_content"
-
-                            android:layout_gravity="left"
-                            android:gravity="left"
-                            android:text="Subject:"
-                            android:textColor="@color/grey_600"
-                            android:textSize="@dimen/_10sdp"
-                            android:textStyle="normal" />
-
-                        <TextView
-                            android:id="@+id/tvSubject"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-
-                            android:layout_marginLeft="@dimen/_5sdp"
-                            android:gravity="right"
-                            android:text="Hindi,English"
-                            android:textColor="@color/green_700"
-                            android:textSize="@dimen/_11sdp"
-                            android:textStyle="bold|italic" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:layout_width="@dimen/_40sdp"
-                            android:layout_height="wrap_content"
-                            android:text="Teacher:"
-                            android:textColor="@color/grey_600"
-                            android:textSize="@dimen/_10sdp"
-                            android:textStyle="normal" />
-
-                        <TextView
-                            android:id="@+id/tvTeacher"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/_5sdp"
-                            android:text="Manoj Sir"
-                            android:textColor="@color/colorPrimary"
-                            android:textSize="@dimen/_11sdp"
-                            android:textStyle="bold" />
-                    </LinearLayout>
-                </LinearLayout>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/_4sdp"
-                android:layout_marginTop="@dimen/_5sdp"
-                android:orientation="horizontal">
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    android:layout_marginTop="@dimen/_2sdp"
+                    android:gravity="center"
                     android:orientation="horizontal">
 
                     <ImageView
-                        android:layout_width="@dimen/_15sdp"
-                        android:layout_height="@dimen/_15sdp"
-                        android:src="@drawable/ic_institue" />
+                        android:layout_width="@dimen/_10sdp"
+                        android:layout_height="@dimen/_10sdp"
+                        android:src="@drawable/ic_placeholder" />
 
-                    <TextView
-                        android:id="@+id/tvInstitute"
+                    <com.appstar.tutionportal.views.MyTextView
+                        android:id="@+id/tvLocation"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/_5sdp"
-                        android:text="Ayushi classes"
-                        android:textColor="@color/colorPrimary"
+                        android:layout_marginLeft="@dimen/_3sdp"
+                        android:text="Vaishali, Ghaziabad"
+                        android:textColor="@color/colorpara"
                         android:textSize="@dimen/_10sdp"
-                        android:textStyle="bold" />
+                        android:textStyle="normal" />
                 </LinearLayout>
 
                 <LinearLayout
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="right"
-                    android:layout_weight="1"
-                    android:gravity="right">
+                    android:layout_marginRight="@dimen/_5sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:gravity="right"
+                    android:orientation="horizontal">
 
-                    <ImageView
-                        android:layout_width="@dimen/_15sdp"
-                        android:layout_height="@dimen/_15sdp"
-                        android:layout_gravity="right"
-                        android:gravity="right"
-                        android:src="@drawable/ic_pin2"
-                        android:visibility="gone" />
-
-                    <TextView
-                        android:id="@+id/tvLocation"
-                        android:layout_width="wrap_content"
+                    <com.appstar.tutionportal.views.MyTextView
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="right"
-                        android:layout_marginLeft="@dimen/_5sdp"
-                        android:layout_marginRight="@dimen/_5sdp"
-                        android:drawableLeft="@drawable/ic_pin2"
-                        android:gravity="right"
-                        android:text="Dwarka Delhi"
-                        android:textColor="@color/grey_600"
-                        android:textSize="@dimen/_10sdp"
-                        android:textStyle="bold" />
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="@dimen/_3sdp"
+                        android:gravity="center"
+                        android:text="Ratings: "
+                        android:textColor="@color/colorpara"
+                        android:textSize="@dimen/_8sdp"
+                        android:textStyle="normal|italic" />
+
+                    <RatingBar
+                        android:id="@+id/ratingTeacher"
+                        style="?android:attr/ratingBarStyleSmall"
+                        android:layout_width="@dimen/_70sdp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="@dimen/_3sdp"
+                        android:numStars="4"
+                        android:rating="3.5"
+                        android:theme="@style/RatingBar" />
+
                 </LinearLayout>
 
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1sp"
+                    android:layout_marginRight="@dimen/_5sdp"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:background="@color/colorpara" />
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/_5sdp"
+                    android:layout_marginTop="@dimen/_2sdp"
+                    android:orientation="horizontal">
+
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="@dimen/_15sdp"
+                            android:layout_height="@dimen/_15sdp"
+                            android:src="@drawable/ic_institue" />
+
+                        <TextView
+                            android:id="@+id/tvInstitute"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/_5sdp"
+                            android:text="Ayushi classes"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="@dimen/_10sdp"
+                            android:textStyle="bold" />
+                    </LinearLayout>-->
+
+
+                </RelativeLayout>
             </LinearLayout>
 
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/_5sdp">
 
+
+                <android.support.v7.widget.CardView
+                    android:id="@+id/cvView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    app:cardBackgroundColor="@color/white"
+                    app:cardCornerRadius="@dimen/_2sdp">
+
+                    <ImageView
+                        android:id="@+id/imgClassImage"
+                        android:layout_width="@dimen/_90sdp"
+                        android:layout_height="@dimen/_105sdp"
+                        android:layout_gravity="center"
+                        android:layout_margin="@dimen/_2sdp"
+                        android:background="@drawable/ic_hover"
+                        android:scaleType="centerCrop"
+                        android:src="@mipmap/teacher" />
+                </android.support.v7.widget.CardView>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/cvView"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/imgFavorite"
+                        android:layout_width="@dimen/_25sdp"
+                        android:layout_height="@dimen/_25sdp"
+                        android:layout_marginLeft="@dimen/_65sdp"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:background="?selectableItemBackground"
+                        android:padding="@dimen/_5sdp"
+                        android:visibility="visible" />
+                    />
+                </LinearLayout>
+
+
+            </RelativeLayout>
         </LinearLayout>
     </android.support.v7.widget.CardView>
-
 </LinearLayout>

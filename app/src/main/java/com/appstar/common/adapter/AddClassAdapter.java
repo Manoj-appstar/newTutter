@@ -48,7 +48,7 @@ public class AddClassAdapter extends RecyclerView.Adapter<AddClassAdapter.MyHold
             subjects += subject.getSubject() + " ,";
         }
 
-       holder.cvInstituteClass.setOnClickListener(new View.OnClickListener() {
+        holder.cvInstituteClass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(mContext, FragmentViewTeacherClass.class);
@@ -81,13 +81,15 @@ public class AddClassAdapter extends RecyclerView.Adapter<AddClassAdapter.MyHold
     }
 
     public class MyHolder extends RecyclerView.ViewHolder {
-        TextView tvBatchName, tvSubject, tvTeacher, tvInstitute, tvLocation;
+        TextView tvBatchName, tvSubject, tvTeacher, tvInstitute, tvLocation, tvAvailableSeats, tvRupees;
         ImageView imgClassImage;
         CardView cvInstituteClass;
 
         public MyHolder(View itemView) {
             super(itemView);
             cvInstituteClass = itemView.findViewById(R.id.cvInstituteClass);
+            tvRupees = itemView.findViewById(R.id.tvRupees);
+            tvAvailableSeats = itemView.findViewById(R.id.tvAvailableSeats);
             tvBatchName = itemView.findViewById(R.id.tvBatchName);
             tvSubject = itemView.findViewById(R.id.tvSubject);
             tvTeacher = itemView.findViewById(R.id.tvTeacher);
