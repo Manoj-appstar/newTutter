@@ -2,6 +2,7 @@ package com.appstar.tutionportal.student.adapter;
 
 import android.app.Activity;
 import android.content.Context;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -48,7 +49,6 @@ public class StudentClassAdapter extends RecyclerView.Adapter<StudentClassAdapte
     @Override
     public void onBindViewHolder(@NonNull final StudentClassAdapter.MyHolder holder, int position) {
         final ClassDetail classDetail = arrayList.get(position);
-//        holder.ratingbar.setRating(position);
         holder.ratingbar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
             @Override
             public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
@@ -83,6 +83,16 @@ public class StudentClassAdapter extends RecyclerView.Adapter<StudentClassAdapte
 
             }
         });
+
+        holder.llViewClass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle bundle=new Bundle();
+                bundle.putSerializable("",classDetail);
+                utilsStudent.openFragment((Activity) mContext, FragmentNames.STUDENT_CLASS_INFO, FragmentNames._STUDENT_CLASS_INFO, null, false);
+            }
+        });
+
     }
 
     private void setDistance(MyTextView tvDistance, double distance) {
@@ -99,7 +109,6 @@ public class StudentClassAdapter extends RecyclerView.Adapter<StudentClassAdapte
     }
 
     public class MyHolder extends RecyclerView.ViewHolder {
-
         CardView cvClassName;
         LinearLayout llViewClass;
         MyTextView tvBatchName, tvLocation, tvSubject, tvRupees, tvAvailableSeats, tvDistance;
@@ -120,22 +129,11 @@ public class StudentClassAdapter extends RecyclerView.Adapter<StudentClassAdapte
             tvSubject = itemView.findViewById(R.id.tvSubject);
             tvAvailableSeats = itemView.findViewById(R.id.tvAvailableSeats);
             tvDistance = itemView.findViewById(R.id.tvDistance);
-            llViewClass.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    utilsStudent.openFragment((Activity) mContext, FragmentNames.STUDENT_CLASS_INFO, FragmentNames._STUDENT_CLASS_INFO, null, false);
 
-                 /*   Intent intent =new Intent(mContext,FragmentViewTeacherInfo.class);
-                    mContext.startActivity(intent);*/
-                }
-            });
             imgTeacher.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     utilsStudent.openFragment((Activity) mContext, FragmentNames.STUDENT_TEACHER_PROFILE, FragmentNames._STUDENT_TEACHER_PROFILE, null, false);
-
-                 /*   Intent intent =new Intent(mContext,FragmentViewTeacherInfo.class);
-                    mContext.startActivity(intent);*/
                 }
             });
 
