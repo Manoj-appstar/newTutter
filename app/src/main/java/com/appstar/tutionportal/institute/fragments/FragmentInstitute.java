@@ -1,5 +1,6 @@
 package com.appstar.tutionportal.institute.fragments;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -42,11 +43,15 @@ public class FragmentInstitute extends Fragment implements OnResponseListener {
     int REQ_GET_INSTITUTE = 123;
     CardView cvAddInstitute;
 
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+    }
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.institute_fragment_branch, container, false);
-        this.view = view;
+        view = inflater.inflate(R.layout.institute_fragment_branch, container, false);
         preferenceData = new SharePreferenceData(getActivity());
         requestServer = new RequestServer(getActivity(), this);
         initView();
@@ -54,8 +59,6 @@ public class FragmentInstitute extends Fragment implements OnResponseListener {
         onClick();
         return view;
     }
-
-
 
     private void initView() {
         cvAddInstitute = view.findViewById(R.id.cvAddInstitute);
@@ -94,25 +97,6 @@ public class FragmentInstitute extends Fragment implements OnResponseListener {
             }
         }, 2000);
 
-   /*     new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    if (Data.getInstituteList().size() <= 0) {
-                        String url = UrlManager.INSTITUTE_DATA;
-                        JSONObject jsonObject = new JSONObject();
-                        //jsonObject.put("director_id=", preferenceData.getUserId(getActivity()));
-                        jsonObject.put("director_id", preferenceData.getUserId(getContext()));
-                        requestServer.sendStringPostWithHeader(url, jsonObject, REQ_GET_INSTITUTE, false);
-                    } else {
-                        bindData();
-                    }
-                } catch (Exception ex) {
-                    ex.printStackTrace();
-                }
-            }
-        }, 2000);*/
-
     }
 
     private void bindData() {
@@ -135,7 +119,7 @@ public class FragmentInstitute extends Fragment implements OnResponseListener {
                 }.getType();
 
                 InstituteData data = gson.fromJson(jsonObject.toString(), category);
-                if (data.getStatus() == true) {
+                if (data.getStatus()) {
                     if (data.getData().size() <= 0) {
                         cvAddInstitute.setVisibility(View.VISIBLE);
                         tvText.setText("No institute added");

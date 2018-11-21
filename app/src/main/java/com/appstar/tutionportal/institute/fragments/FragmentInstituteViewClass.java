@@ -38,10 +38,11 @@ public class FragmentInstituteViewClass extends Fragment {
     private void initView() {
         tabLayout = view.findViewById(R.id.tab_layout);
         viewPager = view.findViewById(R.id.pager);
+        viewPager.setOffscreenPageLimit(0);
     }
 
     private void setUpField() {
-        adapter = new PagerHomeAdapter(getActivity(), getActivity().getSupportFragmentManager());
+        adapter = new PagerHomeAdapter(getActivity(), getChildFragmentManager());
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);
     }

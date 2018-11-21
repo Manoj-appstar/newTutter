@@ -60,21 +60,14 @@ public class InstituteDashboard extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.institute_dashboard);
-
         mActivity = this;
         fragmentManager = getSupportFragmentManager();
         utilsInstitute = new UtilsInstitute();
         sharePreferenceData = new SharePreferenceData();
-
-        setUpGoogleApiClient();
+       /* setUpGoogleApiClient();
         createLocationRequest();
         buildLocationSettingsRequest();
-        checkLocationSettings();
-
-     /* IntentFilter filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
-        filter.addAction(Intent.ACTION_AIRPLANE_MODE_CHANGED);
-        this.registerReceiver(networkChangeReceiver, filter);*/
-
+        checkLocationSettings();*/
         utilsInstitute.openFragment(mActivity, FragmentNames.INSTITUTE_HOME, FragmentNames._INSTITUTE_HOME, null, false);
     }
 

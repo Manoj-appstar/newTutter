@@ -52,7 +52,6 @@ public class FragmentInstituteHome extends Fragment implements View.OnClickListe
         utilsInstitutet = new UtilsInstitute();
         sharePreferenceData = new SharePreferenceData();
         teacherDetail = new TeacherDetail();
-
         findViews(view);
         layoutChat.setOnClickListener(this);
         layoutProfile.setOnClickListener(this);
@@ -78,17 +77,13 @@ public class FragmentInstituteHome extends Fragment implements View.OnClickListe
     }
 
     private void setupViewPager(ViewPager viewPager) {
-
         DashboardPagerAdapter dashboardPagerAdapter = new DashboardPagerAdapter(fragmentManager);
-
         dashboardPagerAdapter.addFragment(Fragment.instantiate(mActivity, FragmentInstituteChatHistory.class.getName()), "CHAT");
         dashboardPagerAdapter.addFragment(Fragment.instantiate(mActivity, FragmentInstituteViewClass.class.getName()), "HOME");
         dashboardPagerAdapter.addFragment(Fragment.instantiate(mActivity, FragmentInstituteProfile.class.getName()), "PROFILE");
         dashboardPagerAdapter.addFragment(Fragment.instantiate(mActivity, FragmentInstituteNotification.class.getName()), "NOTIFICATION");
-
         viewPager.setAdapter(dashboardPagerAdapter);
         viewPager.setCurrentItem(UtilsInstitute.getCurrentTab());
-
         selectView(UtilsInstitute.getCurrentTab());
     }
 

@@ -126,6 +126,7 @@ public class AddInstituteBranch extends AppCompatActivity implements OnResponseL
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), GetSearchLocation.class);
                 intent.putExtra("key", select_Location);
+                intent.putExtra("from", "branch");
                 startActivityForResult(intent, select_Location);
             }
         });

@@ -3,15 +3,47 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@android:color/transparent">
+    android:background="@android:color/transparent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="@dimen/_25sdp"
+        android:layout_marginLeft="@dimen/_25sdp">
+
+        <android.support.v7.widget.CardView
+            android:layout_alignParentLeft="true"
+            android:layout_width="@dimen/_5sdp"
+            android:layout_height="@dimen/_10sdp"
+            android:layout_gravity="left"
+            android:layout_marginLeft="@dimen/_25sdp"
+            android:background="@color/white"
+            android:gravity="left"
+            app:cardBackgroundColor="@color/white"
+            app:cardCornerRadius="@dimen/_2sdp"
+            app:cardElevation="@dimen/_5sdp" />
+        <android.support.v7.widget.CardView
+            android:layout_alignParentRight="true"
+            android:layout_width="@dimen/_5sdp"
+            android:layout_height="@dimen/_10sdp"
+            android:layout_gravity="left"
+           android:layout_marginRight="@dimen/_25sdp"
+            android:background="@color/white"
+            android:gravity="left"
+            app:cardBackgroundColor="@color/white"
+            app:cardCornerRadius="@dimen/_2sdp"
+            app:cardElevation="@dimen/_5sdp" />
+
+    </RelativeLayout>
 
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-       android:layout_marginLeft="@dimen/_10sdp"
-        android:layout_marginRight="@dimen/_10sdp"
-        android:layout_marginTop="@dimen/_3sdp"
         android:layout_marginBottom="@dimen/_3sdp"
+        android:layout_marginLeft="@dimen/_10sdp"
+        android:layout_marginRight="@dimen/_10sdp"
+        android:layout_marginTop="-2sp"
         android:padding="@dimen/_5sdp"
         app:cardCornerRadius="@dimen/_5sdp"
         app:cardElevation="@dimen/_3sdp">
@@ -24,23 +56,23 @@
 
             <android.support.v7.widget.CardView
                 android:id="@+id/cvAddClass"
-                android:background="?selectableItemBackground"
                 android:layout_width="@dimen/_52sdp"
                 android:layout_height="@dimen/_20sdp"
                 android:layout_alignParentRight="true"
                 android:layout_marginTop="@dimen/_10sdp"
+                android:background="?selectableItemBackground"
                 app:cardBackgroundColor="@color/colorPrimary">
 
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:gravity="center"
-                        android:text="Add class"
-                        android:textColor="@color/white"
-                        android:textSize="@dimen/_9sdp"
-                        android:textStyle="normal" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:text="Add class"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_9sdp"
+                    android:textStyle="normal" />
 
 
             </android.support.v7.widget.CardView>

@@ -257,6 +257,8 @@ public class HomeFragment extends Fragment implements OnResponseListener {
                 dbHelper.insertLastLocation(address);
                 if (address != null) {
                     tvLocation.setText(address.getLocalAddress());
+                    Data.getClassList().clear();
+                    page=1;
                     getClasses();
                 }
             }
