@@ -22,6 +22,7 @@ import android.widget.TextView;
 
 import com.appstar.tutionportal.Model.ClassDetail;
 import com.appstar.tutionportal.Model.ImageList;
+import com.appstar.tutionportal.Model.Subject;
 import com.appstar.tutionportal.R;
 import com.appstar.tutionportal.student.adapter.VpClassAdapter;
 import com.appstar.tutionportal.student.extras.FragmentNames;
@@ -63,7 +64,7 @@ public class FragmentViewTeacherClass extends AppCompatActivity implements OnRes
     ImageView ivViewStudent;
     List<String> weekDaysList;
     TextView tvEditClass;
-    String strWeek;
+    String strWeek, from;
     Switch aSwitch;
     RequestServer requestServer;
     int REQ_SERVICES = 198;
@@ -95,6 +96,7 @@ public class FragmentViewTeacherClass extends AppCompatActivity implements OnRes
         }*/
 
         class_id = getIntent().getStringExtra("class_id");
+        from = getIntent().getStringExtra("from");
 
         // findView(view);
         findView();
@@ -208,7 +210,7 @@ public class FragmentViewTeacherClass extends AppCompatActivity implements OnRes
                 Intent intent = new Intent(mActivity, AddClasses.class);
                 intent.putExtra("class", "editClass");
                 intent.putExtra("class_id", class_id);
-                intent.putExtra("editFrom", "individual");
+                intent.putExtra("editFrom", from);
                 startActivity(intent);
             }
         });
@@ -219,7 +221,7 @@ public class FragmentViewTeacherClass extends AppCompatActivity implements OnRes
                 Intent intent = new Intent(mActivity, AddClasses.class);
                 intent.putExtra("class", "editClass");
                 intent.putExtra("class_id", class_id);
-                intent.putExtra("editFrom", "individual");
+                intent.putExtra("editFrom", from);
                 startActivity(intent);
             }
         });
@@ -256,15 +258,24 @@ public class FragmentViewTeacherClass extends AppCompatActivity implements OnRes
             tvEnable.setTextColor(ContextCompat.getColor(mActivity, R.color.white));
             tvDisable.setText("Disabled");
             tvEnable.setText("Enable");
-
+            tvStatus.setText("Close");
         } else {
             aSwitch.setChecked(true);
             tvEnable.setTextColor(ContextCompat.getColor(mActivity, R.color.colorPrimary));
             tvDisable.setTextColor(ContextCompat.getColor(mActivity, R.color.white));
             tvDisable.setText("Disable");
             tvEnable.setText("Enabled");
+            tvStatus.setText("Open");
         }
-        tvClassName.setText(classDetail.getPrice() + "," + classDetail.getBatchName());
+        String subjects = "";
+        for (Subject subject : classDetail.getSubjectname()) {
+            subjects += subject.getSubject() + " ,";
+        }
+        if (subjects.length() > 1)
+            tvSubject.setText(subjects.substring(0, subjects.length() - 1));
+
+
+        tvClassName.setText("₹" + classDetail.getPrice() + "," + classDetail.getBatchName());
         tvClassRupeee.setText("₹" + classDetail.getPrice());
         tvBatchName.setText(classDetail.getBatchName());
         tvAddress.setText(classDetail.getLandmark());
@@ -425,6 +436,7 @@ public class FragmentViewTeacherClass extends AppCompatActivity implements OnRes
             tvDisable.setTextColor(ContextCompat.getColor(mActivity, R.color.white));
             tvDisable.setText("Disable");
             tvEnable.setText("Enabled");
+            tvStatus.setText("Open");
         } else {
             classDetail.setServices("1");
             //sharePreferenceData.seetTeacherServices(mActivity, "0");
@@ -434,6 +446,7 @@ public class FragmentViewTeacherClass extends AppCompatActivity implements OnRes
             tvEnable.setTextColor(ContextCompat.getColor(mActivity, R.color.white));
             tvDisable.setText("Disabled");
             tvEnable.setText("Enable");
+            tvStatus.setText("Close");
         }
     }
 
@@ -453,7 +466,6 @@ public class FragmentViewTeacherClass extends AppCompatActivity implements OnRes
             }
         } catch (Exception ex) {
         }
-
     }
 
     @Override

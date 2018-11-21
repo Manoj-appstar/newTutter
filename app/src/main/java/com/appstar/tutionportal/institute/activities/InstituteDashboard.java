@@ -47,9 +47,6 @@ public class InstituteDashboard extends AppCompatActivity {
     private static SharePreferenceData sharePreferenceData;
     boolean doubleBackToExitPressedOnce = false;
     Double latitude, longitude;
-    AlertDialog alertDialog;
-    boolean bool = false;
-    private NetworkChangeReceiver networkChangeReceiver;
     private Activity mActivity;
     private GoogleApiClient mGoogleApiClient;
     private LocationRequest mLocationRequest;
@@ -70,10 +67,6 @@ public class InstituteDashboard extends AppCompatActivity {
         createLocationRequest();
         buildLocationSettingsRequest();
         checkLocationSettings();
-
-     /* IntentFilter filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
-        filter.addAction(Intent.ACTION_AIRPLANE_MODE_CHANGED);
-        this.registerReceiver(networkChangeReceiver, filter);*/
 
         utilsInstitute.openFragment(mActivity, FragmentNames.INSTITUTE_HOME, FragmentNames._INSTITUTE_HOME, null, false);
     }

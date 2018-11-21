@@ -127,7 +127,7 @@ public class ViewClassFragment extends Fragment implements OnResponseListener, N
         try {
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("teacher_id", Data.getTeacherDetail().getId());
-            requestServer.sendStringPostWithHeader(UrlManager.GET_TEACHER_CLASS, jsonObject, REQ_CLASS, true);
+            requestServer.sendStringPostWithHeader(UrlManager.GET_TEACHER_CLASS, jsonObject, REQ_CLASS, false);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -152,7 +152,7 @@ public class ViewClassFragment extends Fragment implements OnResponseListener, N
                 }.getType();
 
                 ClassDataDetail data = gson.fromJson(response, category);
-                if (data.getStatus() == true) {
+                if (data.getStatus()) {
                     if (data.getData().size() > 0) {
                         rl_data.setVisibility(View.VISIBLE);
                         btnAddClass.setVisibility(View.VISIBLE);

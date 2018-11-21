@@ -30,18 +30,11 @@ public class FragmentInstituteHome extends Fragment implements View.OnClickListe
     public static FragmentManager fragmentManager;
     private static UtilsInstitute utilsInstitutet;
     private static SharePreferenceData sharePreferenceData;
-    RequestServer requestServer;
-    TextView tvCancel, tvAdd;
-    AlertDialog alertDialog;
-    int REQ_CLASS = 198;
-    EditText etGraduationType, etGraduationDetail, etPostGraduationType, etPostGraduationDetail, etOthers, etSpecialist;
-    TeacherDetail teacherDetail;
     FrameLayout flNotification;
     TextView tvNotification;
     private ViewPager homePager;
     private LinearLayout layoutChat, layoutProfile, layoutHome, layoutNotification;
     private FragmentActivity mActivity;
-    private CardView cvCancel;
 
     @Nullable
     @Override
@@ -51,9 +44,9 @@ public class FragmentInstituteHome extends Fragment implements View.OnClickListe
         fragmentManager = getChildFragmentManager();
         utilsInstitutet = new UtilsInstitute();
         sharePreferenceData = new SharePreferenceData();
-        teacherDetail = new TeacherDetail();
 
         findViews(view);
+
         layoutChat.setOnClickListener(this);
         layoutProfile.setOnClickListener(this);
         layoutHome.setOnClickListener(this);
@@ -61,6 +54,7 @@ public class FragmentInstituteHome extends Fragment implements View.OnClickListe
 
         setupViewPager(homePager);
         setupPagerListener();
+
         return view;
 
     }
@@ -172,6 +166,4 @@ public class FragmentInstituteHome extends Fragment implements View.OnClickListe
         super.onResume();
         UtilsInstitute.setCurrentScreen(FragmentNames._INSTITUTE_HOME);
     }
-
-
 }

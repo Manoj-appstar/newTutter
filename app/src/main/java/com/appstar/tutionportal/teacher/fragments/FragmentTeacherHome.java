@@ -56,21 +56,25 @@ public class FragmentTeacherHome extends Fragment implements View.OnClickListene
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_teacher_home, container, false);
+
         mActivity = getActivity();
         fragmentManager = getChildFragmentManager();
         utils = new Utils();
         sharePreferenceData = new SharePreferenceData();
         teacherDetail = new TeacherDetail();
         dbHelper = new DBHelper(mActivity);
+
         findViews(view);
+
         layoutChat.setOnClickListener(this);
         layoutProfile.setOnClickListener(this);
         layoutHome.setOnClickListener(this);
         layoutNotification.setOnClickListener(this);
+
         setupViewPager(homePager);
         setupPagerListener();
         requestServer = new RequestServer(mActivity, this);
-        //Log.d("id",Data.getTeacherDetail().getBachelorDegree());
+
         if (TextUtils.isEmpty(Data.getTeacherDetail().getBachelorDegree())) {
             new Handler().postDelayed(new Runnable() {
                 @Override

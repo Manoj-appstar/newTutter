@@ -106,6 +106,13 @@ public class BindData {
             obj.startingDate = classDetail.getStartingDate();
             obj.endDate = classDetail.getEndDate();
             obj.check_day = classDetail.getWeekDays();
+            obj.strAddress = classDetail.getAddress();
+            obj.strHouse_no = classDetail.getHouseNo();
+            obj.strLandmark = classDetail.getLandmark();
+            obj.strCity = classDetail.getCity();
+            obj.strInstituteId = classDetail.getInstituteId();
+            obj.strBranchId = classDetail.getBranchId();
+        //    obj.Subject_id_list = classDetail.getSubjectId();
 
 
 

@@ -56,4 +56,14 @@ public class FragmentInstituteViewClass extends Fragment {
         });
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        notifySetChange();
+    }
+    private void notifySetChange() {
+        if (adapter != null)
+            adapter.notifyDataSetChanged();
+
+    }
 }

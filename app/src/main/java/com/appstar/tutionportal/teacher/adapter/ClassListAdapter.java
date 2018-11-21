@@ -101,6 +101,7 @@ public class ClassListAdapter extends RecyclerView.Adapter<ClassListAdapter.MyHo
             public void onClick(View v) {
                 Intent intent = new Intent(mContext, FragmentViewTeacherClass.class);
                 intent.putExtra("class_id", model.getId());
+                intent.putExtra("from", "individual");
                 mContext.startActivity(intent);
             }
         });

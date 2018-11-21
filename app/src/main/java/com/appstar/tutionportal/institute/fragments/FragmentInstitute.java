@@ -56,7 +56,6 @@ public class FragmentInstitute extends Fragment implements OnResponseListener {
     }
 
 
-
     private void initView() {
         cvAddInstitute = view.findViewById(R.id.cvAddInstitute);
         expandableView = view.findViewById(R.id.expandableView);
@@ -172,6 +171,5 @@ public class FragmentInstitute extends Fragment implements OnResponseListener {
     private void notifySetChange() {
         if (adapter != null)
             adapter.notifyDataSetChanged();
-
     }
 }

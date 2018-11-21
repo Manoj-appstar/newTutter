@@ -15,6 +15,7 @@ import com.appstar.tutionportal.Model.ClassDetail;
 import com.appstar.tutionportal.Model.Subject;
 import com.appstar.tutionportal.R;
 import com.appstar.tutionportal.teacher.activities.AddClasses;
+import com.appstar.tutionportal.teacher.fragments.FragmentViewTeacherClass;
 import com.bumptech.glide.Glide;
 
 import java.util.List;
@@ -50,10 +51,11 @@ public class AddClassAdapter extends RecyclerView.Adapter<AddClassAdapter.MyHold
        holder.cvInstituteClass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(mContext, AddClasses.class);
-                intent.putExtra("class", "editClass");
+                Intent intent = new Intent(mContext, FragmentViewTeacherClass.class);
+               // intent.putExtra("class", "editClass");
                 intent.putExtra("class_id", classDetail.getId());
-                intent.putExtra("editFrom", "institute");
+                intent.putExtra("from", "institute");
+              //  intent.putExtra("editFrom", "institute");
                 mContext.startActivity(intent);
             }
         });

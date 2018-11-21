@@ -74,10 +74,6 @@ public class TeacherDashboard extends AppCompatActivity implements NetworkRespon
         buildLocationSettingsRequest();
         checkLocationSettings();
 
-        // viewClassFragment = new ViewClassFragment();
-        /*Intent intent = new Intent();
-        networkChangeReceiver.onReceive(mActivity, intent);*/
-
         IntentFilter filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
         filter.addAction(Intent.ACTION_AIRPLANE_MODE_CHANGED);
         this.registerReceiver(networkChangeReceiver, filter);

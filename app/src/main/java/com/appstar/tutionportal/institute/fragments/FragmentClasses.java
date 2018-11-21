@@ -82,8 +82,7 @@ public class FragmentClasses extends Fragment implements OnResponseListener {
         progressBar.setVisibility(View.GONE);
         adapter = new AddClassAdapter(getActivity(), Data.getClassList(), this);
         recyclerView.setAdapter(adapter);
-
-    }
+        }
 
     @Override
     public void onSuccess(int reqCode, String response) {

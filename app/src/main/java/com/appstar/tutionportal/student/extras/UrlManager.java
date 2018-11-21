@@ -13,6 +13,7 @@ public class UrlManager {
     public static final String Add_Institute = BASE_URL + "add_institute";
     public static final String GET_NEW_USER_OTP_login = BASE_URL + "login_verify_phone";
     public static final String ADD_CLASS = BASE_URL + "add_class";
+    public static final String EDIT_CLASS = BASE_URL + "update-class";
     //  public static final String VERIFY_OTP = BASE_URL + "verify_otp.php";
     public static final String VERIFY_OTP = BASE_URL + "Otp_login";
     public static final String GET_CLASS = BASE_URL + "get-class";

@@ -50,7 +50,7 @@
             android:id="@+id/layoutNotification"
             android:layout_width="0dp"
             android:layout_height="@dimen/_40sdp"
-            android:layout_weight="1"
+            android:layout_weight="1.1"
             android:background="@drawable/other_tab_selector"
             android:gravity="center"
             android:orientation="horizontal">

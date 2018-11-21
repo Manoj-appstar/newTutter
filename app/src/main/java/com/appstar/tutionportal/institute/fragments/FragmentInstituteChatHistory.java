@@ -13,12 +13,14 @@ import com.appstar.tutionportal.student.extras.FragmentNames;
 import com.appstar.tutionportal.util.UtilsInstitute;
 
 public class FragmentInstituteChatHistory extends Fragment {
+    UtilsInstitute utilsInstitute;
 
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_institute_chat, container, false);
+        utilsInstitute = new UtilsInstitute();
         return view;
     }
 

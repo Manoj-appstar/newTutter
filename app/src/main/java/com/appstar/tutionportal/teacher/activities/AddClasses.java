@@ -109,7 +109,10 @@ public class AddClasses extends AppCompatActivity implements View.OnClickListene
     public TextView aLocation, aTimeTo, aTimeFrom, aDate, tvEndDate, tvLocation, tvAddClass, tvAddYourClass, tvClassName,
             tvInstituteNmae, tvBranchName, tvTeacherAssigned, tvAddMoreSub, tvSubject;
     public EditText etPrice, etClassPhone, tvDays, batchName, aLimit;
-    public String lat, longt, strCity, strLandmark, strHouse_no, class_selected_id, subject_selected_id, endDate, startingDate, check_day;
+    public String lat, longt, strCity, strLandmark, strHouse_no, class_selected_id, subject_selected_id, endDate, startingDate, check_day,
+            strBranchId, strInstituteId, strAddress;
+
+    public String Subject_id_list, subject_name_list;
     public AutoCompleteTextView aClass, aSubject;
     public TinderRecyclerView recyclerView;
     public List<String> listData = new ArrayList<>();
@@ -119,6 +122,7 @@ public class AddClasses extends AppCompatActivity implements View.OnClickListene
     LinearLayout llAddInstitute;
     String path1;
     int i;
+
     int PLACE_AUTOCOMPLETE_REQUEST_CODE = 1;
     AvatarAdapter adapter;
     List<String> image = new ArrayList<String>();
@@ -128,13 +132,14 @@ public class AddClasses extends AppCompatActivity implements View.OnClickListene
     int class_image_count = 0;
     Double latitude, longitude;
     String scheduledTime = "";
-    String Subject_id_list, subject_name_list;
+
     int year, day, month;
     String[] str = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
     int REQ_ADD_CLASS = 188;
     int REQ_GET_CLASS = 189;
     int REQ_SUBJECT = 198;
     int UPLOAD_CLASS_IMAGE = 158;
+    int REQ_EDIT_CLASS = 155;
     String batch_id;
     int SELECT_PICTURE = 899;
     List<String> listData_data = new ArrayList<>();
@@ -243,6 +248,7 @@ public class AddClasses extends AppCompatActivity implements View.OnClickListene
     }
 
     private void getData() {
+
         clas = getIntent().getStringExtra("class");
         if (clas.equalsIgnoreCase("addClass")) {
             tvAddClass.setText("Add class");
@@ -316,6 +322,18 @@ public class AddClasses extends AppCompatActivity implements View.OnClickListene
         if (from.equalsIgnoreCase("institute")) {
             AddSubjectAdapter adapter = new AddSubjectAdapter(mActivity, classDetail.getSubjectname(), this);
             rvAddSubject.setAdapter(adapter);
+            try {
+                for (int i = 0; i < classDetail.getSubjectname().size(); i++) {
+                    if (Subject_id_list == null) {
+                        Subject_id_list = classDetail.getSubjectname().get(i).getSubjectId() + ",";
+                    } else {
+                        Subject_id_list += classDetail.getSubjectname().get(i).getSubjectId() + ",";
+                    }
+                }
+
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
             showHideMoreSubject();
         }
         setRecycleView();
@@ -365,7 +383,6 @@ public class AddClasses extends AppCompatActivity implements View.OnClickListene
     }
 
     private void findViews() {
-
         batchName = findViewById(R.id.BatchName);
         addTeacherAssigned = findViewById(R.id.addTeacherAssigned);
         tvTeacherAssigned = findViewById(R.id.tvTeacherAssigned);
@@ -698,13 +715,14 @@ public class AddClasses extends AppCompatActivity implements View.OnClickListene
                     jsonObject.put("branch_id", "0");
                 } else {
 
-              /*  if (teacher_id_list.endsWith(",")) {
+                  /*if (teacher_id_list.endsWith(",")) {
                     teacher_id_list = teacher_id_list.substring(0, teacher_id_list.length() - 1);
-                }*/
+                 }*/
 
                     if (Subject_id_list.endsWith(",")) {
                         Subject_id_list = Subject_id_list.substring(0, Subject_id_list.length() - 1);
                     }
+
                     jsonObject.put("teacher_id", "1");
                     jsonObject.put("address", branchInfo.getAddress());
                     jsonObject.put("latitude", branchInfo.getLatitude());
@@ -769,20 +787,21 @@ public class AddClasses extends AppCompatActivity implements View.OnClickListene
                     if (Subject_id_list.endsWith(",")) {
                         Subject_id_list = Subject_id_list.substring(0, Subject_id_list.length() - 1);
                     }
+
                     jsonObject.put("teacher_id", "1");
-                    jsonObject.put("address", branchInfo.getAddress());
-                    jsonObject.put("latitude", branchInfo.getLatitude());
-                    jsonObject.put("longitude", branchInfo.getLongitude());
-                    jsonObject.put("house_no", branchInfo.getHouseNo());
-                    jsonObject.put("city", branchInfo.getCity());
-                    jsonObject.put("landmark", branchInfo.getLandmark());
+                    jsonObject.put("address", strAddress);
+                    jsonObject.put("latitude", lat);
+                    jsonObject.put("longitude", longt);
+                    jsonObject.put("house_no", strHouse_no);
+                    jsonObject.put("city", strCity);
+                    jsonObject.put("landmark", strLandmark);
                     jsonObject.put("subject_id", Subject_id_list);
-                    jsonObject.put("institute_id", branchInfo.getInstituteId());
-                    jsonObject.put("branch_id", branchInfo.getBranchId());
+                    jsonObject.put("institute_id", strInstituteId);
+                    jsonObject.put("branch_id", strBranchId);
                     jsonObject.put("category_type", "1");
                 }
                 jsonObject.put("class_id", class_selected_id);
-                jsonObject.put("batch_id", class_id);
+                jsonObject.put("id", class_id);
                 jsonObject.put("timing_to", aTimeFrom.getText().toString().trim());
                 jsonObject.put("timing_from", aTimeTo.getText().toString().trim());
                 jsonObject.put("starting_date", startingDate);
@@ -795,7 +814,7 @@ public class AddClasses extends AppCompatActivity implements View.OnClickListene
                 tvAddClass.setText("Adding class...");
                 progressBar_result.setVisibility(View.VISIBLE);
                 progress_bar_visibility = true;
-                requestServer.sendStringPostWithHeader(UrlManager.ADD_CLASS, jsonObject, REQ_ADD_CLASS, false);
+                requestServer.sendStringPostWithHeader(UrlManager.EDIT_CLASS, jsonObject, REQ_EDIT_CLASS, false);
 
                 //  }
             } catch (Exception ex) {
@@ -893,6 +912,32 @@ public class AddClasses extends AppCompatActivity implements View.OnClickListene
                             }
                         });*/
                         //   finish();
+
+                    } else {
+                        Toast.makeText(mActivity, jsonObject.getString("message"), Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    Toast.makeText(mActivity, "Error to save", Toast.LENGTH_SHORT).show();
+                }
+            } else if (reqCode == REQ_EDIT_CLASS) {
+                if (jsonObject.has("status")) {
+                    if (jsonObject.getString("status").equalsIgnoreCase("true")) {
+                        jsonObject = jsonObject.getJSONObject("data");
+                        tvAddClass.setText("Uploading Images...");
+                        final HashMap<String, String> hashMap = new HashMap<>();
+                        hashMap.put("batch_id", class_id);
+
+
+                        requestServer.uploadClassImage(UPLOAD_CLASS_IMAGE, UrlManager.ADD_CLASS_IMAGE, listData, hashMap, false);
+
+                      /* runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                requestServer.uploadClassImage(UPLOAD_CLASS_IMAGE, UrlManager.ADD_CLASS_IMAGE, listData, hashMap, false);
+                            }
+                        });*/
+                        //   finish();
+
                     } else {
                         Toast.makeText(mActivity, jsonObject.getString("message"), Toast.LENGTH_SHORT).show();
                     }
@@ -976,6 +1021,7 @@ public class AddClasses extends AppCompatActivity implements View.OnClickListene
                                 classImage.setImageId(jsonObject.getString("id"));
                                 classImages.add(classImage);
                             }
+
                         if (clas.equalsIgnoreCase("addClass")) {
                             addClassDetail(batch_id, classImages);
                         } else {
@@ -1064,7 +1110,7 @@ public class AddClasses extends AppCompatActivity implements View.OnClickListene
     }
 
     private void updateClassDetail(String batch_id, List<ClassImage> classImages) {
-        classDetail = new ClassDetail();
+        classDetail = getFilterClassByBranchId();
         classDetail.setId(batch_id);
         classDetail.setBatchName(batchName.getText().toString().trim());
         classDetail.setClassName(aClass.getText().toString().trim());
@@ -1094,18 +1140,18 @@ public class AddClasses extends AppCompatActivity implements View.OnClickListene
             classDetail.setSubjectname(subjectList);
             classDetail.setTeacherId(Data.getTeacherDetail().getId());
         } else {
-            classDetail.setAddress(branchInfo.getAddress());
-            classDetail.setLatitude(Double.parseDouble(branchInfo.getLatitude()));
-            classDetail.setLongitude(Double.parseDouble(branchInfo.getLongitude()));
-            classDetail.setCity(branchInfo.getCity());
-            classDetail.setHouseNo(branchInfo.getHouseNo());
-            classDetail.setLandmark(branchInfo.getLandmark());
-            classDetail.setBranchId(branchInfo.getBranchId());
-            classDetail.setInstituteId(branchInfo.getInstituteId());
+            classDetail.setAddress(classDetail.getAddress());
+            classDetail.setLatitude(classDetail.getLatitude());
+            classDetail.setLongitude(classDetail.getLongitude());
+            classDetail.setCity(classDetail.getCity());
+            classDetail.setHouseNo(classDetail.getHouseNo());
+            classDetail.setLandmark(classDetail.getLandmark());
+            classDetail.setBranchId(classDetail.getBranchId());
+            classDetail.setInstituteId(classDetail.getInstituteId());
             classDetail.setSubjectId(Subject_id_list);
             classDetail.setSubjectname(subjectList);
             classDetail.setTeacherName(addTeacherAssigned.getText().toString().trim());
-            classDetail.setInstituteName(branchInfo.getInstituteName());
+            classDetail.setInstituteName(classDetail.getInstituteName());
             classDetail.setCategoryType("1");
             classDetail.setTeacherId("1");
         }
@@ -1288,6 +1334,7 @@ public class AddClasses extends AppCompatActivity implements View.OnClickListene
                 // The user canceled the operation.
             }
         }*/
+
         else if (requestCode == MediaChooserConstants.BUCKET_SELECT_IMAGE_CODE) {
             if (data != null) {
                 try {
