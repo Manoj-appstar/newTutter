@@ -39,6 +39,7 @@ import com.appstar.tutionportal.student.extras.UrlManager;
 import com.appstar.tutionportal.student.interfaces.ApiResponse;
 import com.appstar.tutionportal.student.interfaces.OnResponseListener;
 import com.appstar.tutionportal.student.model.TeachersModel;
+import com.appstar.tutionportal.util.Data;
 import com.appstar.tutionportal.util.ProgressUtil;
 import com.appstar.tutionportal.util.SharePreferenceData;
 import com.appstar.tutionportal.util.Utils;
@@ -57,7 +58,7 @@ public class HomeFragment extends Fragment implements OnResponseListener {
 
     private static final float APPBAR_ELEVATION = 10f;
     public Address address;
-    int MAX_SIZE = 30;
+    int MAX_SIZE = 10;
     ApiResponse apiResponse;
     Toolbar toolbar;
     int firstVisibleInListview;
@@ -71,13 +72,13 @@ public class HomeFragment extends Fragment implements OnResponseListener {
     int REQ_GET_CLASS = 12345;
     ProgressBar progressMoreLoad;
     boolean loading, isDataCompleted;
+    static int page = 1;
     private Activity mActivity;
     private RecyclerView recycleView;
     private LinearLayoutManager layoutManager;
     private StudentClassAdapter adapter;
-
     private ArrayList<TeachersModel> teacherlist = new ArrayList<>();
-    private ArrayList<ClassDetail> classList = new ArrayList<>();
+    private List<ClassDetail> classList = new ArrayList<>();
     private ApiInterface apiInterface;
     private Utils utils;
     private LinearLayout homeLayout;
@@ -117,7 +118,6 @@ public class HomeFragment extends Fragment implements OnResponseListener {
         if (address != null) {
             tvLocation.setText(address.getLocalAddress());
             getClasses();
-
         } else
             llLocation.performClick();
     }
@@ -130,6 +130,7 @@ public class HomeFragment extends Fragment implements OnResponseListener {
                 Utils.setEnableDisbaleView(view, 2000);
                 Intent intent = new Intent(getActivity(), GetSearchLocation.class);
                 intent.putExtra("key", ACTIVITY_GET_LOCATION);
+                intent.putExtra("from", "search");
                 startActivityForResult(intent, ACTIVITY_GET_LOCATION);
             }
         });
@@ -204,24 +205,41 @@ public class HomeFragment extends Fragment implements OnResponseListener {
 
     private void getClasses() {
         try {
-            progressMoreLoad.setVisibility(View.VISIBLE);
-            JSONObject jsonObject = new JSONObject();
-            if (!TextUtils.isEmpty(filterClass.getCity()))
-                jsonObject.put("city", filterClass.getCity());
-            else if (TextUtils.isEmpty(filterClass.getInstitute()))
-                jsonObject.put("institute", filterClass.getInstitute());
-            else if (!TextUtils.isEmpty(filterClass.getSubject()))
-                jsonObject.put("subject_id", filterClass.getSubject());
-            jsonObject.put("latitude", address.getLatitude());
-            jsonObject.put("longitude", address.getLongitude());
-            jsonObject.put("page", 1);
-            jsonObject.put("student_id", SharePreferenceData.getUserId(getActivity()));
-            requestServer.sendStringPostWithHeader(UrlManager.GET_ALL_FILTER_CLASS, jsonObject, REQ_GET_CLASS, false);
+            if (Data.getClassList().size() <= 0) {
+                loadData();
+            } else {
+                classList = Data.getClassList();
+                setData();
+            }
         } catch (Exception ex) {
             ex.printStackTrace();
             progressMoreLoad.setVisibility(View.GONE);
         }
 
+    }
+
+    private void loadData() {
+        try {
+                progressMoreLoad.setVisibility(View.VISIBLE);
+                JSONObject jsonObject = new JSONObject();
+                if (!TextUtils.isEmpty(filterClass.getCity()))
+                    jsonObject.put("city", filterClass.getCity());
+                else if (TextUtils.isEmpty(filterClass.getInstitute()))
+                    jsonObject.put("institute", filterClass.getInstitute());
+                else if (!TextUtils.isEmpty(filterClass.getSubject()))
+                    jsonObject.put("subject_id", filterClass.getSubject());
+                jsonObject.put("latitude", address.getLatitude());
+                jsonObject.put("longitude", address.getLongitude());
+                jsonObject.put("page", page);
+                jsonObject.put("student_id", SharePreferenceData.getUserId(getActivity()));
+                requestServer.sendStringPostWithHeader(UrlManager.GET_ALL_FILTER_CLASS, jsonObject, REQ_GET_CLASS, false);
+                page++;
+
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            progressMoreLoad.setVisibility(View.GONE);
+        }
     }
 
     @Override
@@ -264,6 +282,7 @@ public class HomeFragment extends Fragment implements OnResponseListener {
                     }
                     classList.addAll(userDetail.getData());
                     setData();
+                    loading = false;
                 }
             } catch (Exception ex) {
                 ex.printStackTrace();
