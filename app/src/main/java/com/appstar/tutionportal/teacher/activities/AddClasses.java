@@ -795,7 +795,6 @@ public class AddClasses extends AppCompatActivity implements View.OnClickListene
                 tvAddClass.setText("Adding class...");
                 progressBar_result.setVisibility(View.VISIBLE);
                 progress_bar_visibility = true;
-
                 requestServer.sendStringPostWithHeader(UrlManager.ADD_CLASS, jsonObject, REQ_ADD_CLASS, false);
 
                 //  }
@@ -977,8 +976,11 @@ public class AddClasses extends AppCompatActivity implements View.OnClickListene
                                 classImage.setImageId(jsonObject.getString("id"));
                                 classImages.add(classImage);
                             }
-
-                        addClassDetail(batch_id, classImages);
+                        if (clas.equalsIgnoreCase("addClass")) {
+                            addClassDetail(batch_id, classImages);
+                        } else {
+                            updateClassDetail(batch_id, classImages);
+                        }
                     /*    progressBar_result.setVisibility(View.GONE);
                         progress_bar_visibility = false;
                         finish();*/
@@ -1059,6 +1061,54 @@ public class AddClasses extends AppCompatActivity implements View.OnClickListene
             classDetail.setTeacherId("1");
         }
         Data.getClassList().add(classDetail);
+    }
+
+    private void updateClassDetail(String batch_id, List<ClassImage> classImages) {
+        classDetail = new ClassDetail();
+        classDetail.setId(batch_id);
+        classDetail.setBatchName(batchName.getText().toString().trim());
+        classDetail.setClassName(aClass.getText().toString().trim());
+        classDetail.setClassId(class_selected_id);
+        classDetail.setStudentLimit(aLimit.getText().toString().trim());
+        classDetail.setPrice(etPrice.getText().toString().trim());
+        classDetail.setPhone(etClassPhone.getText().toString().trim());
+        classDetail.setStartingDate(aDate.getText().toString().trim());
+        classDetail.setEndDate(tvEndDate.getText().toString().trim());
+        classDetail.setTimingFrom(aTimeTo.getText().toString().trim());
+        classDetail.setTimingTo(aTimeFrom.getText().toString().trim());
+        classDetail.setWeekDays(check_day);
+        classDetail.setClassImage(classImages);
+
+        if (from.equalsIgnoreCase("individual")) {
+            classDetail.setAddress(address.getFullAddress());
+            classDetail.setLatitude(address.getLatitude());
+            classDetail.setLongitude(address.getLongitude());
+            classDetail.setCity(address.getCity());
+            classDetail.setHouseNo(address.getAddress());
+            classDetail.setLandmark(address.getLandmark());
+            classDetail.setBranchId("0");
+            classDetail.setBranchName("0");
+            classDetail.setInstituteId("0");
+            classDetail.setCategoryType("0");
+            classDetail.setSubjectId(subject_selected_id);
+            classDetail.setSubjectname(subjectList);
+            classDetail.setTeacherId(Data.getTeacherDetail().getId());
+        } else {
+            classDetail.setAddress(branchInfo.getAddress());
+            classDetail.setLatitude(Double.parseDouble(branchInfo.getLatitude()));
+            classDetail.setLongitude(Double.parseDouble(branchInfo.getLongitude()));
+            classDetail.setCity(branchInfo.getCity());
+            classDetail.setHouseNo(branchInfo.getHouseNo());
+            classDetail.setLandmark(branchInfo.getLandmark());
+            classDetail.setBranchId(branchInfo.getBranchId());
+            classDetail.setInstituteId(branchInfo.getInstituteId());
+            classDetail.setSubjectId(Subject_id_list);
+            classDetail.setSubjectname(subjectList);
+            classDetail.setTeacherName(addTeacherAssigned.getText().toString().trim());
+            classDetail.setInstituteName(branchInfo.getInstituteName());
+            classDetail.setCategoryType("1");
+            classDetail.setTeacherId("1");
+        }
     }
 
     @Override

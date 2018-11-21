@@ -31,7 +31,7 @@ public class FragmentStudentHome extends Fragment implements View.OnClickListene
     private static UtilsStudent utilsStudent;
     private static SharePreferenceData sharePreferenceData;
     private ViewPager homePager;
-    private LinearLayout layoutChat, layoutProfile, layoutHome, layoutFav, layoutMenu;
+    private LinearLayout layoutChat, layoutNotification, layoutHome, layoutFav, layoutMenu;
     private FragmentActivity mActivity;
 
 
@@ -46,7 +46,7 @@ public class FragmentStudentHome extends Fragment implements View.OnClickListene
         findViews(view);
 
         layoutChat.setOnClickListener(this);
-        layoutProfile.setOnClickListener(this);
+        layoutNotification.setOnClickListener(this);
         layoutHome.setOnClickListener(this);
         layoutFav.setOnClickListener(this);
         layoutMenu.setOnClickListener(this);
@@ -59,7 +59,7 @@ public class FragmentStudentHome extends Fragment implements View.OnClickListene
     private void findViews(View view) {
         homePager = view.findViewById(R.id.homePager);
         layoutChat = view.findViewById(R.id.layoutChat);
-        layoutProfile = view.findViewById(R.id.layoutProfile);
+        layoutNotification = view.findViewById(R.id.layoutNotification);
         layoutHome = view.findViewById(R.id.layoutHome);
         layoutFav = view.findViewById(R.id.layoutFavourite);
         layoutMenu = view.findViewById(R.id.layoutMenu);
@@ -107,7 +107,7 @@ public class FragmentStudentHome extends Fragment implements View.OnClickListene
 
         layoutHome.setSelected(false);
         layoutChat.setSelected(false);
-        layoutProfile.setSelected(false);
+        layoutNotification.setSelected(false);
         layoutMenu.setSelected(false);
         layoutFav.setSelected(false);
 
@@ -116,7 +116,7 @@ public class FragmentStudentHome extends Fragment implements View.OnClickListene
                 layoutChat.setSelected(true);
                 break;
             case 1:
-                layoutProfile.setSelected(true);
+                layoutNotification.setSelected(true);
                 break;
             case 2:
                 layoutHome.setSelected(true);
@@ -144,7 +144,7 @@ public class FragmentStudentHome extends Fragment implements View.OnClickListene
             case R.id.layoutChat:
                 homePager.setCurrentItem(0);
                 break;
-            case R.id.layoutProfile:
+            case R.id.layoutNotification:
                 homePager.setCurrentItem(1);
                 break;
             case R.id.layoutFavourite:

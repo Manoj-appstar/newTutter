@@ -35,6 +35,7 @@ public class FragmentClasses extends Fragment implements OnResponseListener {
     int REQ_GET_CLASS = 733;
     SharePreferenceData sharePreferenceData;
     RequestServer requestServer;
+    AddClassAdapter adapter;
     LinearLayoutManager manager;
 
     @Nullable
@@ -79,7 +80,7 @@ public class FragmentClasses extends Fragment implements OnResponseListener {
 
     private void bindData() {
         progressBar.setVisibility(View.GONE);
-        AddClassAdapter adapter = new AddClassAdapter(getActivity(), Data.getClassList(), this);
+        adapter = new AddClassAdapter(getActivity(), Data.getClassList(), this);
         recyclerView.setAdapter(adapter);
 
     }
@@ -115,4 +116,15 @@ public class FragmentClasses extends Fragment implements OnResponseListener {
     public void onFailed(int reqCode, String response) {
         progressBar.setVisibility(View.GONE);
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        notifySetChange();
+    }
+
+    private void notifySetChange() {
+        if (adapter != null)
+            adapter.notifyDataSetChanged();
+        }
 }
