@@ -78,7 +78,7 @@ public class ProfileTeacherFragment extends Fragment implements View.OnClickList
         tvDisable = view.findViewById(R.id.tvDisable);
         Log.d("services",Data.getTeacherDetail().getServices().toLowerCase());
 
-        if (Data.getTeacherDetail().getServices().equalsIgnoreCase("0")) {
+        if (Data.getTeacherDetail().getServices().equalsIgnoreCase("1")) {
             aSwitch.setChecked(false);
             tvDisable.setTextColor(ContextCompat.getColor(mActivity, R.color.colorPrimary));
             tvEnable.setTextColor(ContextCompat.getColor(mActivity, R.color.white));
@@ -137,9 +137,9 @@ public class ProfileTeacherFragment extends Fragment implements View.OnClickList
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("teacher_id", Data.getTeacherDetail().getId());
             if (aSwitch.isChecked()) {
-                jsonObject.put("status", "1");
-            } else {
                 jsonObject.put("status", "0");
+            } else {
+                jsonObject.put("status", "1");
             }
             requestServer.sendStringPost(UrlManager.UPDATE_TEACHER_SERVICES, jsonObject, REQ_CLASS, true);
         } catch (Exception ex) {
@@ -204,7 +204,7 @@ public class ProfileTeacherFragment extends Fragment implements View.OnClickList
                 if (jsonObject.getString("status").equalsIgnoreCase("true")) {
                     bool = false;
                     if (aSwitch.isChecked()) {
-                        Data.getTeacherDetail().setServices("1");
+                        Data.getTeacherDetail().setServices("0");
                         //  sharePreferenceData.setTeacherServices(mActivity, "1");
                         Snackbar.make(aSwitch, "Your all class services has been closed", Snackbar.LENGTH_SHORT).show();
                         aSwitch.setChecked(true);
@@ -213,7 +213,7 @@ public class ProfileTeacherFragment extends Fragment implements View.OnClickList
                         tvDisable.setText("Disable");
                         tvEnable.setText("Enabled");
                     } else {
-                        Data.getTeacherDetail().setServices("0");
+                        Data.getTeacherDetail().setServices("1");
                         //  sharePreferenceData.setTeacherServices(mActivity, "0");
                         Snackbar.make(aSwitch, "Your all class services has been open", Snackbar.LENGTH_SHORT).show();
                         aSwitch.setChecked(false);

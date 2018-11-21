@@ -55,12 +55,7 @@ public class FragmentInstitute extends Fragment implements OnResponseListener {
         return view;
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        if (adapter != null)
-            adapter.notifyDataSetChanged();
-    }
+
 
     private void initView() {
         cvAddInstitute = view.findViewById(R.id.cvAddInstitute);
@@ -97,7 +92,7 @@ public class FragmentInstitute extends Fragment implements OnResponseListener {
                     ex.printStackTrace();
                 }
             }
-        },2000);
+        }, 2000);
 
    /*     new Handler().postDelayed(new Runnable() {
             @Override
@@ -166,5 +161,17 @@ public class FragmentInstitute extends Fragment implements OnResponseListener {
     @Override
     public void onFailed(int reqCode, String response) {
         progress.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        notifySetChange();
+    }
+
+    private void notifySetChange() {
+        if (adapter != null)
+            adapter.notifyDataSetChanged();
+
     }
 }

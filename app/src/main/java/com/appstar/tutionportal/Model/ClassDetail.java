@@ -22,6 +22,18 @@ public class ClassDetail {
     @SerializedName("class_id")
     @Expose
     private String classId;
+
+    public String getServices() {
+        return services;
+    }
+
+    public void setServices(String services) {
+        this.services = services;
+    }
+
+    @SerializedName("services")
+    @Expose
+    private String services;
     @SerializedName("batch_name")
     @Expose
     private String batchName;

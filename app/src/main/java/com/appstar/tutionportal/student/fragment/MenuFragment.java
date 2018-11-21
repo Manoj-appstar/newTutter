@@ -34,7 +34,7 @@ public class MenuFragment extends Fragment {
     private static String[] navArray;
     private static SharePreferenceData sharePreferenceData;
     DBHelper dbHelper;
-    private LinearLayout llSetting, llSupport, llAbout, llLogout;
+    private LinearLayout llSetting, llSupport, llAbout, llLogout, llAccount;
 
     @Nullable
     @Override
@@ -54,6 +54,7 @@ public class MenuFragment extends Fragment {
         dbHelper = new DBHelper(getContext());
         llSetting = view.findViewById(R.id.llSetting);
         llSupport = view.findViewById(R.id.llSupport);
+        llAccount = view.findViewById(R.id.llAccount);
         llAbout = view.findViewById(R.id.llAbout);
         llLogout = view.findViewById(R.id.llLogout);
     }
@@ -72,12 +73,21 @@ public class MenuFragment extends Fragment {
                 utilsStudent.openFragment(mActivity, FragmentNames.STUDENT_SUPPORT, FragmentNames._STUDENT_SUPPORT, null, false);
             }
         });
+
+        llAccount.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                utilsStudent.openFragment(mActivity, FragmentNames.VIEW_STUDENT_PROFILE, FragmentNames._VIEW_STUDENT_PROFILE, null, false);
+            }
+        });
+
         llAbout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 utilsStudent.openFragment(mActivity, FragmentNames.STUDENT_SUPPORT, FragmentNames._STUDENT_SUPPORT, null, false);
             }
         });
+
         llLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

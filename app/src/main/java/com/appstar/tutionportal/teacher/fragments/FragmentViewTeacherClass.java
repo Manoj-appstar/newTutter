@@ -93,6 +93,7 @@ public class FragmentViewTeacherClass extends AppCompatActivity implements OnRes
         /*if (extras != null) {
             class_id = extras.getString("class_id");
         }*/
+
         class_id = getIntent().getStringExtra("class_id");
 
         // findView(view);
@@ -109,6 +110,7 @@ public class FragmentViewTeacherClass extends AppCompatActivity implements OnRes
             bindData(classDetail);
         } else {
         }
+
     }
 
     private ClassDetail getFilterClassByBranchId() {
@@ -135,6 +137,7 @@ public class FragmentViewTeacherClass extends AppCompatActivity implements OnRes
         tvDisable = findViewById(R.id.tvDisable);
         tvEnable.setText("Enable");
         tvDisable.setText("Disable");
+
 
         ivViewStudent = findViewById(R.id.ivViewStudent);
         tvViewStudent = findViewById(R.id.tvViewStudent);
@@ -233,11 +236,11 @@ public class FragmentViewTeacherClass extends AppCompatActivity implements OnRes
         //        RetrofitCall.CallHome(HomeFragment.this, apiInterface);
         try {
             JSONObject jsonObject = new JSONObject();
-            jsonObject.put("teacher_id", Data.getTeacherDetail().getId());
+            jsonObject.put("batch_id", class_id);
             if (aSwitch.isChecked()) {
-                jsonObject.put("status", "1");
-            } else {
                 jsonObject.put("status", "0");
+            } else {
+                jsonObject.put("status", "1");
             }
             requestServer.sendStringPost(UrlManager.UPDATE_TEACHER_SERVICES, jsonObject, REQ_SERVICES, true);
         } catch (Exception ex) {
@@ -247,7 +250,7 @@ public class FragmentViewTeacherClass extends AppCompatActivity implements OnRes
 
     private void bindData(final ClassDetail classDetail) {
 
-        if (Data.getTeacherDetail().getServices().equalsIgnoreCase("0")) {
+        if (classDetail.getServices().equalsIgnoreCase("1")) {
             aSwitch.setChecked(false);
             tvDisable.setTextColor(ContextCompat.getColor(mActivity, R.color.colorPrimary));
             tvEnable.setTextColor(ContextCompat.getColor(mActivity, R.color.white));
@@ -411,6 +414,29 @@ public class FragmentViewTeacherClass extends AppCompatActivity implements OnRes
         finish();
     }
 
+    private void updateClass(final ClassDetail classDetail) {
+        if (aSwitch.isChecked()) {
+            classDetail.setServices("0");
+            //   Data.getTeacherDetail().setServices("0");
+            //sharePreferenceData.setTeacherServices(mActivity, "1");
+            Snackbar.make(aSwitch, "Your service for this class has been closed", Snackbar.LENGTH_SHORT).show();
+            aSwitch.setChecked(true);
+            tvEnable.setTextColor(ContextCompat.getColor(mActivity, R.color.colorPrimary));
+            tvDisable.setTextColor(ContextCompat.getColor(mActivity, R.color.white));
+            tvDisable.setText("Disable");
+            tvEnable.setText("Enabled");
+        } else {
+            classDetail.setServices("1");
+            //sharePreferenceData.seetTeacherServices(mActivity, "0");
+            Snackbar.make(aSwitch, "Your service for this class has been open", Snackbar.LENGTH_SHORT).show();
+            aSwitch.setChecked(false);
+            tvDisable.setTextColor(ContextCompat.getColor(mActivity, R.color.colorPrimary));
+            tvEnable.setTextColor(ContextCompat.getColor(mActivity, R.color.white));
+            tvDisable.setText("Disabled");
+            tvEnable.setText("Enable");
+        }
+    }
+
     @Override
     public void onSuccess(int reqCode, String response) {
         boolean bool = false;
@@ -419,24 +445,9 @@ public class FragmentViewTeacherClass extends AppCompatActivity implements OnRes
             if (jsonObject.has("status")) {
                 if (jsonObject.getString("status").equalsIgnoreCase("true")) {
                     bool = false;
-                    if (aSwitch.isChecked()) {
-                        Data.getTeacherDetail().setServices("1");
-                        //sharePreferenceData.setTeacherServices(mActivity, "1");
-                        Snackbar.make(aSwitch, "Your service for this class has been closed", Snackbar.LENGTH_SHORT).show();
-                        aSwitch.setChecked(true);
-                        tvEnable.setTextColor(ContextCompat.getColor(mActivity, R.color.colorPrimary));
-                        tvDisable.setTextColor(ContextCompat.getColor(mActivity, R.color.white));
-                        tvDisable.setText("Disable");
-                        tvEnable.setText("Enabled");
-                    } else {
-                        Data.getTeacherDetail().setServices("0");
-                        //sharePreferenceData.setTeacherServices(mActivity, "0");
-                        Snackbar.make(aSwitch, "Your service for this class has been open", Snackbar.LENGTH_SHORT).show();
-                        aSwitch.setChecked(false);
-                        tvDisable.setTextColor(ContextCompat.getColor(mActivity, R.color.colorPrimary));
-                        tvEnable.setTextColor(ContextCompat.getColor(mActivity, R.color.white));
-                        tvDisable.setText("Disabled");
-                        tvEnable.setText("Enable");
+                    if (Data.getClassList().size() > 0) {
+                        ClassDetail classDetail = getFilterClassByBranchId();
+                        updateClass(classDetail);
                     }
                 }
             }

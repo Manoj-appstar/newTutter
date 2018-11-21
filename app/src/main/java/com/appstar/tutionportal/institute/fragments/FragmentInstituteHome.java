@@ -20,13 +20,15 @@ import android.widget.TextView;
 import com.appstar.tutionportal.Model.TeacherDetail;
 import com.appstar.tutionportal.R;
 import com.appstar.tutionportal.student.adapter.DashboardPagerAdapter;
+import com.appstar.tutionportal.student.extras.FragmentNames;
 import com.appstar.tutionportal.util.SharePreferenceData;
 import com.appstar.tutionportal.util.Utils;
+import com.appstar.tutionportal.util.UtilsInstitute;
 import com.appstar.tutionportal.volley.RequestServer;
 
 public class FragmentInstituteHome extends Fragment implements View.OnClickListener {
     public static FragmentManager fragmentManager;
-    private static Utils utils;
+    private static UtilsInstitute utilsInstitutet;
     private static SharePreferenceData sharePreferenceData;
     RequestServer requestServer;
     TextView tvCancel, tvAdd;
@@ -47,7 +49,7 @@ public class FragmentInstituteHome extends Fragment implements View.OnClickListe
         View view = inflater.inflate(R.layout.fragment_institute_home, container, false);
         mActivity = getActivity();
         fragmentManager = getChildFragmentManager();
-        utils = new Utils();
+        utilsInstitutet = new UtilsInstitute();
         sharePreferenceData = new SharePreferenceData();
         teacherDetail = new TeacherDetail();
 
@@ -85,9 +87,9 @@ public class FragmentInstituteHome extends Fragment implements View.OnClickListe
         dashboardPagerAdapter.addFragment(Fragment.instantiate(mActivity, FragmentInstituteNotification.class.getName()), "NOTIFICATION");
 
         viewPager.setAdapter(dashboardPagerAdapter);
-        viewPager.setCurrentItem(Utils.getCurrentTab());
+        viewPager.setCurrentItem(UtilsInstitute.getCurrentTab());
 
-        selectView(Utils.getCurrentTab());
+        selectView(UtilsInstitute.getCurrentTab());
     }
 
     private void setupPagerListener() {
@@ -99,8 +101,8 @@ public class FragmentInstituteHome extends Fragment implements View.OnClickListe
 
             @Override
             public void onPageSelected(int position) {
-                Utils.setCurrentTab(position);
-                selectView(Utils.getCurrentTab());
+                UtilsInstitute.setCurrentTab(position);
+                selectView(UtilsInstitute.getCurrentTab());
             }
 
             @Override
@@ -163,6 +165,12 @@ public class FragmentInstituteHome extends Fragment implements View.OnClickListe
                 homePager.setCurrentItem(0);
                 break;
         }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        UtilsInstitute.setCurrentScreen(FragmentNames._INSTITUTE_HOME);
     }
 
 
